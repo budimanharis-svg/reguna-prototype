@@ -13,245 +13,129 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #e0e0e0; }
 
+a { color: inherit; text-decoration: none; }
+
 .phone {
-  width: 375px;
-  height: 812px;
+  width: 375px; height: 812px;
   margin: 24px auto;
   background: #f5f5f5;
   border-radius: 40px;
   overflow: hidden;
-  box-shadow: 0 0 0 10px #1c1c1e, 0 24px 60px rgba(0,0,0,0.3);
+  box-shadow: 0 0 0 10px #1c1c1e, 0 24px 60px rgba(0,0,0,.3);
   position: relative;
 }
-
 @media (max-width: 430px) {
   body { background: #f5f5f5; }
-  .phone { width: 100%; height: 100dvh; border-radius: 0; box-shadow: none; margin: 0; }
+  .phone { width: 100%; height: 100vh; border-radius: 0; box-shadow: none; margin: 0; }
 }
 
-/* SCREEN SYSTEM */
 .screen { display: none; flex-direction: column; height: 100%; overflow: hidden; }
 .screen.active { display: flex; }
 
-/* SCROLLABLE AREA */
-.body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-.body::-webkit-scrollbar { display: none; }
+.body { flex: 1; overflow-y: scroll; }
 
-/* HEADER */
-.hdr {
-  background: #0F766E;
-  flex-shrink: 0;
-}
-.hdr-bar {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 16px;
-}
+/* TEAL HEADER */
+.hdr { background: #0F766E; flex-shrink: 0; }
+.hdr-bar { display: flex; align-items: center; gap: 10px; padding: 12px 16px; }
 .hdr-title { color: #fff; font-size: 16px; font-weight: 600; flex: 1; }
-.back-btn {
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 24px;
-  cursor: pointer;
-  padding: 4px;
-  display: flex;
-  align-items: center;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+.back-a {
+  color: #fff; font-size: 26px;
+  display: flex; align-items: center;
+  padding: 4px; margin-left: -4px;
 }
-.hdr-icon { color: rgba(255,255,255,0.85); font-size: 22px; cursor: pointer; }
+.hdr-icon { color: rgba(255,255,255,.85); font-size: 22px; }
 
 /* BOTTOM NAV */
 .bottom-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  background: #fff;
-  border-top: 1px solid #e8e8e8;
-  padding: 8px 0 14px;
-  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: space-around;
+  background: #fff; border-top: 1px solid #e8e8e8;
+  padding: 8px 0 14px; flex-shrink: 0;
 }
-.nav-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #aaa;
-  font-size: 10px;
-  padding: 4px 12px;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+.nav-a {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 3px; color: #aaa; font-size: 10px; padding: 4px 12px;
 }
-.nav-btn.on { color: #0F766E; }
-.nav-btn i { font-size: 22px; }
+.nav-a.on { color: #0F766E; }
+.nav-a i { font-size: 22px; }
 .nav-sell {
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
-  background: #0F766E;
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-  font-size: 9px;
-  font-weight: 700;
-  border: none;
-  cursor: pointer;
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; gap: 2px;
+  width: 50px; height: 50px; border-radius: 25px;
+  background: #0F766E; color: #fff;
+  font-size: 9px; font-weight: 700;
   margin-top: -12px;
-  box-shadow: 0 4px 12px rgba(15,118,110,0.45);
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  box-shadow: 0 4px 12px rgba(15,118,110,.45);
 }
 .nav-sell i { font-size: 20px; }
 
 /* BADGES */
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  padding: 3px 8px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 600;
-}
+.badge { display: inline-flex; align-items: center; gap: 3px; padding: 3px 8px; border-radius: 20px; font-size: 11px; font-weight: 600; }
 .b-teal { background: #E1F5EE; color: #0F6E56; }
 .b-blue { background: #DBEAFE; color: #1E40AF; }
 .b-amber { background: #FEF3C7; color: #92400E; }
 .b-navy { background: #1E3A5F; color: #fff; font-size: 10px; padding: 2px 7px; }
 
-/* CARDS */
+/* CARD BLOCK */
 .card { background: #fff; margin-bottom: 8px; padding: 14px 16px; }
-.sec-label {
-  font-size: 11px;
-  font-weight: 700;
-  color: #888;
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
-  margin-bottom: 10px;
-}
+.sec-lbl { font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: .6px; margin-bottom: 10px; }
 
 /* BUTTONS */
 .btn-primary {
-  background: #0F766E;
-  color: #fff;
-  border: none;
-  border-radius: 10px;
-  padding: 13px 20px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  background: #0F766E; color: #fff; border: none; border-radius: 10px;
+  padding: 13px 20px; font-size: 14px; font-weight: 700; cursor: pointer;
 }
 .btn-outline {
-  background: #fff;
-  color: #0F766E;
-  border: 1.5px solid #0F766E;
-  border-radius: 10px;
-  padding: 13px 20px;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  display: flex; align-items: center; justify-content: center;
+  background: #fff; color: #0F766E; border: 1.5px solid #0F766E;
+  border-radius: 10px; padding: 13px 20px; font-size: 14px; font-weight: 700;
 }
 
-/* ══════ HOME SCREEN ══════ */
-.home-top {
-  background: #0F766E;
-  padding: 12px 16px 16px;
-}
-.logo-row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-.logo { color: #fff; font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+/* ══════ HOME ══════ */
+.home-top { background: #0F766E; padding: 12px 16px 16px; }
+.logo-row { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; }
+.logo { color: #fff; font-size: 22px; font-weight: 800; letter-spacing: -.5px; }
 .logo span { color: #6EE7B7; }
-.tagline { color: rgba(255,255,255,0.7); font-size: 11px; }
+.tagline { color: rgba(255,255,255,.7); font-size: 11px; }
 .top-icons { display: flex; gap: 14px; }
-.top-icons i { color: #fff; font-size: 22px; cursor: pointer; }
+.top-icons i { color: #fff; font-size: 22px; }
 .search-bar {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: #fff;
-  border-radius: 10px;
-  padding: 10px 14px;
-  color: #aaa;
-  font-size: 13px;
-  cursor: pointer;
+  display: flex; align-items: center; gap: 8px;
+  background: #fff; border-radius: 10px; padding: 10px 14px;
+  color: #aaa; font-size: 13px;
 }
 .search-bar i { color: #0F766E; font-size: 18px; }
 
 .pg-banner {
-  margin: 10px 12px 2px;
-  background: #1E3A5F;
-  border-radius: 12px;
-  padding: 12px 14px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  display: flex; align-items: center; justify-content: space-between;
+  margin: 10px 12px 2px; background: #1E3A5F;
+  border-radius: 12px; padding: 12px 14px;
 }
 .pg-banner h4 { color: #fff; font-size: 13px; font-weight: 700; }
-.pg-banner p { color: rgba(255,255,255,0.7); font-size: 11px; margin-top: 2px; }
-.pg-banner i { color: rgba(255,255,255,0.75); font-size: 30px; }
+.pg-banner p { color: rgba(255,255,255,.7); font-size: 11px; margin-top: 2px; }
+.pg-banner i { color: rgba(255,255,255,.75); font-size: 30px; }
 
-.cat-row {
-  display: flex;
-  gap: 8px;
-  padding: 12px 12px 6px;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
+.cat-row { display: flex; gap: 8px; padding: 12px 12px 6px; overflow-x: auto; }
 .cat-row::-webkit-scrollbar { display: none; }
 .cat-pill {
-  padding: 7px 14px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  white-space: nowrap;
-  border: 1.5px solid #e0e0e0;
-  background: #fff;
-  color: #555;
-  cursor: pointer;
-  flex-shrink: 0;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  padding: 7px 14px; border-radius: 20px;
+  font-size: 12px; font-weight: 600; white-space: nowrap;
+  border: 1.5px solid #e0e0e0; background: #fff; color: #555;
+  cursor: pointer; flex-shrink: 0;
 }
 .cat-pill.on { background: #0F766E; color: #fff; border-color: #0F766E; }
 
-.listing-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  padding: 10px 12px 20px;
-}
+.listing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px 12px 20px; }
 .listing-card {
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid #eee;
-  cursor: pointer;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  display: block;
+  background: #fff; border-radius: 12px;
+  overflow: hidden; border: 1px solid #eee;
 }
 .listing-img {
-  width: 100%;
-  aspect-ratio: 1;
-  background: #f0f0f0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 38px;
-  position: relative;
+  width: 100%; aspect-ratio: 1;
+  background: #f0f0f0; display: flex;
+  align-items: center; justify-content: center;
+  font-size: 38px; position: relative;
 }
 .img-badge { position: absolute; top: 6px; left: 6px; }
 .listing-info { padding: 8px 10px 10px; }
@@ -262,405 +146,118 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .listing-meta { display: flex; align-items: center; gap: 3px; margin-top: 4px; font-size: 10px; color: #aaa; }
 .listing-meta i { font-size: 11px; color: #F59E0B; }
 
-/* ══════ DETAIL SCREEN ══════ */
+/* ══════ DETAIL ══════ */
 .gallery-wrap { position: relative; }
-.main-photo {
-  width: 100%;
-  height: 230px;
-  background: #f0f0f0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 72px;
-}
+.main-photo { width: 100%; height: 230px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; font-size: 72px; }
 .photo-cond { position: absolute; top: 10px; left: 10px; }
-.dots-row {
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 5px;
-}
-.dot { width: 6px; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.45); }
+.dots-row { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); display: flex; gap: 5px; }
+.dot { width: 6px; height: 6px; border-radius: 3px; background: rgba(255,255,255,.45); }
 .dot.on { width: 16px; background: #fff; }
-
-.thumb-row {
-  display: flex;
-  gap: 6px;
-  padding: 10px 12px;
-  background: #fff;
-}
-.thumb {
-  width: 52px;
-  height: 52px;
-  border-radius: 8px;
-  background: #f0f0f0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  border: 1.5px solid transparent;
-  cursor: pointer;
-}
+.thumb-row { display: flex; gap: 6px; padding: 10px 12px; background: #fff; }
+.thumb { width: 52px; height: 52px; border-radius: 8px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; font-size: 20px; border: 1.5px solid transparent; }
 .thumb.on { border-color: #0F766E; }
 
-.price-block {
-  background: #fff;
-  padding: 14px 16px 10px;
-  margin-bottom: 8px;
-}
+.price-block { background: #fff; padding: 14px 16px 10px; margin-bottom: 8px; }
 .price-main { font-size: 24px; font-weight: 800; color: #1a1a1a; }
 .price-sub { font-size: 12px; color: #999; margin-top: 2px; }
-.pg-bar-wrap {
-  background: #E1F5EE;
-  border-radius: 10px;
-  padding: 10px 12px;
-  margin-top: 10px;
-}
-.pg-bar-labels {
-  display: flex;
-  justify-content: space-between;
-  font-size: 11px;
-  font-weight: 700;
-  color: #0F6E56;
-  margin-bottom: 6px;
-}
-.pg-track {
-  height: 6px;
-  background: #9FE1CB;
-  border-radius: 3px;
-  position: relative;
-}
+.pg-bar-wrap { background: #E1F5EE; border-radius: 10px; padding: 10px 12px; margin-top: 10px; }
+.pg-bar-labels { display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; color: #0F6E56; margin-bottom: 6px; }
+.pg-track { height: 6px; background: #9FE1CB; border-radius: 3px; position: relative; }
 .pg-fill { height: 6px; background: #0F766E; border-radius: 3px; width: 30%; }
-.pg-marker {
-  position: absolute;
-  top: -5px;
-  left: 30%;
-  transform: translateX(-50%);
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #0F766E;
-  border: 2.5px solid #fff;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-}
-.pg-range {
-  display: flex;
-  justify-content: space-between;
-  font-size: 10px;
-  color: #0F6E56;
-  margin-top: 4px;
-}
+.pg-marker { position: absolute; top: -5px; left: 30%; transform: translateX(-50%); width: 16px; height: 16px; border-radius: 50%; background: #0F766E; border: 2.5px solid #fff; }
+.pg-range { display: flex; justify-content: space-between; font-size: 10px; color: #0F6E56; margin-top: 4px; }
 
-.seller-row {
-  background: #fff;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 16px;
-  cursor: pointer;
-  margin-bottom: 8px;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+.seller-a {
+  display: flex; align-items: center; gap: 10px;
+  background: #fff; padding: 12px 16px; margin-bottom: 8px;
 }
-.avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
-  background: #E1F5EE;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  font-size: 14px;
-  color: #0F766E;
-  flex-shrink: 0;
-}
+.avatar { width: 40px; height: 40px; border-radius: 20px; background: #E1F5EE; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; color: #0F766E; flex-shrink: 0; }
 .seller-name { font-size: 13px; font-weight: 700; color: #1a1a1a; }
 .seller-meta { font-size: 11px; color: #999; margin-top: 2px; display: flex; align-items: center; gap: 5px; }
 
 .detail-table { background: #fff; padding: 14px 16px; margin-bottom: 8px; }
 .dt-row { display: flex; padding: 7px 0; border-bottom: 1px solid #f0f0f0; }
 .dt-row:last-child { border-bottom: none; }
-.dt-key { font-size: 13px; color: #999; width: 110px; flex-shrink: 0; }
-.dt-val { font-size: 13px; color: #1a1a1a; font-weight: 600; }
+.dt-k { font-size: 13px; color: #999; width: 110px; flex-shrink: 0; }
+.dt-v { font-size: 13px; color: #1a1a1a; font-weight: 600; }
 
 .desc-block { background: #fff; padding: 14px 16px; margin-bottom: 8px; }
 .desc-text { font-size: 13px; color: #444; line-height: 1.6; }
 
-.safety-box {
-  background: #FEF3C7;
-  border-left: 3px solid #D97706;
-  padding: 10px 14px;
-  display: flex;
-  gap: 8px;
-  font-size: 12px;
-  color: #92400E;
-  line-height: 1.4;
-  margin-bottom: 8px;
-}
+.safety-box { background: #FEF3C7; border-left: 3px solid #D97706; padding: 10px 14px; display: flex; gap: 8px; font-size: 12px; color: #92400E; line-height: 1.4; margin-bottom: 8px; }
 
-.trust-strip {
-  background: #fff;
-  display: flex;
-  gap: 8px;
-  padding: 12px 16px;
-  margin-bottom: 8px;
-}
-.trust-item {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  background: #f8f8f8;
-  border-radius: 10px;
-  padding: 10px 4px;
-}
+.trust-strip { background: #fff; display: flex; gap: 8px; padding: 12px 16px; margin-bottom: 8px; }
+.trust-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; background: #f8f8f8; border-radius: 10px; padding: 10px 4px; }
 .trust-item i { font-size: 20px; color: #0F766E; }
 .trust-item span { font-size: 10px; color: #888; text-align: center; line-height: 1.3; }
 
-.detail-cta {
-  padding: 12px 16px 20px;
-  background: #fff;
-  border-top: 1px solid #eee;
-  display: flex;
-  gap: 10px;
-  flex-shrink: 0;
-}
+.detail-cta { padding: 12px 16px 20px; background: #fff; border-top: 1px solid #eee; display: flex; gap: 10px; flex-shrink: 0; }
 
-/* ══════ CHAT SCREEN ══════ */
+/* ══════ CHAT ══════ */
 .chat-hdr { background: #0F766E; padding: 10px 16px 12px; flex-shrink: 0; }
 .chat-hdr-row { display: flex; align-items: center; gap: 10px; }
 .online-dot { width: 7px; height: 7px; border-radius: 50%; background: #4ADE80; display: inline-block; }
 
-.product-strip {
-  background: #0D6962;
-  padding: 9px 14px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  flex-shrink: 0;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-.ps-thumb {
-  width: 36px;
-  height: 36px;
-  border-radius: 6px;
-  background: #E1F5EE;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  flex-shrink: 0;
-}
+.product-strip-a { display: flex; align-items: center; gap: 10px; background: #0D6962; padding: 9px 14px; }
+.ps-thumb { width: 36px; height: 36px; border-radius: 6px; background: #E1F5EE; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
 
-.security-bar {
-  background: #FEF3C7;
-  padding: 7px 14px;
-  font-size: 11px;
-  color: #92400E;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-shrink: 0;
-}
+.security-bar { background: #FEF3C7; padding: 7px 14px; font-size: 11px; color: #92400E; display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
 
-.chat-body {
-  flex: 1;
-  overflow-y: auto;
-  padding: 12px 14px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  -webkit-overflow-scrolling: touch;
-}
-.chat-body::-webkit-scrollbar { display: none; }
-
+.chat-body { flex: 1; overflow-y: scroll; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; }
 .chat-date { text-align: center; font-size: 11px; color: #aaa; }
-
-.bubble-wrap { display: flex; gap: 8px; align-items: flex-end; }
-.bubble-wrap.me { flex-direction: row-reverse; }
-.bubble {
-  max-width: 72%;
-  padding: 9px 12px;
-  border-radius: 16px;
-  font-size: 13px;
-  line-height: 1.45;
-}
+.brow { display: flex; gap: 8px; align-items: flex-end; }
+.brow.me { flex-direction: row-reverse; }
+.bubble { max-width: 72%; padding: 9px 12px; border-radius: 16px; font-size: 13px; line-height: 1.45; }
 .bubble.them { background: #f0f0f0; color: #1a1a1a; border-bottom-left-radius: 4px; }
 .bubble.me { background: #0F766E; color: #fff; border-bottom-right-radius: 4px; }
 .btime { font-size: 10px; color: #bbb; margin-bottom: 4px; }
+.photo-bub { width: 130px; height: 98px; border-radius: 12px; background: #ddd; display: flex; align-items: center; justify-content: center; font-size: 28px; }
 
-.photo-bub {
-  width: 130px;
-  height: 98px;
-  border-radius: 12px;
-  background: #ddd;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-}
-
-.escrow-card {
-  background: #fff;
-  border: 1.5px solid #0F766E;
-  border-radius: 14px;
-  padding: 14px;
-}
+.escrow-card { background: #fff; border: 1.5px solid #0F766E; border-radius: 14px; padding: 14px; }
 .ec-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
 .ec-head i { font-size: 22px; color: #0F766E; }
 .ec-title { font-size: 13px; font-weight: 700; color: #1a1a1a; }
 .ec-sub { font-size: 12px; color: #555; line-height: 1.4; margin-bottom: 8px; }
 .ec-price { font-size: 18px; font-weight: 800; color: #0F766E; margin-bottom: 10px; }
 
-.chat-input-row {
-  padding: 10px 14px 20px;
-  background: #fff;
-  border-top: 1px solid #eee;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-shrink: 0;
-}
-.chat-input {
-  flex: 1;
-  padding: 9px 14px;
-  border-radius: 24px;
-  border: 1px solid #ddd;
-  background: #f5f5f5;
-  font-size: 13px;
-  outline: none;
-}
-.icon-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #aaa;
-  font-size: 22px;
-  padding: 4px;
-  display: flex;
-  align-items: center;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-.send-btn {
-  width: 36px;
-  height: 36px;
-  border-radius: 18px;
-  background: #0F766E;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
+.chat-input-row { padding: 10px 14px 20px; background: #fff; border-top: 1px solid #eee; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.chat-input { flex: 1; padding: 9px 14px; border-radius: 24px; border: 1px solid #ddd; background: #f5f5f5; font-size: 13px; outline: none; }
+.icon-a { color: #aaa; font-size: 22px; padding: 4px; display: flex; align-items: center; }
+.send-a { width: 36px; height: 36px; border-radius: 18px; background: #0F766E; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 18px; }
 
-/* ══════ CHECKOUT SCREEN ══════ */
-.pay-option {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 11px 12px;
-  border-radius: 10px;
-  border: 1.5px solid #e0e0e0;
-  background: #fff;
-  cursor: pointer;
-  margin-bottom: 8px;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
-.pay-option.on { border-color: #0F766E; background: #E1F5EE; }
-.pay-logo {
-  width: 38px;
-  height: 26px;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  font-weight: 800;
-  color: #fff;
-  flex-shrink: 0;
-}
-.pay-name { font-size: 13px; font-weight: 700; color: #1a1a1a; flex: 1; }
+/* ══════ CHECKOUT ══════ */
+.pay-opt { display: flex; align-items: center; gap: 10px; padding: 11px 12px; border-radius: 10px; border: 1.5px solid #e0e0e0; background: #fff; cursor: pointer; margin-bottom: 8px; }
+.pay-opt.on { border-color: #0F766E; background: #E1F5EE; }
+.pay-logo { width: 38px; height: 26px; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: #fff; flex-shrink: 0; }
+.pay-name { font-size: 13px; font-weight: 700; color: #1a1a1a; }
 .pay-sub { font-size: 11px; color: #999; }
-.radio-circle {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  border: 1.5px solid #ccc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.radio-circle.on { border-color: #0F766E; }
+.radio-c { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid #ccc; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.radio-c.on { border-color: #0F766E; }
 .radio-dot { width: 9px; height: 9px; border-radius: 50%; background: #0F766E; }
 
 .sum-row { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid #f5f5f5; }
 .sum-row:last-child { border-bottom: none; }
-.sum-key { font-size: 13px; color: #888; }
-.sum-val { font-size: 13px; font-weight: 700; color: #1a1a1a; }
+.sum-k { font-size: 13px; color: #888; }
+.sum-v { font-size: 13px; font-weight: 700; color: #1a1a1a; }
 .sum-total { display: flex; justify-content: space-between; padding-top: 10px; border-top: 2px solid #eee; margin-top: 4px; }
-.sum-total-key { font-size: 14px; font-weight: 700; color: #1a1a1a; }
-.sum-total-val { font-size: 16px; font-weight: 800; color: #1a1a1a; }
+.st-k { font-size: 14px; font-weight: 700; color: #1a1a1a; }
+.st-v { font-size: 16px; font-weight: 800; color: #1a1a1a; }
 
-.escrow-info-box {
-  background: #E1F5EE;
-  border: 1px solid #9FE1CB;
-  border-radius: 12px;
-  padding: 13px;
-}
+.eib { background: #E1F5EE; border: 1px solid #9FE1CB; border-radius: 12px; padding: 13px; }
 .eib-title { font-size: 13px; font-weight: 700; color: #085041; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
 .eib-desc { font-size: 12px; color: #0F6E56; line-height: 1.5; margin-bottom: 10px; }
 .eib-step { display: flex; gap: 8px; font-size: 12px; color: #0F6E56; margin-bottom: 7px; align-items: flex-start; }
-.step-num {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #0F766E;
-  color: #fff;
-  font-size: 10px;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
+.step-n { width: 18px; height: 18px; border-radius: 50%; background: #0F766E; color: #fff; font-size: 10px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
 
 .checkout-cta { padding: 12px 16px 24px; background: #fff; border-top: 1px solid #eee; flex-shrink: 0; }
 .cta-total-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
-.cta-label { font-size: 12px; color: #999; }
-.cta-amount { font-size: 18px; font-weight: 800; color: #1a1a1a; }
+.cta-lbl { font-size: 12px; color: #999; }
+.cta-amt { font-size: 18px; font-weight: 800; color: #1a1a1a; }
 .disclaimer { font-size: 11px; color: #aaa; text-align: center; margin-top: 8px; line-height: 1.4; }
 
-/* ══════ SUCCESS SCREEN ══════ */
-.success-hero {
-  background: #E1F5EE;
-  padding: 28px 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  border-bottom: 1px solid #9FE1CB;
-}
-.success-icon {
-  width: 70px;
-  height: 70px;
-  border-radius: 35px;
-  background: #0F766E;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 34px;
-  color: #fff;
-  margin-bottom: 14px;
-}
+/* ══════ SUCCESS ══════ */
+.success-hero { background: #E1F5EE; padding: 28px 24px; display: flex; flex-direction: column; align-items: center; text-align: center; border-bottom: 1px solid #9FE1CB; }
+.success-icon { width: 70px; height: 70px; border-radius: 35px; background: #0F766E; display: flex; align-items: center; justify-content: center; font-size: 34px; color: #fff; margin-bottom: 14px; }
 .success-title { font-size: 20px; font-weight: 800; color: #1a1a1a; margin-bottom: 6px; }
 .success-sub { font-size: 13px; color: #555; line-height: 1.5; }
 .order-id { margin-top: 12px; padding: 7px 16px; background: #fff; border-radius: 8px; border: 1px solid #9FE1CB; font-size: 12px; color: #888; }
@@ -670,16 +267,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .tl-title { font-size: 14px; font-weight: 800; color: #1a1a1a; margin-bottom: 16px; }
 .tl-row { display: flex; gap: 12px; }
 .tl-left { display: flex; flex-direction: column; align-items: center; width: 28px; }
-.tl-dot {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  flex-shrink: 0;
-}
+.tl-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
 .tl-dot.done { background: #0F766E; color: #fff; }
 .tl-dot.cur { background: #E1F5EE; color: #0F766E; border: 2px solid #0F766E; }
 .tl-dot.next { background: #f0f0f0; color: #ccc; border: 2px solid #e0e0e0; }
@@ -693,29 +281,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .tl-time { font-size: 11px; color: #aaa; margin-top: 3px; }
 
 .success-btns { padding: 0 16px 32px; display: flex; flex-direction: column; gap: 10px; }
-.btn-wa {
-  width: 100%;
-  padding: 13px;
-  border-radius: 12px;
-  background: #25D366;
-  color: #fff;
-  border: none;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
-}
+.btn-wa { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px; border-radius: 12px; background: #25D366; color: #fff; border: none; font-size: 14px; font-weight: 700; cursor: pointer; }
 </style>
 </head>
 <body>
-
 <div class="phone">
 
-<!-- ══════ SCREEN: HOME ══════ -->
+<!-- ══════ HOME ══════ -->
 <div id="s-home" class="screen active">
   <div class="home-top">
     <div class="logo-row">
@@ -735,147 +307,95 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
   </div>
 
   <div class="body">
-    <div class="pg-banner" onclick="go('s-detail')">
+    <a href="#s-detail" class="pg-banner">
       <div>
         <h4>Price Guide ReGuna</h4>
         <p>Cek kisaran harga wajar sebelum beli atau jual</p>
       </div>
       <i class="ti ti-chart-bar" aria-hidden="true"></i>
-    </div>
+    </a>
 
     <div class="cat-row">
-      <div class="cat-pill on" onclick="pilih(this)">Semua</div>
-      <div class="cat-pill" onclick="pilih(this)">Anak &amp; Bayi</div>
-      <div class="cat-pill" onclick="pilih(this)">Olahraga</div>
-      <div class="cat-pill" onclick="pilih(this)">Furnitur</div>
-      <div class="cat-pill" onclick="pilih(this)">Elektronik</div>
-      <div class="cat-pill" onclick="pilih(this)">🎁 Gratis</div>
+      <button class="cat-pill on" onclick="pilih(this)">Semua</button>
+      <button class="cat-pill" onclick="pilih(this)">Anak &amp; Bayi</button>
+      <button class="cat-pill" onclick="pilih(this)">Olahraga</button>
+      <button class="cat-pill" onclick="pilih(this)">Furnitur</button>
+      <button class="cat-pill" onclick="pilih(this)">Elektronik</button>
+      <button class="cat-pill" onclick="pilih(this)">🎁 Gratis</button>
     </div>
 
     <div class="listing-grid">
-      <div class="listing-card" onclick="go('s-detail')">
-        <div class="listing-img">
-          🛒
-          <span class="img-badge badge b-teal">Seperti Baru</span>
-        </div>
+      <a href="#s-detail" class="listing-card">
+        <div class="listing-img">🛒<span class="img-badge badge b-teal">Seperti Baru</span></div>
         <div class="listing-info">
           <div class="listing-name">Stroller Babyelle B900</div>
           <div class="listing-cat">Anak &amp; Bayi</div>
           <div class="listing-price">Rp 850.000</div>
-          <div class="listing-meta">
-            <i class="ti ti-star" aria-hidden="true"></i> 4.9 · Sari W.
-          </div>
+          <div class="listing-meta"><i class="ti ti-star" aria-hidden="true"></i> 4.9 · Sari W.</div>
         </div>
-      </div>
-
-      <div class="listing-card">
-        <div class="listing-img">
-          🏋️
-          <span class="img-badge badge b-blue">Baik</span>
-        </div>
+      </a>
+      <a href="#" class="listing-card">
+        <div class="listing-img">🏋️<span class="img-badge badge b-blue">Baik</span></div>
         <div class="listing-info">
           <div class="listing-name">Treadmill Lifefit T100</div>
           <div class="listing-cat">Olahraga</div>
           <div class="listing-price">Rp 2.500.000</div>
-          <div class="listing-meta">
-            <i class="ti ti-star" aria-hidden="true"></i> 4.7 · Budi R.
-          </div>
+          <div class="listing-meta"><i class="ti ti-star" aria-hidden="true"></i> 4.7 · Budi R.</div>
         </div>
-      </div>
-
-      <div class="listing-card">
-        <div class="listing-img">
-          🚲
-          <span class="img-badge badge b-teal">Seperti Baru</span>
-        </div>
+      </a>
+      <a href="#" class="listing-card">
+        <div class="listing-img">🚲<span class="img-badge badge b-teal">Seperti Baru</span></div>
         <div class="listing-info">
           <div class="listing-name">Sepeda Anak Wimcycle 16"</div>
           <div class="listing-cat">Anak &amp; Bayi</div>
           <div class="listing-price">Rp 350.000</div>
-          <div class="listing-meta">
-            <i class="ti ti-star" aria-hidden="true"></i> 5.0 · Dewi A.
-          </div>
+          <div class="listing-meta"><i class="ti ti-star" aria-hidden="true"></i> 5.0 · Dewi A.</div>
         </div>
-      </div>
-
-      <div class="listing-card">
-        <div class="listing-img">
-          🛋️
-          <span class="img-badge badge b-amber">Cukup Baik</span>
-        </div>
+      </a>
+      <a href="#" class="listing-card">
+        <div class="listing-img">🛋️<span class="img-badge badge b-amber">Cukup Baik</span></div>
         <div class="listing-info">
           <div class="listing-name">Sofa 2-Seater Fabric</div>
           <div class="listing-cat">Furnitur</div>
           <div class="listing-price">Rp 1.200.000</div>
-          <div class="listing-meta">
-            <i class="ti ti-star" aria-hidden="true"></i> 4.6 · Rudi P.
-          </div>
+          <div class="listing-meta"><i class="ti ti-star" aria-hidden="true"></i> 4.6 · Rudi P.</div>
         </div>
-      </div>
-
-      <div class="listing-card">
-        <div class="listing-img">
-          🧸
-          <span class="img-badge badge b-teal">Seperti Baru</span>
-        </div>
+      </a>
+      <a href="#" class="listing-card">
+        <div class="listing-img">🧸<span class="img-badge badge b-teal">Seperti Baru</span></div>
         <div class="listing-info">
           <div class="listing-name">LEGO Duplo Classic Box</div>
           <div class="listing-cat">Anak &amp; Bayi</div>
           <div class="listing-price">Rp 280.000</div>
-          <div class="listing-meta">
-            <i class="ti ti-star" aria-hidden="true"></i> 4.8 · Rina S.
-          </div>
+          <div class="listing-meta"><i class="ti ti-star" aria-hidden="true"></i> 4.8 · Rina S.</div>
         </div>
-      </div>
-
-      <div class="listing-card">
-        <div class="listing-img">
-          🏃
-          <span class="img-badge badge b-amber">Gratis</span>
-        </div>
+      </a>
+      <a href="#" class="listing-card">
+        <div class="listing-img">🏃<span class="img-badge badge b-amber">Gratis</span></div>
         <div class="listing-info">
           <div class="listing-name">Treadmill Manual Tak Terpakai</div>
           <div class="listing-cat">Olahraga · Ambil Sendiri</div>
           <div class="listing-price free">Rp 2.000 (admin)</div>
-          <div class="listing-meta">
-            <i class="ti ti-star" aria-hidden="true"></i> 4.5 · Haris B.
-          </div>
+          <div class="listing-meta"><i class="ti ti-star" aria-hidden="true"></i> 4.5 · Haris B.</div>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 
   <div class="bottom-nav">
-    <button class="nav-btn on">
-      <i class="ti ti-home" aria-hidden="true"></i>
-      <span>Jelajahi</span>
-    </button>
-    <button class="nav-btn">
-      <i class="ti ti-heart" aria-hidden="true"></i>
-      <span>Simpan</span>
-    </button>
-    <button class="nav-sell">
-      <i class="ti ti-plus" aria-hidden="true"></i>
-      <span>Jual</span>
-    </button>
-    <button class="nav-btn">
-      <i class="ti ti-message" aria-hidden="true"></i>
-      <span>Chat</span>
-    </button>
-    <button class="nav-btn">
-      <i class="ti ti-user" aria-hidden="true"></i>
-      <span>Profil</span>
-    </button>
+    <a href="#s-home" class="nav-a on"><i class="ti ti-home" aria-hidden="true"></i><span>Jelajahi</span></a>
+    <a href="#" class="nav-a"><i class="ti ti-heart" aria-hidden="true"></i><span>Simpan</span></a>
+    <a href="#" class="nav-sell"><i class="ti ti-plus" aria-hidden="true"></i><span>Jual</span></a>
+    <a href="#" class="nav-a"><i class="ti ti-message" aria-hidden="true"></i><span>Chat</span></a>
+    <a href="#" class="nav-a"><i class="ti ti-user" aria-hidden="true"></i><span>Profil</span></a>
   </div>
 </div>
 
-<!-- ══════ SCREEN: DETAIL ══════ -->
+<!-- ══════ DETAIL ══════ -->
 <div id="s-detail" class="screen">
   <div class="hdr">
     <div class="hdr-bar">
-      <button class="back-btn" onclick="go('s-home')" aria-label="Kembali">
-        <i class="ti ti-arrow-left" aria-hidden="true"></i>
-      </button>
+      <a href="#s-home" class="back-a" aria-label="Kembali"><i class="ti ti-arrow-left" aria-hidden="true"></i></a>
       <span class="hdr-title">Detail Barang</span>
       <i class="ti ti-share hdr-icon" aria-hidden="true"></i>
       <i class="ti ti-heart hdr-icon" aria-hidden="true"></i>
@@ -887,13 +407,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       <div class="main-photo">🛒</div>
       <span class="photo-cond badge b-teal"><i class="ti ti-circle-check" style="font-size:11px" aria-hidden="true"></i> Seperti Baru</span>
       <div class="dots-row">
-        <div class="dot on"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
+        <div class="dot on"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
       </div>
     </div>
-
     <div class="thumb-row">
       <div class="thumb on">🛒</div>
       <div class="thumb">📦</div>
@@ -912,18 +428,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
           <span><i class="ti ti-chart-bar" style="font-size:12px" aria-hidden="true"></i> Price Guide ReGuna</span>
           <span>Rp 700K – Rp 1,2jt</span>
         </div>
-        <div class="pg-track">
-          <div class="pg-fill"></div>
-          <div class="pg-marker"></div>
-        </div>
-        <div class="pg-range">
-          <span>Rp 700K (Cukup Baik)</span>
-          <span>Rp 1,2jt (Seperti Baru)</span>
-        </div>
+        <div class="pg-track"><div class="pg-fill"></div><div class="pg-marker"></div></div>
+        <div class="pg-range"><span>Rp 700K (Cukup Baik)</span><span>Rp 1,2jt (Seperti Baru)</span></div>
       </div>
     </div>
 
-    <div class="seller-row" onclick="go('s-chat')">
+    <a href="#s-chat" class="seller-a">
       <div class="avatar">SW</div>
       <div style="flex:1">
         <div style="display:flex;align-items:center;gap:6px">
@@ -936,20 +446,20 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         </div>
       </div>
       <i class="ti ti-chevron-right" style="color:#ccc;font-size:18px" aria-hidden="true"></i>
-    </div>
+    </a>
 
     <div class="detail-table">
-      <div class="sec-label">Detail Barang</div>
-      <div class="dt-row"><span class="dt-key">Kondisi</span><span class="dt-val">Seperti Baru</span></div>
-      <div class="dt-row"><span class="dt-key">Merek</span><span class="dt-val">Babyelle</span></div>
-      <div class="dt-row"><span class="dt-key">Model</span><span class="dt-val">B900 Seri 2022</span></div>
-      <div class="dt-row"><span class="dt-key">Lama dipakai</span><span class="dt-val">8 bulan</span></div>
-      <div class="dt-row"><span class="dt-key">Lokasi</span><span class="dt-val">Tangerang Selatan</span></div>
-      <div class="dt-row"><span class="dt-key">Pengiriman</span><span class="dt-val">COD / Gosend</span></div>
+      <div class="sec-lbl">Detail Barang</div>
+      <div class="dt-row"><span class="dt-k">Kondisi</span><span class="dt-v">Seperti Baru</span></div>
+      <div class="dt-row"><span class="dt-k">Merek</span><span class="dt-v">Babyelle</span></div>
+      <div class="dt-row"><span class="dt-k">Model</span><span class="dt-v">B900 Seri 2022</span></div>
+      <div class="dt-row"><span class="dt-k">Lama dipakai</span><span class="dt-v">8 bulan</span></div>
+      <div class="dt-row"><span class="dt-k">Lokasi</span><span class="dt-v">Tangerang Selatan</span></div>
+      <div class="dt-row"><span class="dt-k">Pengiriman</span><span class="dt-v">COD / Gosend</span></div>
     </div>
 
     <div class="desc-block">
-      <div class="sec-label">Deskripsi</div>
+      <div class="sec-lbl">Deskripsi</div>
       <div class="desc-text">Stroller Babyelle B900 seri 2022 kondisi sangat mulus. Dipakai hanya 8 bulan, anak sudah bisa jalan sendiri. Semua fungsi normal: sandaran bisa rebah, kanopi lengkap, sabuk pengaman mulus, roda empat masih bagus. Sudah dicuci bersih. Kelengkapan: buku manual, tas bawaan, rain cover.</div>
     </div>
 
@@ -959,59 +469,41 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     </div>
 
     <div class="trust-strip">
-      <div class="trust-item">
-        <i class="ti ti-shield-lock" aria-hidden="true"></i>
-        <span>Pembayaran<br>Escrow</span>
-      </div>
-      <div class="trust-item">
-        <i class="ti ti-clock" aria-hidden="true"></i>
-        <span>Dispute<br>72 jam</span>
-      </div>
-      <div class="trust-item">
-        <i class="ti ti-camera" aria-hidden="true"></i>
-        <span>Foto asli<br>seller</span>
-      </div>
+      <div class="trust-item"><i class="ti ti-shield-lock" aria-hidden="true"></i><span>Pembayaran<br>Escrow</span></div>
+      <div class="trust-item"><i class="ti ti-clock" aria-hidden="true"></i><span>Dispute<br>72 jam</span></div>
+      <div class="trust-item"><i class="ti ti-camera" aria-hidden="true"></i><span>Foto asli<br>seller</span></div>
     </div>
-
     <div style="height:80px"></div>
   </div>
 
   <div class="detail-cta">
-    <button class="btn-outline" onclick="go('s-chat')" style="flex:1">
-      <i class="ti ti-message" aria-hidden="true"></i> Chat
-    </button>
-    <button class="btn-primary" onclick="go('s-checkout')" style="flex:2">Beli Sekarang</button>
+    <a href="#s-chat" class="btn-outline" style="flex:1"><i class="ti ti-message" aria-hidden="true"></i> Chat</a>
+    <a href="#s-checkout" class="btn-primary" style="flex:2">Beli Sekarang</a>
   </div>
 </div>
 
-<!-- ══════ SCREEN: CHAT ══════ -->
+<!-- ══════ CHAT ══════ -->
 <div id="s-chat" class="screen">
   <div class="chat-hdr">
     <div class="chat-hdr-row">
-      <button class="back-btn" onclick="go('s-detail')" aria-label="Kembali">
-        <i class="ti ti-arrow-left" aria-hidden="true"></i>
-      </button>
+      <a href="#s-detail" class="back-a" aria-label="Kembali"><i class="ti ti-arrow-left" aria-hidden="true"></i></a>
       <div class="avatar" style="width:36px;height:36px;font-size:13px">SW</div>
       <div style="flex:1">
-        <div style="color:#fff;font-size:14px;font-weight:700">
-          Sari W. <span class="badge b-navy" style="font-size:9px;vertical-align:1px">Tier 2</span>
-        </div>
-        <div style="color:rgba(255,255,255,0.7);font-size:11px;display:flex;align-items:center;gap:4px">
-          <span class="online-dot"></span> Online sekarang
-        </div>
+        <div style="color:#fff;font-size:14px;font-weight:700">Sari W. <span class="badge b-navy" style="font-size:9px;vertical-align:1px">Tier 2</span></div>
+        <div style="color:rgba(255,255,255,.7);font-size:11px;display:flex;align-items:center;gap:4px"><span class="online-dot"></span> Online sekarang</div>
       </div>
-      <i class="ti ti-dots-vertical" style="color:rgba(255,255,255,0.8);font-size:20px" aria-hidden="true"></i>
+      <i class="ti ti-dots-vertical" style="color:rgba(255,255,255,.8);font-size:20px" aria-hidden="true"></i>
     </div>
   </div>
 
-  <div class="product-strip" onclick="go('s-detail')">
+  <a href="#s-detail" class="product-strip-a">
     <div class="ps-thumb">🛒</div>
     <div style="flex:1">
       <div style="color:#fff;font-size:12px;font-weight:700">Stroller Babyelle B900</div>
-      <div style="color:rgba(255,255,255,0.7);font-size:11px">Rp 850.000 · Seperti Baru</div>
+      <div style="color:rgba(255,255,255,.7);font-size:11px">Rp 850.000 · Seperti Baru</div>
     </div>
-    <i class="ti ti-chevron-right" style="color:rgba(255,255,255,0.4);font-size:16px" aria-hidden="true"></i>
-  </div>
+    <i class="ti ti-chevron-right" style="color:rgba(255,255,255,.4);font-size:16px" aria-hidden="true"></i>
+  </a>
 
   <div class="security-bar">
     <i class="ti ti-lock" style="font-size:14px" aria-hidden="true"></i>
@@ -1020,115 +512,58 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 
   <div class="chat-body">
     <div class="chat-date">Hari ini · 09.15 WIB</div>
-
-    <div class="bubble-wrap">
-      <div>
-        <div class="bubble them">Halo kak! Masih tersedia strollernya? 😊</div>
-        <div class="btime">09.15</div>
-      </div>
-    </div>
-
-    <div class="bubble-wrap me">
-      <div>
-        <div class="bubble me">Masih kak! Kondisi mulus banget, cuma 8 bulan dipakai</div>
-        <div class="btime" style="text-align:right">09.16</div>
-      </div>
-    </div>
-
-    <div class="bubble-wrap">
-      <div>
-        <div class="bubble them">Boleh minta foto bagian roda kak? Mau pastiin kondisinya</div>
-        <div class="btime">09.18</div>
-      </div>
-    </div>
-
-    <div class="bubble-wrap me">
-      <div>
-        <div class="photo-bub">🔍</div>
-        <div class="btime" style="text-align:right">09.20</div>
-      </div>
-    </div>
-
-    <div class="bubble-wrap me">
-      <div>
-        <div class="bubble me">Ini foto rodanya kak, masih bagus semua</div>
-        <div class="btime" style="text-align:right">09.20</div>
-      </div>
-    </div>
-
-    <div class="bubble-wrap">
-      <div>
-        <div class="bubble them">Wah mulus ya! Boleh nego kak? 800rb gimana? 🙏</div>
-        <div class="btime">09.22</div>
-      </div>
-    </div>
-
-    <div class="bubble-wrap me">
-      <div>
-        <div class="bubble me">Oke kak, 800rb deal! COD bisa di mall BSD ya</div>
-        <div class="btime" style="text-align:right">09.25</div>
-      </div>
-    </div>
-
-    <div class="bubble-wrap">
-      <div>
-        <div class="bubble them">Siap kak! Sabtu jam 14.00, Aeon BSD pintu utama 👍</div>
-        <div class="btime">09.26</div>
-      </div>
-    </div>
+    <div class="brow"><div><div class="bubble them">Halo kak! Masih tersedia strollernya? 😊</div><div class="btime">09.15</div></div></div>
+    <div class="brow me"><div><div class="bubble me">Masih kak! Kondisi mulus banget, cuma 8 bulan dipakai</div><div class="btime" style="text-align:right">09.16</div></div></div>
+    <div class="brow"><div><div class="bubble them">Boleh minta foto bagian roda kak? Mau pastiin kondisinya</div><div class="btime">09.18</div></div></div>
+    <div class="brow me"><div><div class="photo-bub">🔍</div><div class="btime" style="text-align:right">09.20</div></div></div>
+    <div class="brow me"><div><div class="bubble me">Ini foto rodanya kak, masih bagus semua</div><div class="btime" style="text-align:right">09.20</div></div></div>
+    <div class="brow"><div><div class="bubble them">Wah mulus ya! Boleh nego kak? 800rb gimana? 🙏</div><div class="btime">09.22</div></div></div>
+    <div class="brow me"><div><div class="bubble me">Oke kak, 800rb deal! COD bisa di mall BSD ya</div><div class="btime" style="text-align:right">09.25</div></div></div>
+    <div class="brow"><div><div class="bubble them">Siap kak! Sabtu jam 14.00, Aeon BSD pintu utama 👍</div><div class="btime">09.26</div></div></div>
 
     <div class="escrow-card">
-      <div class="ec-head">
-        <i class="ti ti-shield-check" aria-hidden="true"></i>
-        <span class="ec-title">Deal di Rp 800.000! 🎉</span>
-      </div>
+      <div class="ec-head"><i class="ti ti-shield-check" aria-hidden="true"></i><span class="ec-title">Deal di Rp 800.000! 🎉</span></div>
       <div class="ec-sub">Bayar lewat escrow ReGuna agar dana kamu aman sampai barang diterima.</div>
       <div class="ec-price">Rp 800.000</div>
-      <button class="btn-primary" onclick="go('s-checkout')" style="width:100%">
-        <i class="ti ti-lock" aria-hidden="true"></i> Bayar Rp 800.000 via Escrow
-      </button>
+      <a href="#s-checkout" class="btn-primary" style="width:100%"><i class="ti ti-lock" aria-hidden="true"></i> Bayar Rp 800.000 via Escrow</a>
     </div>
   </div>
 
   <div class="chat-input-row">
-    <button class="icon-btn" aria-label="Lampiran"><i class="ti ti-paperclip" aria-hidden="true"></i></button>
+    <a href="#" class="icon-a" aria-label="Lampiran"><i class="ti ti-paperclip" aria-hidden="true"></i></a>
     <input class="chat-input" type="text" placeholder="Ketik pesan...">
-    <button class="icon-btn" aria-label="Kamera"><i class="ti ti-camera" aria-hidden="true"></i></button>
-    <button class="send-btn" aria-label="Kirim"><i class="ti ti-send" aria-hidden="true"></i></button>
+    <a href="#" class="icon-a" aria-label="Kamera"><i class="ti ti-camera" aria-hidden="true"></i></a>
+    <a href="#" class="send-a" aria-label="Kirim"><i class="ti ti-send" aria-hidden="true"></i></a>
   </div>
 </div>
 
-<!-- ══════ SCREEN: CHECKOUT ══════ -->
+<!-- ══════ CHECKOUT ══════ -->
 <div id="s-checkout" class="screen">
   <div class="hdr">
     <div class="hdr-bar">
-      <button class="back-btn" onclick="go('s-chat')" aria-label="Kembali">
-        <i class="ti ti-arrow-left" aria-hidden="true"></i>
-      </button>
+      <a href="#s-chat" class="back-a" aria-label="Kembali"><i class="ti ti-arrow-left" aria-hidden="true"></i></a>
       <span class="hdr-title">Konfirmasi Pesanan</span>
-      <span style="color:rgba(255,255,255,0.65);font-size:12px">Langkah 1/2</span>
+      <span style="color:rgba(255,255,255,.65);font-size:12px">Langkah 1/2</span>
     </div>
   </div>
 
   <div class="body">
     <div class="card">
-      <div class="sec-label">Detail Barang</div>
+      <div class="sec-lbl">Detail Barang</div>
       <div style="display:flex;gap:10px;align-items:flex-start">
         <div style="width:54px;height:54px;border-radius:8px;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">🛒</div>
         <div>
-          <div style="font-size:13px;font-weight:700;color:#1a1a1a;line-height:1.3">Stroller Babyelle B900</div>
+          <div style="font-size:13px;font-weight:700;color:#1a1a1a">Stroller Babyelle B900</div>
           <div style="font-size:12px;color:#999;margin-top:2px">Sari W. · <span class="badge b-teal" style="font-size:10px">Seperti Baru</span></div>
           <div style="font-size:14px;font-weight:800;color:#0F766E;margin-top:4px">
-            <span style="text-decoration:line-through;color:#bbb;font-size:12px;font-weight:400;margin-right:4px">Rp 850.000</span>
-            Rp 800.000
+            <span style="text-decoration:line-through;color:#bbb;font-size:12px;font-weight:400;margin-right:4px">Rp 850.000</span>Rp 800.000
           </div>
-          <div style="font-size:11px;color:#aaa;margin-top:2px">Harga negosiasi via chat</div>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="sec-label">Titik Temu COD</div>
+      <div class="sec-lbl">Titik Temu COD</div>
       <div style="display:flex;gap:10px;background:#f8f8f8;border-radius:10px;padding:12px;border:1px solid #eee">
         <i class="ti ti-map-pin" style="font-size:22px;color:#0F766E;flex-shrink:0" aria-hidden="true"></i>
         <div>
@@ -1137,95 +572,68 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
           <div style="font-size:11px;color:#999;margin-top:6px">Waktu</div>
           <div style="font-size:13px;font-weight:700;color:#1a1a1a">Sabtu, 17 Mei · 14.00 WIB</div>
           <div style="font-size:11px;color:#D97706;margin-top:5px;display:flex;align-items:center;gap:4px">
-            <i class="ti ti-alert-triangle" style="font-size:13px" aria-hidden="true"></i>
-            Bayar via escrow sebelum bertemu seller
+            <i class="ti ti-alert-triangle" style="font-size:13px" aria-hidden="true"></i> Bayar via escrow sebelum bertemu seller
           </div>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="sec-label">Metode Pembayaran</div>
-      <div class="pay-option on" id="opt-gopay" onclick="pilihPay('gopay')">
+      <div class="sec-lbl">Metode Pembayaran</div>
+      <div class="pay-opt on" id="opt-gopay" onclick="pilihPay('gopay')">
         <div class="pay-logo" style="background:#00AED6">GP</div>
-        <div>
-          <div class="pay-name">GoPay</div>
-          <div class="pay-sub">Saldo tersedia · Rp 1.250.000</div>
-        </div>
-        <div class="radio-circle on" id="r-gopay"><div class="radio-dot"></div></div>
+        <div><div class="pay-name">GoPay</div><div class="pay-sub">Saldo tersedia · Rp 1.250.000</div></div>
+        <div class="radio-c on" id="r-gopay"><div class="radio-dot"></div></div>
       </div>
-      <div class="pay-option" id="opt-ovo" onclick="pilihPay('ovo')">
+      <div class="pay-opt" id="opt-ovo" onclick="pilihPay('ovo')">
         <div class="pay-logo" style="background:#4C3494">OVO</div>
-        <div>
-          <div class="pay-name">OVO</div>
-          <div class="pay-sub">Sambungkan akun OVO</div>
-        </div>
-        <div class="radio-circle" id="r-ovo"></div>
+        <div><div class="pay-name">OVO</div><div class="pay-sub">Sambungkan akun OVO</div></div>
+        <div class="radio-c" id="r-ovo"></div>
       </div>
-      <div class="pay-option" id="opt-qris" onclick="pilihPay('qris')">
+      <div class="pay-opt" id="opt-qris" onclick="pilihPay('qris')">
         <div class="pay-logo" style="background:#E31837">QR</div>
-        <div>
-          <div class="pay-name">QRIS</div>
-          <div class="pay-sub">Scan dari app manapun</div>
-        </div>
-        <div class="radio-circle" id="r-qris"></div>
+        <div><div class="pay-name">QRIS</div><div class="pay-sub">Scan dari app manapun</div></div>
+        <div class="radio-c" id="r-qris"></div>
       </div>
-      <div class="pay-option" id="opt-va" onclick="pilihPay('va')">
+      <div class="pay-opt" id="opt-va" onclick="pilihPay('va')">
         <div class="pay-logo" style="background:#003087">VA</div>
-        <div>
-          <div class="pay-name">Transfer Bank</div>
-          <div class="pay-sub">BCA · BRI · Mandiri · BNI</div>
-        </div>
-        <div class="radio-circle" id="r-va"></div>
+        <div><div class="pay-name">Transfer Bank</div><div class="pay-sub">BCA · BRI · Mandiri · BNI</div></div>
+        <div class="radio-c" id="r-va"></div>
       </div>
     </div>
 
     <div class="card">
-      <div class="sec-label">Ringkasan Pembayaran</div>
-      <div class="sum-row"><span class="sum-key">Harga barang</span><span class="sum-val">Rp 800.000</span></div>
-      <div class="sum-row"><span class="sum-key">Biaya layanan ReGuna</span><span class="sum-val">Rp 3.000</span></div>
-      <div class="sum-row"><span class="sum-key">Biaya transaksi GoPay</span><span class="sum-val">Rp 0</span></div>
-      <div class="sum-total">
-        <span class="sum-total-key">Total dibayar</span>
-        <span class="sum-total-val">Rp 803.000</span>
-      </div>
+      <div class="sec-lbl">Ringkasan Pembayaran</div>
+      <div class="sum-row"><span class="sum-k">Harga barang</span><span class="sum-v">Rp 800.000</span></div>
+      <div class="sum-row"><span class="sum-k">Biaya layanan ReGuna</span><span class="sum-v">Rp 3.000</span></div>
+      <div class="sum-row"><span class="sum-k">Biaya transaksi GoPay</span><span class="sum-v">Rp 0</span></div>
+      <div class="sum-total"><span class="st-k">Total dibayar</span><span class="st-v">Rp 803.000</span></div>
     </div>
 
     <div class="card">
-      <div class="sec-label">Cara Kerja Escrow</div>
-      <div class="escrow-info-box">
+      <div class="sec-lbl">Cara Kerja Escrow</div>
+      <div class="eib">
         <div class="eib-title"><i class="ti ti-shield-lock" style="font-size:18px" aria-hidden="true"></i> Dana aman sampai barang diterima</div>
         <div class="eib-desc">ReGuna menahan dana dan baru mencairkan ke seller setelah kamu konfirmasi terima barang.</div>
-        <div class="eib-step"><span class="step-num">1</span><span>Kamu bayar — dana masuk escrow ReGuna</span></div>
-        <div class="eib-step"><span class="step-num">2</span><span>Bertemu seller, cek kondisi barang di lokasi</span></div>
-        <div class="eib-step"><span class="step-num">3</span><span>Barang oke? Konfirmasi di app — dana cair ke seller</span></div>
-        <div class="eib-step"><span class="step-num">4</span><span>Ada masalah? Dispute dalam 72 jam — tim ReGuna mediasi</span></div>
+        <div class="eib-step"><span class="step-n">1</span><span>Kamu bayar — dana masuk escrow ReGuna</span></div>
+        <div class="eib-step"><span class="step-n">2</span><span>Bertemu seller, cek kondisi barang di lokasi</span></div>
+        <div class="eib-step"><span class="step-n">3</span><span>Barang oke? Konfirmasi di app — dana cair ke seller</span></div>
+        <div class="eib-step"><span class="step-n">4</span><span>Ada masalah? Dispute 72 jam — tim ReGuna mediasi</span></div>
       </div>
     </div>
-
     <div style="height:8px"></div>
   </div>
 
   <div class="checkout-cta">
-    <div class="cta-total-row">
-      <span class="cta-label">Total pembayaran</span>
-      <span class="cta-amount">Rp 803.000</span>
-    </div>
-    <button class="btn-primary" onclick="go('s-success')" style="width:100%">
-      <i class="ti ti-lock" aria-hidden="true"></i> Bayar via Escrow
-    </button>
+    <div class="cta-total-row"><span class="cta-lbl">Total pembayaran</span><span class="cta-amt">Rp 803.000</span></div>
+    <a href="#s-success" class="btn-primary" style="width:100%"><i class="ti ti-lock" aria-hidden="true"></i> Bayar via Escrow</a>
     <div class="disclaimer">Dengan membayar, kamu menyetujui Syarat &amp; Ketentuan escrow ReGuna</div>
   </div>
 </div>
 
-<!-- ══════ SCREEN: SUCCESS ══════ -->
+<!-- ══════ SUCCESS ══════ -->
 <div id="s-success" class="screen">
-  <div class="hdr">
-    <div class="hdr-bar">
-      <span class="hdr-title">Status Pesanan</span>
-    </div>
-  </div>
-
+  <div class="hdr"><div class="hdr-bar"><span class="hdr-title">Status Pesanan</span></div></div>
   <div class="body">
     <div class="success-hero">
       <div class="success-icon"><i class="ti ti-shield-check" aria-hidden="true"></i></div>
@@ -1236,58 +644,27 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 
     <div class="timeline">
       <div class="tl-title">Status Pesanan</div>
-
       <div class="tl-row">
-        <div class="tl-left">
-          <div class="tl-dot done"><i class="ti ti-check" aria-hidden="true"></i></div>
-          <div class="tl-line done"></div>
-        </div>
-        <div class="tl-content">
-          <div class="tl-step">Pembayaran diterima</div>
-          <div class="tl-desc">Dana Rp 803.000 masuk ke escrow ReGuna</div>
-          <div class="tl-time">Hari ini · 09.41 WIB</div>
-        </div>
+        <div class="tl-left"><div class="tl-dot done"><i class="ti ti-check" aria-hidden="true"></i></div><div class="tl-line done"></div></div>
+        <div class="tl-content"><div class="tl-step">Pembayaran diterima</div><div class="tl-desc">Dana Rp 803.000 masuk ke escrow ReGuna</div><div class="tl-time">Hari ini · 09.41 WIB</div></div>
       </div>
-
       <div class="tl-row">
-        <div class="tl-left">
-          <div class="tl-dot cur"><i class="ti ti-clock" aria-hidden="true"></i></div>
-          <div class="tl-line"></div>
-        </div>
-        <div class="tl-content">
-          <div class="tl-step">Menunggu pertemuan COD</div>
-          <div class="tl-desc">Aeon BSD · Sabtu 17 Mei · 14.00 WIB</div>
-          <div class="tl-time">Dijadwalkan</div>
-        </div>
+        <div class="tl-left"><div class="tl-dot cur"><i class="ti ti-clock" aria-hidden="true"></i></div><div class="tl-line"></div></div>
+        <div class="tl-content"><div class="tl-step">Menunggu pertemuan COD</div><div class="tl-desc">Aeon BSD · Sabtu 17 Mei · 14.00 WIB</div><div class="tl-time">Dijadwalkan</div></div>
       </div>
-
       <div class="tl-row">
-        <div class="tl-left">
-          <div class="tl-dot next"><i class="ti ti-package" aria-hidden="true"></i></div>
-          <div class="tl-line"></div>
-        </div>
-        <div class="tl-content">
-          <div class="tl-step dim">Konfirmasi penerimaan</div>
-          <div class="tl-desc dim">Setelah cek barang, kamu konfirmasi di sini</div>
-        </div>
+        <div class="tl-left"><div class="tl-dot next"><i class="ti ti-package" aria-hidden="true"></i></div><div class="tl-line"></div></div>
+        <div class="tl-content"><div class="tl-step dim">Konfirmasi penerimaan</div><div class="tl-desc dim">Setelah cek barang, konfirmasi di sini</div></div>
       </div>
-
       <div class="tl-row">
-        <div class="tl-left">
-          <div class="tl-dot next"><i class="ti ti-circle-check" aria-hidden="true"></i></div>
-        </div>
-        <div class="tl-content" style="padding-bottom:0">
-          <div class="tl-step dim">Dana cair ke seller</div>
-          <div class="tl-desc dim">Rp 800.000 dikirim ke Sari W.</div>
-        </div>
+        <div class="tl-left"><div class="tl-dot next"><i class="ti ti-circle-check" aria-hidden="true"></i></div></div>
+        <div class="tl-content" style="padding-bottom:0"><div class="tl-step dim">Dana cair ke seller</div><div class="tl-desc dim">Rp 800.000 dikirim ke Sari W.</div></div>
       </div>
     </div>
 
     <div class="success-btns">
-      <button class="btn-wa">
-        <i class="ti ti-brand-whatsapp" aria-hidden="true"></i> Bagikan ke WhatsApp
-      </button>
-      <button class="btn-outline" onclick="go('s-home')">Jelajahi Barang Lain</button>
+      <button class="btn-wa"><i class="ti ti-brand-whatsapp" aria-hidden="true"></i> Bagikan ke WhatsApp</button>
+      <a href="#s-home" class="btn-outline">Jelajahi Barang Lain</a>
     </div>
   </div>
 </div>
@@ -1295,44 +672,37 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 </div><!-- .phone -->
 
 <script>
-function go(id) {
-  var screens = document.querySelectorAll('.screen');
-  for (var i = 0; i < screens.length; i++) {
-    if (screens[i].id === id) {
-      screens[i].classList.add('active');
-    } else {
-      screens[i].classList.remove('active');
-    }
-  }
-  document.querySelector('.phone').scrollTop = 0;
-}
-
 function pilih(el) {
-  var pills = document.querySelectorAll('.cat-pill');
-  for (var i = 0; i < pills.length; i++) {
-    pills[i].classList.remove('on');
-  }
+  var btns = document.querySelectorAll('.cat-pill');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('on');
   el.classList.add('on');
 }
 
 function pilihPay(id) {
-  var opts = document.querySelectorAll('.pay-option');
-  for (var i = 0; i < opts.length; i++) {
-    opts[i].classList.remove('on');
-  }
-  var radios = document.querySelectorAll('.radio-circle');
-  for (var i = 0; i < radios.length; i++) {
-    radios[i].classList.remove('on');
-    radios[i].innerHTML = '';
-  }
+  var opts = document.querySelectorAll('.pay-opt');
+  for (var i = 0; i < opts.length; i++) opts[i].classList.remove('on');
+  var radios = document.querySelectorAll('.radio-c');
+  for (var i = 0; i < radios.length; i++) { radios[i].classList.remove('on'); radios[i].innerHTML = ''; }
   var opt = document.getElementById('opt-' + id);
   var radio = document.getElementById('r-' + id);
   if (opt) opt.classList.add('on');
-  if (radio) {
-    radio.classList.add('on');
-    radio.innerHTML = '<div class="radio-dot"></div>';
-  }
+  if (radio) { radio.classList.add('on'); radio.innerHTML = '<div class="radio-dot"></div>'; }
 }
+
+window.addEventListener('hashchange', function() {
+  var id = location.hash.replace('#', '');
+  if (!id) id = 's-home';
+  var screens = document.querySelectorAll('.screen');
+  for (var i = 0; i < screens.length; i++) {
+    if (screens[i].id === id) {
+      screens[i].classList.add('active');
+      var b = screens[i].querySelector('.body, .chat-body');
+      if (b) b.scrollTop = 0;
+    } else {
+      screens[i].classList.remove('active');
+    }
+  }
+});
 </script>
 </body>
 </html>
