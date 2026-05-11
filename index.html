@@ -4,300 +4,235 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>ReGuna — Nilai Baru untuk Setiap Barang</title>
-<meta name="description" content="Platform sirkulasi barang rumah tangga layak pakai">
 <meta name="theme-color" content="#0F766E">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="ReGuna">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #e0e0e0; }
+*{box-sizing:border-box;margin:0;padding:0}
+button{font-family:inherit;cursor:pointer;border:none;background:none;padding:0;text-align:left}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#e0e0e0}
+.phone{width:375px;height:812px;margin:24px auto;background:#f5f5f5;border-radius:40px;overflow:hidden;box-shadow:0 0 0 10px #1c1c1e,0 24px 60px rgba(0,0,0,.3);position:relative}
+@media(max-width:430px){body{background:#f5f5f5}.phone{width:100%;height:100vh;border-radius:0;box-shadow:none;margin:0}}
+.screen{display:none;flex-direction:column;height:100%;overflow:hidden}
+.screen.active{display:flex}
+.body{flex:1;overflow-y:scroll}
 
-a { color: inherit; text-decoration: none; }
-
-.phone {
-  width: 375px; height: 812px;
-  margin: 24px auto;
-  background: #f5f5f5;
-  border-radius: 40px;
-  overflow: hidden;
-  box-shadow: 0 0 0 10px #1c1c1e, 0 24px 60px rgba(0,0,0,.3);
-  position: relative;
-}
-@media (max-width: 430px) {
-  body { background: #f5f5f5; }
-  .phone { width: 100%; height: 100vh; border-radius: 0; box-shadow: none; margin: 0; }
-}
-
-.screen { display: none; flex-direction: column; height: 100%; overflow: hidden; }
-.screen.active { display: flex; }
-
-.body { flex: 1; overflow-y: scroll; }
-
-/* TEAL HEADER */
-.hdr { background: #0F766E; flex-shrink: 0; }
-.hdr-bar { display: flex; align-items: center; gap: 10px; padding: 12px 16px; }
-.hdr-title { color: #fff; font-size: 16px; font-weight: 600; flex: 1; }
-.back-a {
-  color: #fff; font-size: 26px;
-  display: flex; align-items: center;
-  padding: 4px; margin-left: -4px;
-}
-.hdr-icon { color: rgba(255,255,255,.85); font-size: 22px; }
+/* HEADER */
+.hdr{background:#0F766E;flex-shrink:0}
+.hdr-bar{display:flex;align-items:center;gap:10px;padding:12px 16px}
+.hdr-title{color:#fff;font-size:16px;font-weight:700;flex:1}
+.back-btn{color:#fff;font-size:26px;display:flex;align-items:center;padding:4px;margin-left:-4px}
+.hdr-icon{color:rgba(255,255,255,.85);font-size:22px}
 
 /* BOTTOM NAV */
-.bottom-nav {
-  display: flex; align-items: center; justify-content: space-around;
-  background: #fff; border-top: 1px solid #e8e8e8;
-  padding: 8px 0 14px; flex-shrink: 0;
-}
-.nav-a {
-  display: flex; flex-direction: column; align-items: center;
-  gap: 3px; color: #aaa; font-size: 10px; padding: 4px 12px;
-}
-.nav-a.on { color: #0F766E; }
-.nav-a i { font-size: 22px; }
-.nav-sell {
-  display: flex; flex-direction: column; align-items: center;
-  justify-content: center; gap: 2px;
-  width: 50px; height: 50px; border-radius: 25px;
-  background: #0F766E; color: #fff;
-  font-size: 9px; font-weight: 700;
-  margin-top: -12px;
-  box-shadow: 0 4px 12px rgba(15,118,110,.45);
-}
-.nav-sell i { font-size: 20px; }
+.bnav{display:flex;align-items:center;justify-content:space-around;background:#fff;border-top:1px solid #e8e8e8;padding:8px 0 14px;flex-shrink:0}
+.bnav-btn{display:flex;flex-direction:column;align-items:center;gap:3px;color:#aaa;font-size:10px;padding:4px 14px}
+.bnav-btn.on{color:#0F766E}
+.bnav-btn i{font-size:22px}
+.bnav-sell{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;width:50px;height:50px;border-radius:25px;background:#0F766E;color:#fff;font-size:9px;font-weight:700;margin-top:-12px;box-shadow:0 4px 12px rgba(15,118,110,.45)}
+.bnav-sell i{font-size:20px}
 
 /* BADGES */
-.badge { display: inline-flex; align-items: center; gap: 3px; padding: 3px 8px; border-radius: 20px; font-size: 11px; font-weight: 600; }
-.b-teal { background: #E1F5EE; color: #0F6E56; }
-.b-blue { background: #DBEAFE; color: #1E40AF; }
-.b-amber { background: #FEF3C7; color: #92400E; }
-.b-navy { background: #1E3A5F; color: #fff; font-size: 10px; padding: 2px 7px; }
+.badge{display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:700}
+.bt{background:#E1F5EE;color:#0F6E56}
+.bb{background:#DBEAFE;color:#1E40AF}
+.ba{background:#FEF3C7;color:#92400E}
+.bn{background:#1E3A5F;color:#fff;font-size:10px;padding:2px 7px}
+
+/* SHARED BUTTONS */
+.btn-g{display:flex;align-items:center;justify-content:center;gap:6px;background:#0F766E;color:#fff;border-radius:10px;padding:13px 20px;font-size:14px;font-weight:700;width:100%}
+.btn-o{display:flex;align-items:center;justify-content:center;background:#fff;color:#0F766E;border:1.5px solid #0F766E;border-radius:10px;padding:13px 20px;font-size:14px;font-weight:700;width:100%}
 
 /* CARD BLOCK */
-.card { background: #fff; margin-bottom: 8px; padding: 14px 16px; }
-.sec-lbl { font-size: 11px; font-weight: 700; color: #888; text-transform: uppercase; letter-spacing: .6px; margin-bottom: 10px; }
+.card{background:#fff;margin-bottom:8px;padding:14px 16px}
+.slbl{font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px}
 
-/* BUTTONS */
-.btn-primary {
-  display: flex; align-items: center; justify-content: center; gap: 6px;
-  background: #0F766E; color: #fff; border: none; border-radius: 10px;
-  padding: 13px 20px; font-size: 14px; font-weight: 700; cursor: pointer;
-}
-.btn-outline {
-  display: flex; align-items: center; justify-content: center;
-  background: #fff; color: #0F766E; border: 1.5px solid #0F766E;
-  border-radius: 10px; padding: 13px 20px; font-size: 14px; font-weight: 700;
-}
+/* ══ HOME ══ */
+.home-hdr{background:#0F766E;padding:12px 16px 16px}
+.logo{color:#fff;font-size:22px;font-weight:800;letter-spacing:-.5px}
+.logo span{color:#6EE7B7}
+.tagline{color:rgba(255,255,255,.7);font-size:11px}
+.search-bar{display:flex;align-items:center;gap:8px;background:#fff;border-radius:10px;padding:10px 14px;color:#aaa;font-size:13px;margin-top:10px}
+.search-bar i{color:#0F766E;font-size:18px}
+.pg-banner{display:flex;align-items:center;justify-content:space-between;margin:10px 12px 2px;background:#1E3A5F;border-radius:12px;padding:12px 14px;width:calc(100% - 24px)}
+.pg-banner h4{color:#fff;font-size:13px;font-weight:700}
+.pg-banner p{color:rgba(255,255,255,.7);font-size:11px;margin-top:2px}
+.pg-banner i{color:rgba(255,255,255,.75);font-size:30px}
+.cat-row{display:flex;gap:8px;padding:12px 12px 6px;overflow-x:auto}
+.cat-row::-webkit-scrollbar{display:none}
+.cat-pill{padding:7px 14px;border-radius:20px;font-size:12px;font-weight:700;white-space:nowrap;border:1.5px solid #e0e0e0;background:#fff;color:#555;flex-shrink:0}
+.cat-pill.on{background:#0F766E;color:#fff;border-color:#0F766E}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px 12px 20px}
+.lcard{display:block;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #eee;width:100%}
+.limg{width:100%;aspect-ratio:1;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:38px;position:relative}
+.limg-badge{position:absolute;top:6px;left:6px}
+.linfo{padding:8px 10px 10px}
+.lname{font-size:12px;font-weight:700;color:#1a1a1a;line-height:1.3;margin-bottom:2px}
+.lcat{font-size:11px;color:#999;margin-bottom:4px}
+.lprice{font-size:13px;font-weight:800;color:#0F766E}
+.lprice.free{color:#D97706}
+.lmeta{display:flex;align-items:center;gap:3px;margin-top:4px;font-size:10px;color:#aaa}
+.lmeta i{font-size:11px;color:#F59E0B}
 
-/* ══════ HOME ══════ */
-.home-top { background: #0F766E; padding: 12px 16px 16px; }
-.logo-row { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; }
-.logo { color: #fff; font-size: 22px; font-weight: 800; letter-spacing: -.5px; }
-.logo span { color: #6EE7B7; }
-.tagline { color: rgba(255,255,255,.7); font-size: 11px; }
-.top-icons { display: flex; gap: 14px; }
-.top-icons i { color: #fff; font-size: 22px; }
-.search-bar {
-  display: flex; align-items: center; gap: 8px;
-  background: #fff; border-radius: 10px; padding: 10px 14px;
-  color: #aaa; font-size: 13px;
-}
-.search-bar i { color: #0F766E; font-size: 18px; }
+/* ══ DETAIL ══ */
+.gal-wrap{position:relative}
+.main-img{width:100%;height:230px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:72px}
+.img-cond{position:absolute;top:10px;left:10px}
+.dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:5px}
+.dot{width:6px;height:6px;border-radius:3px;background:rgba(255,255,255,.45)}
+.dot.on{width:16px;background:#fff}
+.thumb-row{display:flex;gap:6px;padding:10px 12px;background:#fff}
+.thumb{width:52px;height:52px;border-radius:8px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:20px;border:1.5px solid transparent}
+.thumb.on{border-color:#0F766E}
+.price-block{background:#fff;padding:14px 16px 10px;margin-bottom:8px}
+.price-main{font-size:24px;font-weight:800;color:#1a1a1a}
+.price-sub{font-size:12px;color:#999;margin-top:2px}
+.pgbar-wrap{background:#E1F5EE;border-radius:10px;padding:10px 12px;margin-top:10px}
+.pgbar-labels{display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:#0F6E56;margin-bottom:6px}
+.pgbar-track{height:6px;background:#9FE1CB;border-radius:3px;position:relative}
+.pgbar-fill{height:6px;background:#0F766E;border-radius:3px;width:30%}
+.pgbar-marker{position:absolute;top:-5px;left:30%;transform:translateX(-50%);width:16px;height:16px;border-radius:50%;background:#0F766E;border:2.5px solid #fff}
+.pgbar-range{display:flex;justify-content:space-between;font-size:10px;color:#0F6E56;margin-top:4px}
+.seller-btn{display:flex;align-items:center;gap:10px;background:#fff;padding:12px 16px;margin-bottom:8px;width:100%}
+.avatar{width:40px;height:40px;border-radius:20px;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#0F766E;flex-shrink:0}
+.sname{font-size:13px;font-weight:700;color:#1a1a1a}
+.smeta{font-size:11px;color:#999;margin-top:2px;display:flex;align-items:center;gap:5px}
+.dtable{background:#fff;padding:14px 16px;margin-bottom:8px}
+.drow{display:flex;padding:7px 0;border-bottom:1px solid #f0f0f0}
+.drow:last-child{border-bottom:none}
+.dk{font-size:13px;color:#999;width:110px;flex-shrink:0}
+.dv{font-size:13px;color:#1a1a1a;font-weight:600}
+.desc-block{background:#fff;padding:14px 16px;margin-bottom:8px}
+.desc-text{font-size:13px;color:#444;line-height:1.6}
+.safety{background:#FEF3C7;border-left:3px solid #D97706;padding:10px 14px;display:flex;gap:8px;font-size:12px;color:#92400E;line-height:1.4;margin-bottom:8px}
+.trust-row{background:#fff;display:flex;gap:8px;padding:12px 16px;margin-bottom:8px}
+.trust-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;background:#f8f8f8;border-radius:10px;padding:10px 4px}
+.trust-item i{font-size:20px;color:#0F766E}
+.trust-item span{font-size:10px;color:#888;text-align:center;line-height:1.3}
+.detail-cta{padding:12px 16px 20px;background:#fff;border-top:1px solid #eee;display:flex;gap:10px;flex-shrink:0}
 
-.pg-banner {
-  display: flex; align-items: center; justify-content: space-between;
-  margin: 10px 12px 2px; background: #1E3A5F;
-  border-radius: 12px; padding: 12px 14px;
-}
-.pg-banner h4 { color: #fff; font-size: 13px; font-weight: 700; }
-.pg-banner p { color: rgba(255,255,255,.7); font-size: 11px; margin-top: 2px; }
-.pg-banner i { color: rgba(255,255,255,.75); font-size: 30px; }
+/* ══ CHAT ══ */
+.chat-hdr{background:#0F766E;padding:10px 16px 12px;flex-shrink:0}
+.chat-hdr-row{display:flex;align-items:center;gap:10px}
+.online-dot{width:7px;height:7px;border-radius:50%;background:#4ADE80;display:inline-block}
+.prod-strip{display:flex;align-items:center;gap:10px;background:#0D6962;padding:9px 14px;width:100%}
+.ps-thumb{width:36px;height:36px;border-radius:6px;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.sec-bar{background:#FEF3C7;padding:7px 14px;font-size:11px;color:#92400E;display:flex;align-items:center;gap:6px;flex-shrink:0}
+.chat-body{flex:1;overflow-y:scroll;padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+.chat-date{text-align:center;font-size:11px;color:#aaa}
+.brow{display:flex;gap:8px;align-items:flex-end}
+.brow.me{flex-direction:row-reverse}
+.bubble{max-width:72%;padding:9px 12px;border-radius:16px;font-size:13px;line-height:1.45}
+.bubble.them{background:#f0f0f0;color:#1a1a1a;border-bottom-left-radius:4px}
+.bubble.me{background:#0F766E;color:#fff;border-bottom-right-radius:4px}
+.btime{font-size:10px;color:#bbb;margin-bottom:4px}
+.photobub{width:130px;height:98px;border-radius:12px;background:#ddd;display:flex;align-items:center;justify-content:center;font-size:28px}
+.escrow-card{background:#fff;border:1.5px solid #0F766E;border-radius:14px;padding:14px}
+.ec-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.ec-head i{font-size:22px;color:#0F766E}
+.ec-title{font-size:13px;font-weight:700;color:#1a1a1a}
+.ec-sub{font-size:12px;color:#555;line-height:1.4;margin-bottom:8px}
+.ec-price{font-size:18px;font-weight:800;color:#0F766E;margin-bottom:10px}
+.chat-input-row{padding:10px 14px 20px;background:#fff;border-top:1px solid #eee;display:flex;align-items:center;gap:8px;flex-shrink:0}
+.chat-input{flex:1;padding:9px 14px;border-radius:24px;border:1px solid #ddd;background:#f5f5f5;font-size:13px;outline:none}
+.icon-btn{color:#aaa;font-size:22px;padding:4px;display:flex;align-items:center}
+.send-btn{width:36px;height:36px;border-radius:18px;background:#0F766E;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px}
 
-.cat-row { display: flex; gap: 8px; padding: 12px 12px 6px; overflow-x: auto; }
-.cat-row::-webkit-scrollbar { display: none; }
-.cat-pill {
-  padding: 7px 14px; border-radius: 20px;
-  font-size: 12px; font-weight: 600; white-space: nowrap;
-  border: 1.5px solid #e0e0e0; background: #fff; color: #555;
-  cursor: pointer; flex-shrink: 0;
-}
-.cat-pill.on { background: #0F766E; color: #fff; border-color: #0F766E; }
+/* ══ CHECKOUT ══ */
+.pay-opt{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:10px;border:1.5px solid #e0e0e0;background:#fff;margin-bottom:8px;width:100%}
+.pay-opt.on{border-color:#0F766E;background:#E1F5EE}
+.pay-logo{width:38px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0}
+.pay-name{font-size:13px;font-weight:700;color:#1a1a1a}
+.pay-sub{font-size:11px;color:#999}
+.radio-c{width:18px;height:18px;border-radius:50%;border:1.5px solid #ccc;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.radio-c.on{border-color:#0F766E}
+.radio-dot{width:9px;height:9px;border-radius:50%;background:#0F766E}
+.sum-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #f5f5f5}
+.sum-row:last-child{border-bottom:none}
+.sk{font-size:13px;color:#888}
+.sv{font-size:13px;font-weight:700;color:#1a1a1a}
+.sum-total{display:flex;justify-content:space-between;padding-top:10px;border-top:2px solid #eee;margin-top:4px}
+.stk{font-size:14px;font-weight:700;color:#1a1a1a}
+.stv{font-size:16px;font-weight:800;color:#1a1a1a}
+.eib{background:#E1F5EE;border:1px solid #9FE1CB;border-radius:12px;padding:13px}
+.eib-title{font-size:13px;font-weight:700;color:#085041;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.eib-desc{font-size:12px;color:#0F6E56;line-height:1.5;margin-bottom:10px}
+.eib-step{display:flex;gap:8px;font-size:12px;color:#0F6E56;margin-bottom:7px;align-items:flex-start}
+.stepn{width:18px;height:18px;border-radius:50%;background:#0F766E;color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.co-cta{padding:12px 16px 24px;background:#fff;border-top:1px solid #eee;flex-shrink:0}
+.co-total-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.co-lbl{font-size:12px;color:#999}
+.co-amt{font-size:18px;font-weight:800;color:#1a1a1a}
+.disclaimer{font-size:11px;color:#aaa;text-align:center;margin-top:8px;line-height:1.4}
 
-.listing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 10px 12px 20px; }
-.listing-card {
-  display: block;
-  background: #fff; border-radius: 12px;
-  overflow: hidden; border: 1px solid #eee;
-}
-.listing-img {
-  width: 100%; aspect-ratio: 1;
-  background: #f0f0f0; display: flex;
-  align-items: center; justify-content: center;
-  font-size: 38px; position: relative;
-}
-.img-badge { position: absolute; top: 6px; left: 6px; }
-.listing-info { padding: 8px 10px 10px; }
-.listing-name { font-size: 12px; font-weight: 700; color: #1a1a1a; line-height: 1.3; margin-bottom: 2px; }
-.listing-cat { font-size: 11px; color: #999; margin-bottom: 4px; }
-.listing-price { font-size: 13px; font-weight: 800; color: #0F766E; }
-.listing-price.free { color: #D97706; }
-.listing-meta { display: flex; align-items: center; gap: 3px; margin-top: 4px; font-size: 10px; color: #aaa; }
-.listing-meta i { font-size: 11px; color: #F59E0B; }
+/* ══ SUCCESS ══ */
+.suc-hero{background:#E1F5EE;padding:28px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;border-bottom:1px solid #9FE1CB}
+.suc-icon{width:70px;height:70px;border-radius:35px;background:#0F766E;display:flex;align-items:center;justify-content:center;font-size:34px;color:#fff;margin-bottom:14px}
+.suc-title{font-size:20px;font-weight:800;color:#1a1a1a;margin-bottom:6px}
+.suc-sub{font-size:13px;color:#555;line-height:1.5}
+.order-id{margin-top:12px;padding:7px 16px;background:#fff;border-radius:8px;border:1px solid #9FE1CB;font-size:12px;color:#888}
+.order-id span{font-weight:800;color:#0F766E}
+.suc-btns{padding:0 16px 32px;display:flex;flex-direction:column;gap:10px}
 
-/* ══════ DETAIL ══════ */
-.gallery-wrap { position: relative; }
-.main-photo { width: 100%; height: 230px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; font-size: 72px; }
-.photo-cond { position: absolute; top: 10px; left: 10px; }
-.dots-row { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); display: flex; gap: 5px; }
-.dot { width: 6px; height: 6px; border-radius: 3px; background: rgba(255,255,255,.45); }
-.dot.on { width: 16px; background: #fff; }
-.thumb-row { display: flex; gap: 6px; padding: 10px 12px; background: #fff; }
-.thumb { width: 52px; height: 52px; border-radius: 8px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; font-size: 20px; border: 1.5px solid transparent; }
-.thumb.on { border-color: #0F766E; }
+/* TIMELINE (shared) */
+.tl-wrap{padding:20px 16px}
+.tl-title{font-size:14px;font-weight:800;color:#1a1a1a;margin-bottom:16px}
+.tl-row{display:flex;gap:12px}
+.tl-left{display:flex;flex-direction:column;align-items:center;width:28px}
+.tl-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.tl-dot.done{background:#0F766E;color:#fff}
+.tl-dot.cur{background:#E1F5EE;color:#0F766E;border:2px solid #0F766E}
+.tl-dot.next{background:#f0f0f0;color:#ccc;border:2px solid #e0e0e0}
+.tl-line{width:2px;flex:1;background:#e0e0e0;margin:4px 0;min-height:26px}
+.tl-line.done{background:#0F766E}
+.tl-content{flex:1;padding-bottom:22px}
+.tl-step{font-size:13px;font-weight:700;color:#1a1a1a}
+.tl-step.dim{color:#ccc}
+.tl-desc{font-size:12px;color:#888;margin-top:2px;line-height:1.4}
+.tl-desc.dim{color:#ddd}
+.tl-time{font-size:11px;color:#aaa;margin-top:3px}
 
-.price-block { background: #fff; padding: 14px 16px 10px; margin-bottom: 8px; }
-.price-main { font-size: 24px; font-weight: 800; color: #1a1a1a; }
-.price-sub { font-size: 12px; color: #999; margin-top: 2px; }
-.pg-bar-wrap { background: #E1F5EE; border-radius: 10px; padding: 10px 12px; margin-top: 10px; }
-.pg-bar-labels { display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; color: #0F6E56; margin-bottom: 6px; }
-.pg-track { height: 6px; background: #9FE1CB; border-radius: 3px; position: relative; }
-.pg-fill { height: 6px; background: #0F766E; border-radius: 3px; width: 30%; }
-.pg-marker { position: absolute; top: -5px; left: 30%; transform: translateX(-50%); width: 16px; height: 16px; border-radius: 50%; background: #0F766E; border: 2.5px solid #fff; }
-.pg-range { display: flex; justify-content: space-between; font-size: 10px; color: #0F6E56; margin-top: 4px; }
+/* ══ BUAT LISTING ══ */
+.upload-main{width:90px;height:90px;border-radius:10px;border:2px dashed #0F766E;background:#E1F5EE;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;flex-shrink:0}
+.upload-slot{flex:1;height:40px;border-radius:8px;border:1.5px dashed #ccc;background:#f8f8f8;display:flex;align-items:center;justify-content:center}
+.field{width:100%;border:1px solid #ddd;border-radius:8px;padding:10px 12px;font-size:13px;outline:none;color:#1a1a1a;font-family:inherit}
+.kondisi-label{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:10px;border:1.5px solid #e0e0e0;background:#fff;cursor:pointer;margin-bottom:8px;width:100%}
+.kondisi-label.on{border-color:#0F766E;background:#E1F5EE}
+.pg-hint{display:none;background:#1E3A5F;border-radius:10px;padding:12px 14px;margin-top:4px}
 
-.seller-a {
-  display: flex; align-items: center; gap: 10px;
-  background: #fff; padding: 12px 16px; margin-bottom: 8px;
-}
-.avatar { width: 40px; height: 40px; border-radius: 20px; background: #E1F5EE; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; color: #0F766E; flex-shrink: 0; }
-.seller-name { font-size: 13px; font-weight: 700; color: #1a1a1a; }
-.seller-meta { font-size: 11px; color: #999; margin-top: 2px; display: flex; align-items: center; gap: 5px; }
-
-.detail-table { background: #fff; padding: 14px 16px; margin-bottom: 8px; }
-.dt-row { display: flex; padding: 7px 0; border-bottom: 1px solid #f0f0f0; }
-.dt-row:last-child { border-bottom: none; }
-.dt-k { font-size: 13px; color: #999; width: 110px; flex-shrink: 0; }
-.dt-v { font-size: 13px; color: #1a1a1a; font-weight: 600; }
-
-.desc-block { background: #fff; padding: 14px 16px; margin-bottom: 8px; }
-.desc-text { font-size: 13px; color: #444; line-height: 1.6; }
-
-.safety-box { background: #FEF3C7; border-left: 3px solid #D97706; padding: 10px 14px; display: flex; gap: 8px; font-size: 12px; color: #92400E; line-height: 1.4; margin-bottom: 8px; }
-
-.trust-strip { background: #fff; display: flex; gap: 8px; padding: 12px 16px; margin-bottom: 8px; }
-.trust-item { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; background: #f8f8f8; border-radius: 10px; padding: 10px 4px; }
-.trust-item i { font-size: 20px; color: #0F766E; }
-.trust-item span { font-size: 10px; color: #888; text-align: center; line-height: 1.3; }
-
-.detail-cta { padding: 12px 16px 20px; background: #fff; border-top: 1px solid #eee; display: flex; gap: 10px; flex-shrink: 0; }
-
-/* ══════ CHAT ══════ */
-.chat-hdr { background: #0F766E; padding: 10px 16px 12px; flex-shrink: 0; }
-.chat-hdr-row { display: flex; align-items: center; gap: 10px; }
-.online-dot { width: 7px; height: 7px; border-radius: 50%; background: #4ADE80; display: inline-block; }
-
-.product-strip-a { display: flex; align-items: center; gap: 10px; background: #0D6962; padding: 9px 14px; }
-.ps-thumb { width: 36px; height: 36px; border-radius: 6px; background: #E1F5EE; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-
-.security-bar { background: #FEF3C7; padding: 7px 14px; font-size: 11px; color: #92400E; display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
-
-.chat-body { flex: 1; overflow-y: scroll; padding: 12px 14px; display: flex; flex-direction: column; gap: 10px; }
-.chat-date { text-align: center; font-size: 11px; color: #aaa; }
-.brow { display: flex; gap: 8px; align-items: flex-end; }
-.brow.me { flex-direction: row-reverse; }
-.bubble { max-width: 72%; padding: 9px 12px; border-radius: 16px; font-size: 13px; line-height: 1.45; }
-.bubble.them { background: #f0f0f0; color: #1a1a1a; border-bottom-left-radius: 4px; }
-.bubble.me { background: #0F766E; color: #fff; border-bottom-right-radius: 4px; }
-.btime { font-size: 10px; color: #bbb; margin-bottom: 4px; }
-.photo-bub { width: 130px; height: 98px; border-radius: 12px; background: #ddd; display: flex; align-items: center; justify-content: center; font-size: 28px; }
-
-.escrow-card { background: #fff; border: 1.5px solid #0F766E; border-radius: 14px; padding: 14px; }
-.ec-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-.ec-head i { font-size: 22px; color: #0F766E; }
-.ec-title { font-size: 13px; font-weight: 700; color: #1a1a1a; }
-.ec-sub { font-size: 12px; color: #555; line-height: 1.4; margin-bottom: 8px; }
-.ec-price { font-size: 18px; font-weight: 800; color: #0F766E; margin-bottom: 10px; }
-
-.chat-input-row { padding: 10px 14px 20px; background: #fff; border-top: 1px solid #eee; display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-.chat-input { flex: 1; padding: 9px 14px; border-radius: 24px; border: 1px solid #ddd; background: #f5f5f5; font-size: 13px; outline: none; }
-.icon-a { color: #aaa; font-size: 22px; padding: 4px; display: flex; align-items: center; }
-.send-a { width: 36px; height: 36px; border-radius: 18px; background: #0F766E; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-
-/* ══════ CHECKOUT ══════ */
-.pay-opt { display: flex; align-items: center; gap: 10px; padding: 11px 12px; border-radius: 10px; border: 1.5px solid #e0e0e0; background: #fff; cursor: pointer; margin-bottom: 8px; }
-.pay-opt.on { border-color: #0F766E; background: #E1F5EE; }
-.pay-logo { width: 38px; height: 26px; border-radius: 5px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: #fff; flex-shrink: 0; }
-.pay-name { font-size: 13px; font-weight: 700; color: #1a1a1a; }
-.pay-sub { font-size: 11px; color: #999; }
-.radio-c { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid #ccc; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.radio-c.on { border-color: #0F766E; }
-.radio-dot { width: 9px; height: 9px; border-radius: 50%; background: #0F766E; }
-
-.sum-row { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid #f5f5f5; }
-.sum-row:last-child { border-bottom: none; }
-.sum-k { font-size: 13px; color: #888; }
-.sum-v { font-size: 13px; font-weight: 700; color: #1a1a1a; }
-.sum-total { display: flex; justify-content: space-between; padding-top: 10px; border-top: 2px solid #eee; margin-top: 4px; }
-.st-k { font-size: 14px; font-weight: 700; color: #1a1a1a; }
-.st-v { font-size: 16px; font-weight: 800; color: #1a1a1a; }
-
-.eib { background: #E1F5EE; border: 1px solid #9FE1CB; border-radius: 12px; padding: 13px; }
-.eib-title { font-size: 13px; font-weight: 700; color: #085041; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
-.eib-desc { font-size: 12px; color: #0F6E56; line-height: 1.5; margin-bottom: 10px; }
-.eib-step { display: flex; gap: 8px; font-size: 12px; color: #0F6E56; margin-bottom: 7px; align-items: flex-start; }
-.step-n { width: 18px; height: 18px; border-radius: 50%; background: #0F766E; color: #fff; font-size: 10px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
-
-.checkout-cta { padding: 12px 16px 24px; background: #fff; border-top: 1px solid #eee; flex-shrink: 0; }
-.cta-total-row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
-.cta-lbl { font-size: 12px; color: #999; }
-.cta-amt { font-size: 18px; font-weight: 800; color: #1a1a1a; }
-.disclaimer { font-size: 11px; color: #aaa; text-align: center; margin-top: 8px; line-height: 1.4; }
-
-/* ══════ SUCCESS ══════ */
-.success-hero { background: #E1F5EE; padding: 28px 24px; display: flex; flex-direction: column; align-items: center; text-align: center; border-bottom: 1px solid #9FE1CB; }
-.success-icon { width: 70px; height: 70px; border-radius: 35px; background: #0F766E; display: flex; align-items: center; justify-content: center; font-size: 34px; color: #fff; margin-bottom: 14px; }
-.success-title { font-size: 20px; font-weight: 800; color: #1a1a1a; margin-bottom: 6px; }
-.success-sub { font-size: 13px; color: #555; line-height: 1.5; }
-.order-id { margin-top: 12px; padding: 7px 16px; background: #fff; border-radius: 8px; border: 1px solid #9FE1CB; font-size: 12px; color: #888; }
-.order-id span { font-weight: 800; color: #0F766E; }
-
-.timeline { padding: 20px 16px; }
-.tl-title { font-size: 14px; font-weight: 800; color: #1a1a1a; margin-bottom: 16px; }
-.tl-row { display: flex; gap: 12px; }
-.tl-left { display: flex; flex-direction: column; align-items: center; width: 28px; }
-.tl-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
-.tl-dot.done { background: #0F766E; color: #fff; }
-.tl-dot.cur { background: #E1F5EE; color: #0F766E; border: 2px solid #0F766E; }
-.tl-dot.next { background: #f0f0f0; color: #ccc; border: 2px solid #e0e0e0; }
-.tl-line { width: 2px; flex: 1; background: #e0e0e0; margin: 4px 0; min-height: 26px; }
-.tl-line.done { background: #0F766E; }
-.tl-content { flex: 1; padding-bottom: 22px; }
-.tl-step { font-size: 13px; font-weight: 700; color: #1a1a1a; }
-.tl-step.dim { color: #ccc; }
-.tl-desc { font-size: 12px; color: #888; margin-top: 2px; line-height: 1.4; }
-.tl-desc.dim { color: #ddd; }
-.tl-time { font-size: 11px; color: #aaa; margin-top: 3px; }
-
-.success-btns { padding: 0 16px 32px; display: flex; flex-direction: column; gap: 10px; }
-.btn-wa { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px; border-radius: 12px; background: #25D366; color: #fff; border: none; font-size: 14px; font-weight: 700; cursor: pointer; }
+/* ══ PROFIL ══ */
+.profil-hdr{background:#0F766E;flex-shrink:0}
+.profil-hdr-bar{display:flex;align-items:center;gap:10px;padding:12px 16px}
+.profil-avatar-row{display:flex;align-items:center;gap:14px;padding:0 16px 20px}
+.profil-avatar{width:60px;height:60px;border-radius:30px;background:#fff;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:#0F766E;flex-shrink:0}
+.stats-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:#eee;flex-shrink:0}
+.stat-cell{background:#fff;padding:12px;text-align:center}
+.stat-num{font-size:20px;font-weight:800;color:#1a1a1a}
+.stat-lbl{font-size:11px;color:#888}
+.menu-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f5f5f5;width:100%}
+.menu-row:last-child{border-bottom:none}
+.menu-icon{font-size:20px;width:28px;color:#888}
+.menu-label{font-size:13px;font-weight:600;color:#1a1a1a;flex:1}
+.menu-row.danger .menu-icon,.menu-row.danger .menu-label{color:#E53E3E}
 </style>
 </head>
 <body>
 <div class="phone">
 
-<!-- ══════ HOME ══════ -->
+<!-- ═══════════════════════════════
+     HOME
+═══════════════════════════════ -->
 <div id="s-home" class="screen active">
-  <div class="home-top">
-    <div class="logo-row">
+  <div class="home-hdr">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px">
       <div>
         <div class="logo">Re<span>Guna</span></div>
         <div class="tagline">Nilai baru untuk setiap barang</div>
       </div>
-      <div class="top-icons">
-        <i class="ti ti-heart" aria-hidden="true"></i>
-        <i class="ti ti-bell" aria-hidden="true"></i>
+      <div style="display:flex;gap:14px">
+        <i class="ti ti-heart" style="color:#fff;font-size:22px" aria-hidden="true"></i>
+        <i class="ti ti-bell" style="color:#fff;font-size:22px" aria-hidden="true"></i>
       </div>
     </div>
     <div class="search-bar">
@@ -307,548 +242,404 @@ a { color: inherit; text-decoration: none; }
   </div>
 
   <div class="body">
-    <a href="#s-detail" class="pg-banner">
-      <div>
-        <h4>Price Guide ReGuna</h4>
-        <p>Cek kisaran harga wajar sebelum beli atau jual</p>
-      </div>
+    <button class="pg-banner" onclick="go('s-detail')" type="button">
+      <div><h4>Price Guide ReGuna</h4><p>Cek kisaran harga wajar sebelum beli atau jual</p></div>
       <i class="ti ti-chart-bar" aria-hidden="true"></i>
-    </a>
+    </button>
 
     <div class="cat-row">
-      <button class="cat-pill on" onclick="pilih(this,'semua')" data-cat="semua">Semua</button>
-      <button class="cat-pill" onclick="pilih(this,'anak')" data-cat="anak">Anak &amp; Bayi</button>
-      <button class="cat-pill" onclick="pilih(this,'olahraga')" data-cat="olahraga">Olahraga</button>
-      <button class="cat-pill" onclick="pilih(this,'furnitur')" data-cat="furnitur">Furnitur</button>
-      <button class="cat-pill" onclick="pilih(this,'elektronik')" data-cat="elektronik">Elektronik</button>
-      <button class="cat-pill" onclick="pilih(this,'gratis')" data-cat="gratis">🎁 Gratis</button>
+      <button class="cat-pill on" onclick="pilih(this,'semua')" type="button">Semua</button>
+      <button class="cat-pill" onclick="pilih(this,'anak')" type="button">Anak &amp; Bayi</button>
+      <button class="cat-pill" onclick="pilih(this,'olahraga')" type="button">Olahraga</button>
+      <button class="cat-pill" onclick="pilih(this,'furnitur')" type="button">Furnitur</button>
+      <button class="cat-pill" onclick="pilih(this,'elektronik')" type="button">Elektronik</button>
+      <button class="cat-pill" onclick="pilih(this,'gratis')" type="button">🎁 Gratis</button>
     </div>
 
-    <div class="listing-grid" id="listing-grid">
-      <a href="#s-detail" class="listing-card" data-cat="anak">
-        <div class="listing-img">🛒<span class="img-badge badge b-teal">Seperti Baru</span></div>
-        <div class="listing-info">
-          <div class="listing-name">Stroller Babyelle B900</div>
-          <div class="listing-cat">Anak &amp; Bayi</div>
-          <div class="listing-price">Rp 850.000</div>
-          <div class="listing-meta"><i class="ti ti-star" aria-hidden="true"></i> 4.9 · Sari W.</div>
-        </div>
-      </a>
-      <a href="#" class="listing-card" data-cat="olahraga">
-        <div class="listing-img">🏋️<span class="img-badge badge b-blue">Baik</span></div>
-        <div class="listing-info">
-          <div class="listing-name">Treadmill Lifefit T100</div>
-          <div class="listing-cat">Olahraga</div>
-          <div class="listing-price">Rp 2.500.000</div>
-          <div class="listing-meta"><i class="ti ti-star" aria-hidden="true"></i> 4.7 · Budi R.</div>
-        </div>
-      </a>
-      <a href="#" class="listing-card" data-cat="anak">
-        <div class="listing-img">🚲<span class="img-badge badge b-teal">Seperti Baru</span></div>
-        <div class="listing-info">
-          <div class="listing-name">Sepeda Anak Wimcycle 16"</div>
-          <div class="listing-cat">Anak &amp; Bayi</div>
-          <div class="listing-price">Rp 350.000</div>
-          <div class="listing-meta"><i class="ti ti-star" aria-hidden="true"></i> 5.0 · Dewi A.</div>
-        </div>
-      </a>
-      <a href="#" class="listing-card" data-cat="furnitur">
-        <div class="listing-img">🛋️<span class="img-badge badge b-amber">Cukup Baik</span></div>
-        <div class="listing-info">
-          <div class="listing-name">Sofa 2-Seater Fabric</div>
-          <div class="listing-cat">Furnitur</div>
-          <div class="listing-price">Rp 1.200.000</div>
-          <div class="listing-meta"><i class="ti ti-star" aria-hidden="true"></i> 4.6 · Rudi P.</div>
-        </div>
-      </a>
-      <a href="#" class="listing-card" data-cat="anak">
-        <div class="listing-img">🧸<span class="img-badge badge b-teal">Seperti Baru</span></div>
-        <div class="listing-info">
-          <div class="listing-name">LEGO Duplo Classic Box</div>
-          <div class="listing-cat">Anak &amp; Bayi</div>
-          <div class="listing-price">Rp 280.000</div>
-          <div class="listing-meta"><i class="ti ti-star" aria-hidden="true"></i> 4.8 · Rina S.</div>
-        </div>
-      </a>
-      <a href="#" class="listing-card" data-cat="gratis">
-        <div class="listing-img">🏃<span class="img-badge badge b-amber">Gratis</span></div>
-        <div class="listing-info">
-          <div class="listing-name">Treadmill Manual Tak Terpakai</div>
-          <div class="listing-cat">Olahraga · Ambil Sendiri</div>
-          <div class="listing-price free">Rp 2.000 (admin)</div>
-          <div class="listing-meta"><i class="ti ti-star" aria-hidden="true"></i> 4.5 · Haris B.</div>
-        </div>
-      </a>
+    <div class="grid" id="listing-grid">
+      <button class="lcard" onclick="go('s-detail')" type="button" data-cat="anak">
+        <div class="limg">🛒<span class="limg-badge badge bt">Seperti Baru</span></div>
+        <div class="linfo"><div class="lname">Stroller Babyelle B900</div><div class="lcat">Anak &amp; Bayi</div><div class="lprice">Rp 850.000</div><div class="lmeta"><i class="ti ti-star" aria-hidden="true"></i> 4.9 · Sari W.</div></div>
+      </button>
+      <button class="lcard" onclick="go('s-home')" type="button" data-cat="olahraga">
+        <div class="limg">🏋️<span class="limg-badge badge bb">Baik</span></div>
+        <div class="linfo"><div class="lname">Treadmill Lifefit T100</div><div class="lcat">Olahraga</div><div class="lprice">Rp 2.500.000</div><div class="lmeta"><i class="ti ti-star" aria-hidden="true"></i> 4.7 · Budi R.</div></div>
+      </button>
+      <button class="lcard" onclick="go('s-home')" type="button" data-cat="anak">
+        <div class="limg">🚲<span class="limg-badge badge bt">Seperti Baru</span></div>
+        <div class="linfo"><div class="lname">Sepeda Anak Wimcycle 16"</div><div class="lcat">Anak &amp; Bayi</div><div class="lprice">Rp 350.000</div><div class="lmeta"><i class="ti ti-star" aria-hidden="true"></i> 5.0 · Dewi A.</div></div>
+      </button>
+      <button class="lcard" onclick="go('s-home')" type="button" data-cat="furnitur">
+        <div class="limg">🛋️<span class="limg-badge badge ba">Cukup Baik</span></div>
+        <div class="linfo"><div class="lname">Sofa 2-Seater Fabric</div><div class="lcat">Furnitur</div><div class="lprice">Rp 1.200.000</div><div class="lmeta"><i class="ti ti-star" aria-hidden="true"></i> 4.6 · Rudi P.</div></div>
+      </button>
+      <button class="lcard" onclick="go('s-home')" type="button" data-cat="anak">
+        <div class="limg">🧸<span class="limg-badge badge bt">Seperti Baru</span></div>
+        <div class="linfo"><div class="lname">LEGO Duplo Classic Box</div><div class="lcat">Anak &amp; Bayi</div><div class="lprice">Rp 280.000</div><div class="lmeta"><i class="ti ti-star" aria-hidden="true"></i> 4.8 · Rina S.</div></div>
+      </button>
+      <button class="lcard" onclick="go('s-home')" type="button" data-cat="gratis">
+        <div class="limg">🏃<span class="limg-badge badge ba">Gratis</span></div>
+        <div class="linfo"><div class="lname">Treadmill Manual Tak Terpakai</div><div class="lcat">Olahraga · Ambil Sendiri</div><div class="lprice free">Rp 2.000 (admin)</div><div class="lmeta"><i class="ti ti-star" aria-hidden="true"></i> 4.5 · Haris B.</div></div>
+      </button>
     </div>
   </div>
 
-  <div class="bottom-nav">
-    <a href="#s-home" class="nav-a on"><i class="ti ti-home" aria-hidden="true"></i><span>Jelajahi</span></a>
-    <a href="#" class="nav-a"><i class="ti ti-heart" aria-hidden="true"></i><span>Simpan</span></a>
-    <a href="#s-buat-listing" class="nav-sell"><i class="ti ti-plus" aria-hidden="true"></i><span>Jual</span></a>
-    <a href="#s-chat" class="nav-a"><i class="ti ti-message" aria-hidden="true"></i><span>Chat</span></a>
-    <a href="#s-profil" class="nav-a"><i class="ti ti-user" aria-hidden="true"></i><span>Profil</span></a>
+  <div class="bnav">
+    <button class="bnav-btn on" onclick="go('s-home')" type="button"><i class="ti ti-home" aria-hidden="true"></i><span>Jelajahi</span></button>
+    <button class="bnav-btn" type="button"><i class="ti ti-heart" aria-hidden="true"></i><span>Simpan</span></button>
+    <button class="bnav-sell" onclick="go('s-buat-listing')" type="button"><i class="ti ti-plus" aria-hidden="true"></i><span>Jual</span></button>
+    <button class="bnav-btn" onclick="go('s-chat')" type="button"><i class="ti ti-message" aria-hidden="true"></i><span>Chat</span></button>
+    <button class="bnav-btn" onclick="go('s-profil')" type="button"><i class="ti ti-user" aria-hidden="true"></i><span>Profil</span></button>
   </div>
 </div>
 
-<!-- ══════ DETAIL ══════ -->
+<!-- ═══════════════════════════════
+     DETAIL LISTING
+═══════════════════════════════ -->
 <div id="s-detail" class="screen">
   <div class="hdr">
     <div class="hdr-bar">
-      <a href="#s-home" class="back-a" aria-label="Kembali"><i class="ti ti-arrow-left" aria-hidden="true"></i></a>
+      <button class="back-btn" onclick="go('s-home')" type="button"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
       <span class="hdr-title">Detail Barang</span>
       <i class="ti ti-share hdr-icon" aria-hidden="true"></i>
       <i class="ti ti-heart hdr-icon" aria-hidden="true"></i>
     </div>
   </div>
-
   <div class="body">
-    <div class="gallery-wrap">
-      <div class="main-photo">🛒</div>
-      <span class="photo-cond badge b-teal"><i class="ti ti-circle-check" style="font-size:11px" aria-hidden="true"></i> Seperti Baru</span>
-      <div class="dots-row">
-        <div class="dot on"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
-      </div>
+    <div class="gal-wrap">
+      <div class="main-img">🛒</div>
+      <span class="img-cond badge bt"><i class="ti ti-circle-check" style="font-size:11px" aria-hidden="true"></i> Seperti Baru</span>
+      <div class="dots"><div class="dot on"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
     </div>
     <div class="thumb-row">
-      <div class="thumb on">🛒</div>
-      <div class="thumb">📦</div>
-      <div class="thumb">🔍</div>
-      <div class="thumb">📋</div>
+      <div class="thumb on">🛒</div><div class="thumb">📦</div><div class="thumb">🔍</div><div class="thumb">📋</div>
     </div>
-
     <div class="price-block">
       <div style="display:flex;align-items:baseline;gap:8px">
         <span class="price-main">Rp 850.000</span>
-        <span class="badge b-teal" style="font-size:11px">Harga fleksibel</span>
+        <span class="badge bt" style="font-size:11px">Harga fleksibel</span>
       </div>
       <div class="price-sub">Stroller Babyelle B900 · Seri 2022</div>
-      <div class="pg-bar-wrap">
-        <div class="pg-bar-labels">
-          <span><i class="ti ti-chart-bar" style="font-size:12px" aria-hidden="true"></i> Price Guide ReGuna</span>
-          <span>Rp 700K – Rp 1,2jt</span>
-        </div>
-        <div class="pg-track"><div class="pg-fill"></div><div class="pg-marker"></div></div>
-        <div class="pg-range"><span>Rp 700K (Cukup Baik)</span><span>Rp 1,2jt (Seperti Baru)</span></div>
+      <div class="pgbar-wrap">
+        <div class="pgbar-labels"><span><i class="ti ti-chart-bar" style="font-size:12px" aria-hidden="true"></i> Price Guide</span><span>Rp 700K – Rp 1,2jt</span></div>
+        <div class="pgbar-track"><div class="pgbar-fill"></div><div class="pgbar-marker"></div></div>
+        <div class="pgbar-range"><span>Rp 700K (Cukup Baik)</span><span>Rp 1,2jt (Seperti Baru)</span></div>
       </div>
     </div>
-
-    <a href="#s-chat" class="seller-a">
+    <button class="seller-btn" onclick="go('s-chat')" type="button">
       <div class="avatar">SW</div>
       <div style="flex:1">
-        <div style="display:flex;align-items:center;gap:6px">
-          <span class="seller-name">Sari W.</span>
-          <span class="badge b-navy">Tier 2</span>
-        </div>
-        <div class="seller-meta">
-          <i class="ti ti-star" style="color:#F59E0B;font-size:12px" aria-hidden="true"></i>
-          4.9 · 23 transaksi · <i class="ti ti-clock" style="font-size:12px" aria-hidden="true"></i> &lt;1 jam
-        </div>
+        <div style="display:flex;align-items:center;gap:6px"><span class="sname">Sari W.</span><span class="badge bn">Tier 2</span></div>
+        <div class="smeta"><i class="ti ti-star" style="color:#F59E0B;font-size:12px" aria-hidden="true"></i> 4.9 · 23 transaksi · <i class="ti ti-clock" style="font-size:12px" aria-hidden="true"></i> &lt;1 jam</div>
       </div>
       <i class="ti ti-chevron-right" style="color:#ccc;font-size:18px" aria-hidden="true"></i>
-    </a>
-
-    <div class="detail-table">
-      <div class="sec-lbl">Detail Barang</div>
-      <div class="dt-row"><span class="dt-k">Kondisi</span><span class="dt-v">Seperti Baru</span></div>
-      <div class="dt-row"><span class="dt-k">Merek</span><span class="dt-v">Babyelle</span></div>
-      <div class="dt-row"><span class="dt-k">Model</span><span class="dt-v">B900 Seri 2022</span></div>
-      <div class="dt-row"><span class="dt-k">Lama dipakai</span><span class="dt-v">8 bulan</span></div>
-      <div class="dt-row"><span class="dt-k">Lokasi</span><span class="dt-v">Tangerang Selatan</span></div>
-      <div class="dt-row"><span class="dt-k">Pengiriman</span><span class="dt-v">COD / Gosend</span></div>
+    </button>
+    <div class="dtable">
+      <div class="slbl">Detail Barang</div>
+      <div class="drow"><span class="dk">Kondisi</span><span class="dv">Seperti Baru</span></div>
+      <div class="drow"><span class="dk">Merek</span><span class="dv">Babyelle</span></div>
+      <div class="drow"><span class="dk">Model</span><span class="dv">B900 Seri 2022</span></div>
+      <div class="drow"><span class="dk">Lama dipakai</span><span class="dv">8 bulan</span></div>
+      <div class="drow"><span class="dk">Lokasi</span><span class="dv">Tangerang Selatan</span></div>
+      <div class="drow"><span class="dk">Pengiriman</span><span class="dv">COD / Gosend</span></div>
     </div>
-
     <div class="desc-block">
-      <div class="sec-lbl">Deskripsi</div>
-      <div class="desc-text">Stroller Babyelle B900 seri 2022 kondisi sangat mulus. Dipakai hanya 8 bulan, anak sudah bisa jalan sendiri. Semua fungsi normal: sandaran bisa rebah, kanopi lengkap, sabuk pengaman mulus, roda empat masih bagus. Sudah dicuci bersih. Kelengkapan: buku manual, tas bawaan, rain cover.</div>
+      <div class="slbl">Deskripsi</div>
+      <div class="desc-text">Stroller Babyelle B900 seri 2022 kondisi sangat mulus. Dipakai hanya 8 bulan, anak sudah bisa jalan sendiri. Semua fungsi normal: sandaran bisa rebah, kanopi lengkap, sabuk pengaman mulus, roda empat masih bagus. Kelengkapan: buku manual, tas bawaan, rain cover.</div>
     </div>
-
-    <div class="safety-box">
+    <div class="safety">
       <i class="ti ti-alert-triangle" style="font-size:18px;color:#D97706;flex-shrink:0" aria-hidden="true"></i>
-      <span><strong>Catatan keamanan:</strong> Cek tanggal produksi sebelum membeli. Stroller ini diproduksi 2022, masih dalam batas aman penggunaan.</span>
+      <span><strong>Catatan keamanan:</strong> Cek tanggal produksi sebelum membeli. Stroller ini diproduksi 2022, masih dalam batas aman.</span>
     </div>
-
-    <div class="trust-strip">
+    <div class="trust-row">
       <div class="trust-item"><i class="ti ti-shield-lock" aria-hidden="true"></i><span>Pembayaran<br>Escrow</span></div>
       <div class="trust-item"><i class="ti ti-clock" aria-hidden="true"></i><span>Dispute<br>72 jam</span></div>
       <div class="trust-item"><i class="ti ti-camera" aria-hidden="true"></i><span>Foto asli<br>seller</span></div>
     </div>
     <div style="height:80px"></div>
   </div>
-
   <div class="detail-cta">
-    <a href="#s-chat" class="btn-outline" style="flex:1"><i class="ti ti-message" aria-hidden="true"></i> Chat</a>
-    <a href="#s-checkout" class="btn-primary" style="flex:2">Beli Sekarang</a>
+    <button class="btn-o" onclick="go('s-chat')" type="button" style="flex:1"><i class="ti ti-message" aria-hidden="true"></i> Chat</button>
+    <button class="btn-g" onclick="go('s-checkout')" type="button" style="flex:2">Beli Sekarang</button>
   </div>
 </div>
 
-<!-- ══════ CHAT ══════ -->
+<!-- ═══════════════════════════════
+     CHAT
+═══════════════════════════════ -->
 <div id="s-chat" class="screen">
   <div class="chat-hdr">
     <div class="chat-hdr-row">
-      <a href="#s-detail" class="back-a" aria-label="Kembali"><i class="ti ti-arrow-left" aria-hidden="true"></i></a>
+      <button class="back-btn" onclick="go('s-detail')" type="button"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
       <div class="avatar" style="width:36px;height:36px;font-size:13px">SW</div>
       <div style="flex:1">
-        <div style="color:#fff;font-size:14px;font-weight:700">Sari W. <span class="badge b-navy" style="font-size:9px;vertical-align:1px">Tier 2</span></div>
+        <div style="color:#fff;font-size:14px;font-weight:700">Sari W. <span class="badge bn" style="font-size:9px;vertical-align:1px">Tier 2</span></div>
         <div style="color:rgba(255,255,255,.7);font-size:11px;display:flex;align-items:center;gap:4px"><span class="online-dot"></span> Online sekarang</div>
       </div>
       <i class="ti ti-dots-vertical" style="color:rgba(255,255,255,.8);font-size:20px" aria-hidden="true"></i>
     </div>
   </div>
-
-  <a href="#s-detail" class="product-strip-a">
+  <button class="prod-strip" onclick="go('s-detail')" type="button">
     <div class="ps-thumb">🛒</div>
-    <div style="flex:1">
-      <div style="color:#fff;font-size:12px;font-weight:700">Stroller Babyelle B900</div>
-      <div style="color:rgba(255,255,255,.7);font-size:11px">Rp 850.000 · Seperti Baru</div>
-    </div>
+    <div style="flex:1"><div style="color:#fff;font-size:12px;font-weight:700">Stroller Babyelle B900</div><div style="color:rgba(255,255,255,.7);font-size:11px">Rp 850.000 · Seperti Baru</div></div>
     <i class="ti ti-chevron-right" style="color:rgba(255,255,255,.4);font-size:16px" aria-hidden="true"></i>
-  </a>
-
-  <div class="security-bar">
-    <i class="ti ti-lock" style="font-size:14px" aria-hidden="true"></i>
-    Nomor HP disembunyikan. Transaksi di ReGuna = dana kamu dilindungi escrow.
-  </div>
-
+  </button>
+  <div class="sec-bar"><i class="ti ti-lock" style="font-size:14px" aria-hidden="true"></i> Nomor HP disembunyikan. Transaksi di ReGuna = dana dilindungi escrow.</div>
   <div class="chat-body">
     <div class="chat-date">Hari ini · 09.15 WIB</div>
     <div class="brow"><div><div class="bubble them">Halo kak! Masih tersedia strollernya? 😊</div><div class="btime">09.15</div></div></div>
     <div class="brow me"><div><div class="bubble me">Masih kak! Kondisi mulus banget, cuma 8 bulan dipakai</div><div class="btime" style="text-align:right">09.16</div></div></div>
-    <div class="brow"><div><div class="bubble them">Boleh minta foto bagian roda kak? Mau pastiin kondisinya</div><div class="btime">09.18</div></div></div>
-    <div class="brow me"><div><div class="photo-bub">🔍</div><div class="btime" style="text-align:right">09.20</div></div></div>
+    <div class="brow"><div><div class="bubble them">Boleh minta foto bagian roda kak?</div><div class="btime">09.18</div></div></div>
+    <div class="brow me"><div><div class="photobub">🔍</div><div class="btime" style="text-align:right">09.20</div></div></div>
     <div class="brow me"><div><div class="bubble me">Ini foto rodanya kak, masih bagus semua</div><div class="btime" style="text-align:right">09.20</div></div></div>
-    <div class="brow"><div><div class="bubble them">Wah mulus ya! Boleh nego kak? 800rb gimana? 🙏</div><div class="btime">09.22</div></div></div>
-    <div class="brow me"><div><div class="bubble me">Oke kak, 800rb deal! COD bisa di mall BSD ya</div><div class="btime" style="text-align:right">09.25</div></div></div>
-    <div class="brow"><div><div class="bubble them">Siap kak! Sabtu jam 14.00, Aeon BSD pintu utama 👍</div><div class="btime">09.26</div></div></div>
-
+    <div class="brow"><div><div class="bubble them">Wah mulus! Boleh nego kak? 800rb gimana? 🙏</div><div class="btime">09.22</div></div></div>
+    <div class="brow me"><div><div class="bubble me">Oke kak, 800rb deal! COD di mall BSD ya</div><div class="btime" style="text-align:right">09.25</div></div></div>
+    <div class="brow"><div><div class="bubble them">Siap! Sabtu jam 14.00, Aeon BSD pintu utama 👍</div><div class="btime">09.26</div></div></div>
     <div class="escrow-card">
       <div class="ec-head"><i class="ti ti-shield-check" aria-hidden="true"></i><span class="ec-title">Deal di Rp 800.000! 🎉</span></div>
       <div class="ec-sub">Bayar lewat escrow ReGuna agar dana kamu aman sampai barang diterima.</div>
       <div class="ec-price">Rp 800.000</div>
-      <a href="#s-checkout" class="btn-primary" style="width:100%"><i class="ti ti-lock" aria-hidden="true"></i> Bayar Rp 800.000 via Escrow</a>
+      <button class="btn-g" onclick="go('s-checkout')" type="button"><i class="ti ti-lock" aria-hidden="true"></i> Bayar Rp 800.000 via Escrow</button>
     </div>
   </div>
-
   <div class="chat-input-row">
-    <a href="#" class="icon-a" aria-label="Lampiran"><i class="ti ti-paperclip" aria-hidden="true"></i></a>
+    <button class="icon-btn" type="button"><i class="ti ti-paperclip" aria-hidden="true"></i></button>
     <input class="chat-input" type="text" placeholder="Ketik pesan...">
-    <a href="#" class="icon-a" aria-label="Kamera"><i class="ti ti-camera" aria-hidden="true"></i></a>
-    <a href="#" class="send-a" aria-label="Kirim"><i class="ti ti-send" aria-hidden="true"></i></a>
+    <button class="icon-btn" type="button"><i class="ti ti-camera" aria-hidden="true"></i></button>
+    <button class="send-btn" type="button"><i class="ti ti-send" aria-hidden="true"></i></button>
   </div>
 </div>
 
-<!-- ══════ CHECKOUT ══════ -->
+<!-- ═══════════════════════════════
+     CHECKOUT
+═══════════════════════════════ -->
 <div id="s-checkout" class="screen">
   <div class="hdr">
     <div class="hdr-bar">
-      <a href="#s-chat" class="back-a" aria-label="Kembali"><i class="ti ti-arrow-left" aria-hidden="true"></i></a>
+      <button class="back-btn" onclick="go('s-chat')" type="button"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
       <span class="hdr-title">Konfirmasi Pesanan</span>
       <span style="color:rgba(255,255,255,.65);font-size:12px">Langkah 1/2</span>
     </div>
   </div>
-
   <div class="body">
     <div class="card">
-      <div class="sec-lbl">Detail Barang</div>
-      <div style="display:flex;gap:10px;align-items:flex-start">
+      <div class="slbl">Detail Barang</div>
+      <div style="display:flex;gap:10px">
         <div style="width:54px;height:54px;border-radius:8px;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0">🛒</div>
-        <div>
-          <div style="font-size:13px;font-weight:700;color:#1a1a1a">Stroller Babyelle B900</div>
-          <div style="font-size:12px;color:#999;margin-top:2px">Sari W. · <span class="badge b-teal" style="font-size:10px">Seperti Baru</span></div>
-          <div style="font-size:14px;font-weight:800;color:#0F766E;margin-top:4px">
-            <span style="text-decoration:line-through;color:#bbb;font-size:12px;font-weight:400;margin-right:4px">Rp 850.000</span>Rp 800.000
-          </div>
-        </div>
+        <div><div style="font-size:13px;font-weight:700;color:#1a1a1a">Stroller Babyelle B900</div><div style="font-size:12px;color:#999;margin-top:2px">Sari W. · <span class="badge bt" style="font-size:10px">Seperti Baru</span></div><div style="font-size:14px;font-weight:800;color:#0F766E;margin-top:4px"><span style="text-decoration:line-through;color:#bbb;font-size:12px;font-weight:400;margin-right:4px">Rp 850.000</span>Rp 800.000</div></div>
       </div>
     </div>
-
     <div class="card">
-      <div class="sec-lbl">Titik Temu COD</div>
+      <div class="slbl">Titik Temu COD</div>
       <div style="display:flex;gap:10px;background:#f8f8f8;border-radius:10px;padding:12px;border:1px solid #eee">
-        <i class="ti ti-map-pin" style="font-size:22px;color:#0F766E;flex-shrink:0" aria-hidden="true"></i>
-        <div>
-          <div style="font-size:11px;color:#999">Lokasi</div>
-          <div style="font-size:13px;font-weight:700;color:#1a1a1a">Aeon Mall BSD City, Pintu Utama</div>
-          <div style="font-size:11px;color:#999;margin-top:6px">Waktu</div>
-          <div style="font-size:13px;font-weight:700;color:#1a1a1a">Sabtu, 17 Mei · 14.00 WIB</div>
-          <div style="font-size:11px;color:#D97706;margin-top:5px;display:flex;align-items:center;gap:4px">
-            <i class="ti ti-alert-triangle" style="font-size:13px" aria-hidden="true"></i> Bayar via escrow sebelum bertemu seller
-          </div>
-        </div>
+        <i class="ti ti-map-pin" style="font-size:20px;color:#0F766E;flex-shrink:0" aria-hidden="true"></i>
+        <div><div style="font-size:11px;color:#999">Lokasi</div><div style="font-size:13px;font-weight:700;color:#1a1a1a">Aeon Mall BSD City, Pintu Utama</div><div style="font-size:11px;color:#999;margin-top:6px">Waktu</div><div style="font-size:13px;font-weight:700;color:#1a1a1a">Sabtu, 17 Mei · 14.00 WIB</div><div style="font-size:11px;color:#D97706;margin-top:5px"><i class="ti ti-alert-triangle" style="font-size:13px" aria-hidden="true"></i> Bayar via escrow sebelum bertemu seller</div></div>
       </div>
     </div>
-
     <div class="card">
-      <div class="sec-lbl">Metode Pembayaran</div>
-      <div class="pay-opt on" id="opt-gopay" onclick="pilihPay('gopay')">
-        <div class="pay-logo" style="background:#00AED6">GP</div>
-        <div><div class="pay-name">GoPay</div><div class="pay-sub">Saldo tersedia · Rp 1.250.000</div></div>
-        <div class="radio-c on" id="r-gopay"><div class="radio-dot"></div></div>
-      </div>
-      <div class="pay-opt" id="opt-ovo" onclick="pilihPay('ovo')">
-        <div class="pay-logo" style="background:#4C3494">OVO</div>
-        <div><div class="pay-name">OVO</div><div class="pay-sub">Sambungkan akun OVO</div></div>
-        <div class="radio-c" id="r-ovo"></div>
-      </div>
-      <div class="pay-opt" id="opt-qris" onclick="pilihPay('qris')">
-        <div class="pay-logo" style="background:#E31837">QR</div>
-        <div><div class="pay-name">QRIS</div><div class="pay-sub">Scan dari app manapun</div></div>
-        <div class="radio-c" id="r-qris"></div>
-      </div>
-      <div class="pay-opt" id="opt-va" onclick="pilihPay('va')">
-        <div class="pay-logo" style="background:#003087">VA</div>
-        <div><div class="pay-name">Transfer Bank</div><div class="pay-sub">BCA · BRI · Mandiri · BNI</div></div>
-        <div class="radio-c" id="r-va"></div>
-      </div>
+      <div class="slbl">Metode Pembayaran</div>
+      <button class="pay-opt on" id="opt-gopay" onclick="pilihPay('gopay')" type="button"><div class="pay-logo" style="background:#00AED6">GP</div><div><div class="pay-name">GoPay</div><div class="pay-sub">Saldo · Rp 1.250.000</div></div><div class="radio-c on" id="r-gopay"><div class="radio-dot"></div></div></button>
+      <button class="pay-opt" id="opt-ovo" onclick="pilihPay('ovo')" type="button"><div class="pay-logo" style="background:#4C3494">OVO</div><div><div class="pay-name">OVO</div><div class="pay-sub">Sambungkan akun</div></div><div class="radio-c" id="r-ovo"></div></button>
+      <button class="pay-opt" id="opt-qris" onclick="pilihPay('qris')" type="button"><div class="pay-logo" style="background:#E31837">QR</div><div><div class="pay-name">QRIS</div><div class="pay-sub">Scan dari app manapun</div></div><div class="radio-c" id="r-qris"></div></button>
+      <button class="pay-opt" id="opt-va" onclick="pilihPay('va')" type="button"><div class="pay-logo" style="background:#003087">VA</div><div><div class="pay-name">Transfer Bank</div><div class="pay-sub">BCA · BRI · Mandiri</div></div><div class="radio-c" id="r-va"></div></button>
     </div>
-
     <div class="card">
-      <div class="sec-lbl">Ringkasan Pembayaran</div>
-      <div class="sum-row"><span class="sum-k">Harga barang</span><span class="sum-v">Rp 800.000</span></div>
-      <div class="sum-row"><span class="sum-k">Biaya layanan ReGuna</span><span class="sum-v">Rp 3.000</span></div>
-      <div class="sum-row"><span class="sum-k">Biaya transaksi GoPay</span><span class="sum-v">Rp 0</span></div>
-      <div class="sum-total"><span class="st-k">Total dibayar</span><span class="st-v">Rp 803.000</span></div>
+      <div class="slbl">Ringkasan Pembayaran</div>
+      <div class="sum-row"><span class="sk">Harga barang</span><span class="sv">Rp 800.000</span></div>
+      <div class="sum-row"><span class="sk">Biaya layanan ReGuna</span><span class="sv">Rp 3.000</span></div>
+      <div class="sum-row"><span class="sk">Biaya transaksi GoPay</span><span class="sv">Rp 0</span></div>
+      <div class="sum-total"><span class="stk">Total dibayar</span><span class="stv">Rp 803.000</span></div>
     </div>
-
     <div class="card">
-      <div class="sec-lbl">Cara Kerja Escrow</div>
+      <div class="slbl">Cara Kerja Escrow</div>
       <div class="eib">
         <div class="eib-title"><i class="ti ti-shield-lock" style="font-size:18px" aria-hidden="true"></i> Dana aman sampai barang diterima</div>
         <div class="eib-desc">ReGuna menahan dana dan baru mencairkan ke seller setelah kamu konfirmasi terima barang.</div>
-        <div class="eib-step"><span class="step-n">1</span><span>Kamu bayar — dana masuk escrow ReGuna</span></div>
-        <div class="eib-step"><span class="step-n">2</span><span>Bertemu seller, cek kondisi barang di lokasi</span></div>
-        <div class="eib-step"><span class="step-n">3</span><span>Barang oke? Konfirmasi di app — dana cair ke seller</span></div>
-        <div class="eib-step"><span class="step-n">4</span><span>Ada masalah? Dispute 72 jam — tim ReGuna mediasi</span></div>
+        <div class="eib-step"><span class="stepn">1</span><span>Kamu bayar — dana masuk escrow ReGuna</span></div>
+        <div class="eib-step"><span class="stepn">2</span><span>Bertemu seller, cek kondisi barang di lokasi</span></div>
+        <div class="eib-step"><span class="stepn">3</span><span>Barang oke? Konfirmasi di app — dana cair</span></div>
+        <div class="eib-step"><span class="stepn">4</span><span>Ada masalah? Dispute 72 jam — tim ReGuna mediasi</span></div>
       </div>
     </div>
     <div style="height:8px"></div>
   </div>
-
-  <div class="checkout-cta">
-    <div class="cta-total-row"><span class="cta-lbl">Total pembayaran</span><span class="cta-amt">Rp 803.000</span></div>
-    <a href="#s-success" class="btn-primary" style="width:100%"><i class="ti ti-lock" aria-hidden="true"></i> Bayar via Escrow</a>
+  <div class="co-cta">
+    <div class="co-total-row"><span class="co-lbl">Total pembayaran</span><span class="co-amt">Rp 803.000</span></div>
+    <button class="btn-g" onclick="go('s-success')" type="button"><i class="ti ti-lock" aria-hidden="true"></i> Bayar via Escrow</button>
     <div class="disclaimer">Dengan membayar, kamu menyetujui Syarat &amp; Ketentuan escrow ReGuna</div>
   </div>
 </div>
 
-<!-- ══════ SUCCESS ══════ -->
+<!-- ═══════════════════════════════
+     PAYMENT SUCCESS
+═══════════════════════════════ -->
 <div id="s-success" class="screen">
-  <div class="hdr"><div class="hdr-bar"><span class="hdr-title">Status Pesanan</span></div></div>
+  <div class="hdr"><div class="hdr-bar"><span class="hdr-title">Pembayaran</span></div></div>
   <div class="body">
-    <div class="success-hero">
-      <div class="success-icon"><i class="ti ti-shield-check" aria-hidden="true"></i></div>
-      <div class="success-title">Pembayaran Berhasil!</div>
-      <div class="success-sub">Dana Rp 803.000 sudah masuk escrow ReGuna.<br>Aman hingga kamu konfirmasi terima barang.</div>
+    <div class="suc-hero">
+      <div class="suc-icon"><i class="ti ti-shield-check" aria-hidden="true"></i></div>
+      <div class="suc-title">Pembayaran Berhasil!</div>
+      <div class="suc-sub">Dana Rp 803.000 sudah masuk escrow ReGuna.<br>Aman hingga kamu konfirmasi terima barang.</div>
       <div class="order-id">ID Pesanan: <span>#RG-2025-00841</span></div>
     </div>
-
-    <div class="timeline">
-      <div class="tl-title">Status Pesanan</div>
-      <div class="tl-row">
-        <div class="tl-left"><div class="tl-dot done"><i class="ti ti-check" aria-hidden="true"></i></div><div class="tl-line done"></div></div>
-        <div class="tl-content"><div class="tl-step">Pembayaran diterima</div><div class="tl-desc">Dana Rp 803.000 masuk ke escrow ReGuna</div><div class="tl-time">Hari ini · 09.41 WIB</div></div>
-      </div>
-      <div class="tl-row">
-        <div class="tl-left"><div class="tl-dot cur"><i class="ti ti-clock" aria-hidden="true"></i></div><div class="tl-line"></div></div>
-        <div class="tl-content"><div class="tl-step">Menunggu pertemuan COD</div><div class="tl-desc">Aeon BSD · Sabtu 17 Mei · 14.00 WIB</div><div class="tl-time">Dijadwalkan</div></div>
-      </div>
-      <div class="tl-row">
-        <div class="tl-left"><div class="tl-dot next"><i class="ti ti-package" aria-hidden="true"></i></div><div class="tl-line"></div></div>
-        <div class="tl-content"><div class="tl-step dim">Konfirmasi penerimaan</div><div class="tl-desc dim">Setelah cek barang, konfirmasi di sini</div></div>
-      </div>
-      <div class="tl-row">
-        <div class="tl-left"><div class="tl-dot next"><i class="ti ti-circle-check" aria-hidden="true"></i></div></div>
-        <div class="tl-content" style="padding-bottom:0"><div class="tl-step dim">Dana cair ke seller</div><div class="tl-desc dim">Rp 800.000 dikirim ke Sari W.</div></div>
-      </div>
-    </div>
-
-    <div class="success-btns">
-      <a href="#s-tracking" class="btn-primary"><i class="ti ti-package" aria-hidden="true"></i> Lihat Status Pesanan</a>
-      <button class="btn-wa"><i class="ti ti-brand-whatsapp" aria-hidden="true"></i> Bagikan ke WhatsApp</button>
-      <a href="#s-home" class="btn-outline">Jelajahi Barang Lain</a>
+    <div class="suc-btns" style="padding-top:20px">
+      <button class="btn-g" onclick="go('s-tracking')" type="button"><i class="ti ti-package" aria-hidden="true"></i> Lihat Status Pesanan</button>
+      <button class="btn-o" onclick="go('s-home')" type="button">Jelajahi Barang Lain</button>
     </div>
   </div>
 </div>
 
-<!-- ══════ ORDER TRACKING ══════ -->
+<!-- ═══════════════════════════════
+     ORDER TRACKING
+═══════════════════════════════ -->
 <div id="s-tracking" class="screen">
   <div class="hdr">
     <div class="hdr-bar">
-      <a href="#s-home" class="back-a" aria-label="Kembali"><i class="ti ti-arrow-left" aria-hidden="true"></i></a>
+      <button class="back-btn" onclick="go('s-home')" type="button"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
       <span class="hdr-title">Pesanan Saya</span>
       <i class="ti ti-bell hdr-icon" aria-hidden="true"></i>
     </div>
   </div>
   <div class="body">
-
-    <div style="background:#E1F5EE;border-bottom:1px solid #9FE1CB;padding:12px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0">
+    <div style="background:#E1F5EE;border-bottom:1px solid #9FE1CB;padding:12px 16px;display:flex;align-items:center;gap:10px">
       <i class="ti ti-shield-check" style="font-size:24px;color:#0F766E" aria-hidden="true"></i>
-      <div>
-        <div style="font-size:13px;font-weight:700;color:#085041">Dana Rp 803.000 Aman di Escrow</div>
-        <div style="font-size:11px;color:#0F6E56">Akan cair ke seller setelah kamu konfirmasi terima barang</div>
-      </div>
+      <div><div style="font-size:13px;font-weight:700;color:#085041">Dana Rp 803.000 Aman di Escrow</div><div style="font-size:11px;color:#0F6E56">Cair ke seller setelah kamu konfirmasi terima barang</div></div>
     </div>
-
     <div class="card">
-      <div class="sec-lbl">Detail Pesanan</div>
+      <div class="slbl">Detail Pesanan</div>
       <div style="display:flex;gap:10px;align-items:center">
         <div style="width:48px;height:48px;border-radius:8px;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🛒</div>
-        <div style="flex:1">
-          <div style="font-size:13px;font-weight:700;color:#1a1a1a">Stroller Babyelle B900</div>
-          <div style="font-size:11px;color:#999;margin-top:1px">Sari W. · Seperti Baru</div>
-        </div>
+        <div style="flex:1"><div style="font-size:13px;font-weight:700;color:#1a1a1a">Stroller Babyelle B900</div><div style="font-size:11px;color:#999;margin-top:1px">Sari W. · Seperti Baru</div></div>
         <div style="font-size:14px;font-weight:800;color:#0F766E">Rp 800.000</div>
       </div>
-      <div style="margin-top:10px;padding-top:10px;border-top:1px solid #f0f0f0;display:flex;justify-content:space-between;font-size:12px">
-        <span style="color:#888">ID Pesanan</span><span style="font-weight:700;color:#1a1a1a">#RG-2025-00841</span>
-      </div>
-      <div style="margin-top:6px;display:flex;justify-content:space-between;font-size:12px">
-        <span style="color:#888">Waktu bayar</span><span style="font-weight:700;color:#1a1a1a">Hari ini · 09.41 WIB</span>
-      </div>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid #f0f0f0;display:flex;justify-content:space-between;font-size:12px"><span style="color:#888">ID Pesanan</span><span style="font-weight:700;color:#1a1a1a">#RG-2025-00841</span></div>
+      <div style="margin-top:6px;display:flex;justify-content:space-between;font-size:12px"><span style="color:#888">Waktu bayar</span><span style="font-weight:700;color:#1a1a1a">Hari ini · 09.41 WIB</span></div>
     </div>
-
     <div class="card">
-      <div class="sec-lbl">Titik Temu COD</div>
+      <div class="slbl">Titik Temu COD</div>
       <div style="display:flex;gap:10px;background:#f8f8f8;border-radius:10px;padding:12px;border:1px solid #eee">
         <i class="ti ti-map-pin" style="font-size:20px;color:#0F766E;flex-shrink:0;margin-top:2px" aria-hidden="true"></i>
         <div>
           <div style="font-size:13px;font-weight:700;color:#1a1a1a">Aeon Mall BSD City, Pintu Utama</div>
-          <div style="font-size:12px;color:#888;margin-top:2px">Sabtu, 17 Mei 2025 · 14.00 WIB</div>
-          <a href="#s-chat" style="display:inline-flex;align-items:center;gap:4px;margin-top:8px;font-size:12px;font-weight:600;color:#0F766E">
-            <i class="ti ti-message" style="font-size:14px" aria-hidden="true"></i> Chat dengan Sari W.
-          </a>
+          <div style="font-size:12px;color:#888;margin-top:2px">Sabtu, 17 Mei · 14.00 WIB</div>
+          <button onclick="go('s-chat')" type="button" style="display:inline-flex;align-items:center;gap:4px;margin-top:8px;font-size:12px;font-weight:700;color:#0F766E"><i class="ti ti-message" style="font-size:14px" aria-hidden="true"></i> Chat dengan Sari W.</button>
         </div>
       </div>
     </div>
-
     <div class="card">
-      <div class="sec-lbl">Status Pengiriman</div>
-      <div class="tl-row">
-        <div class="tl-left"><div class="tl-dot done"><i class="ti ti-check" aria-hidden="true"></i></div><div class="tl-line done"></div></div>
-        <div class="tl-content"><div class="tl-step">Pembayaran diterima</div><div class="tl-desc">Dana Rp 803.000 masuk ke escrow ReGuna</div><div class="tl-time">Hari ini · 09.41 WIB</div></div>
-      </div>
-      <div class="tl-row">
-        <div class="tl-left"><div class="tl-dot cur"><i class="ti ti-clock" aria-hidden="true"></i></div><div class="tl-line"></div></div>
-        <div class="tl-content"><div class="tl-step">Menunggu pertemuan COD</div><div class="tl-desc">Aeon BSD · Sabtu 17 Mei · 14.00 WIB</div><div class="tl-time">Dijadwalkan</div></div>
-      </div>
-      <div class="tl-row">
-        <div class="tl-left"><div class="tl-dot next"><i class="ti ti-package" aria-hidden="true"></i></div><div class="tl-line"></div></div>
-        <div class="tl-content"><div class="tl-step dim">Konfirmasi penerimaan</div><div class="tl-desc dim">Cek barang di lokasi, lalu konfirmasi di bawah</div></div>
-      </div>
-      <div class="tl-row">
-        <div class="tl-left"><div class="tl-dot next"><i class="ti ti-circle-check" aria-hidden="true"></i></div></div>
-        <div class="tl-content" style="padding-bottom:0"><div class="tl-step dim">Dana cair ke seller</div><div class="tl-desc dim">Rp 800.000 dikirim ke Sari W.</div></div>
-      </div>
+      <div class="slbl">Status Pengiriman</div>
+      <div class="tl-row"><div class="tl-left"><div class="tl-dot done"><i class="ti ti-check" aria-hidden="true"></i></div><div class="tl-line done"></div></div><div class="tl-content"><div class="tl-step">Pembayaran diterima</div><div class="tl-desc">Dana Rp 803.000 masuk ke escrow ReGuna</div><div class="tl-time">Hari ini · 09.41 WIB</div></div></div>
+      <div class="tl-row"><div class="tl-left"><div class="tl-dot cur"><i class="ti ti-clock" aria-hidden="true"></i></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-step">Menunggu pertemuan COD</div><div class="tl-desc">Aeon BSD · Sabtu 17 Mei · 14.00 WIB</div><div class="tl-time">Dijadwalkan</div></div></div>
+      <div class="tl-row"><div class="tl-left"><div class="tl-dot next"><i class="ti ti-package" aria-hidden="true"></i></div><div class="tl-line"></div></div><div class="tl-content"><div class="tl-step dim">Konfirmasi penerimaan</div><div class="tl-desc dim">Cek barang di lokasi, lalu konfirmasi di bawah</div></div></div>
+      <div class="tl-row"><div class="tl-left"><div class="tl-dot next"><i class="ti ti-circle-check" aria-hidden="true"></i></div></div><div class="tl-content" style="padding-bottom:0"><div class="tl-step dim">Dana cair ke seller</div><div class="tl-desc dim">Rp 800.000 dikirim ke Sari W.</div></div></div>
     </div>
-
-    <div style="padding:0 16px 8px">
-      <div style="background:#FEF3C7;border-radius:10px;padding:12px 14px;font-size:12px;color:#92400E;line-height:1.5">
-        <strong>Cara konfirmasi:</strong> Setelah bertemu seller dan cek barang di lokasi, tekan tombol "Konfirmasi Terima Barang" di bawah. Dana baru akan cair ke seller setelah kamu konfirmasi.
-      </div>
-    </div>
-
-    <div style="padding:12px 16px 8px">
-      <a href="#s-home" class="btn-primary" style="width:100%;font-size:15px;padding:15px">
-        <i class="ti ti-circle-check" aria-hidden="true"></i> Konfirmasi Terima Barang
-      </a>
-    </div>
-    <div style="text-align:center;padding:8px 16px 24px">
-      <a href="#" style="font-size:12px;color:#E53E3E;text-decoration:none">Ada masalah? Ajukan Dispute (tersedia 72 jam)</a>
-    </div>
+    <div style="padding:0 16px 8px"><div style="background:#FEF3C7;border-radius:10px;padding:12px 14px;font-size:12px;color:#92400E;line-height:1.5"><strong>Cara konfirmasi:</strong> Setelah bertemu seller dan cek barang di lokasi, tekan tombol konfirmasi di bawah. Dana baru cair ke seller setelah kamu konfirmasi.</div></div>
+    <div style="padding:12px 16px 8px"><button class="btn-g" onclick="go('s-home')" type="button" style="font-size:15px;padding:15px"><i class="ti ti-circle-check" aria-hidden="true"></i> Konfirmasi Terima Barang</button></div>
+    <div style="text-align:center;padding:8px 16px 24px"><button type="button" style="font-size:12px;color:#E53E3E">Ada masalah? Ajukan Dispute (tersedia 72 jam)</button></div>
   </div>
 </div>
 
-<!-- ══════ BUAT LISTING ══════ -->
+<!-- ═══════════════════════════════
+     BUAT LISTING
+═══════════════════════════════ -->
 <div id="s-buat-listing" class="screen">
   <div class="hdr">
     <div class="hdr-bar">
-      <a href="#s-home" class="back-a" aria-label="Kembali"><i class="ti ti-arrow-left" aria-hidden="true"></i></a>
+      <button class="back-btn" onclick="go('s-home')" type="button"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
       <span class="hdr-title">Buat Listing</span>
       <span style="color:rgba(255,255,255,.65);font-size:12px">Tier 1</span>
     </div>
   </div>
   <div class="body">
-
     <div class="card">
-      <div class="sec-lbl">Foto Barang <span style="color:#E53E3E">*</span></div>
+      <div class="slbl">Foto Barang <span style="color:#E53E3E">*</span></div>
       <div style="display:flex;gap:8px">
-        <div style="width:90px;height:90px;border-radius:10px;border:2px dashed #0F766E;background:#E1F5EE;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;flex-shrink:0">
-          <i class="ti ti-camera" style="font-size:22px;color:#0F766E" aria-hidden="true"></i>
-          <span style="font-size:10px;color:#0F766E;font-weight:600">Foto Utama</span>
-        </div>
+        <div class="upload-main"><i class="ti ti-camera" style="font-size:22px;color:#0F766E" aria-hidden="true"></i><span style="font-size:10px;color:#0F766E;font-weight:700">Foto Utama</span></div>
         <div style="display:flex;flex-direction:column;gap:8px;flex:1">
-          <div style="display:flex;gap:8px">
-            <div style="flex:1;height:40px;border-radius:8px;border:1.5px dashed #ccc;background:#f8f8f8;display:flex;align-items:center;justify-content:center;cursor:pointer">
-              <i class="ti ti-plus" style="font-size:18px;color:#aaa" aria-hidden="true"></i>
-            </div>
-            <div style="flex:1;height:40px;border-radius:8px;border:1.5px dashed #ccc;background:#f8f8f8;display:flex;align-items:center;justify-content:center;cursor:pointer">
-              <i class="ti ti-plus" style="font-size:18px;color:#aaa" aria-hidden="true"></i>
-            </div>
-          </div>
-          <div style="display:flex;gap:8px">
-            <div style="flex:1;height:40px;border-radius:8px;border:1.5px dashed #ccc;background:#f8f8f8;display:flex;align-items:center;justify-content:center;cursor:pointer">
-              <i class="ti ti-plus" style="font-size:18px;color:#aaa" aria-hidden="true"></i>
-            </div>
-            <div style="flex:1;height:40px;border-radius:8px;border:1.5px dashed #ccc;background:#f8f8f8;display:flex;align-items:center;justify-content:center;cursor:pointer">
-              <i class="ti ti-plus" style="font-size:18px;color:#aaa" aria-hidden="true"></i>
-            </div>
-          </div>
+          <div style="display:flex;gap:8px"><div class="upload-slot"><i class="ti ti-plus" style="font-size:18px;color:#aaa" aria-hidden="true"></i></div><div class="upload-slot"><i class="ti ti-plus" style="font-size:18px;color:#aaa" aria-hidden="true"></i></div></div>
+          <div style="display:flex;gap:8px"><div class="upload-slot"><i class="ti ti-plus" style="font-size:18px;color:#aaa" aria-hidden="true"></i></div><div class="upload-slot"><i class="ti ti-plus" style="font-size:18px;color:#aaa" aria-hidden="true"></i></div></div>
         </div>
       </div>
-      <div style="font-size:11px;color:#aaa;margin-top:8px"><i class="ti ti-info-circle" style="font-size:12px;vertical-align:-1px" aria-hidden="true"></i> Minimal 3 foto · Termasuk foto kondisi aktual</div>
+      <div style="font-size:11px;color:#aaa;margin-top:8px"><i class="ti ti-info-circle" style="font-size:12px;vertical-align:-1px" aria-hidden="true"></i> Minimal 3 foto · Sertakan foto kondisi aktual</div>
     </div>
-
     <div class="card">
-      <div class="sec-lbl">Kategori <span style="color:#E53E3E">*</span></div>
+      <div class="slbl">Kategori <span style="color:#E53E3E">*</span></div>
       <div style="display:flex;flex-wrap:wrap;gap:8px" id="kat-btns">
-        <button class="cat-pill" onclick="pilihKat(this,'anak')">Anak &amp; Bayi</button>
-        <button class="cat-pill" onclick="pilihKat(this,'olahraga')">Olahraga</button>
-        <button class="cat-pill" onclick="pilihKat(this,'furnitur')">Furnitur</button>
-        <button class="cat-pill" onclick="pilihKat(this,'elektronik')">Elektronik</button>
-        <button class="cat-pill" onclick="pilihKat(this,'gratis')">🎁 Gratis</button>
+        <button class="cat-pill" onclick="pilihKat(this,'anak')" type="button">Anak &amp; Bayi</button>
+        <button class="cat-pill" onclick="pilihKat(this,'olahraga')" type="button">Olahraga</button>
+        <button class="cat-pill" onclick="pilihKat(this,'furnitur')" type="button">Furnitur</button>
+        <button class="cat-pill" onclick="pilihKat(this,'elektronik')" type="button">Elektronik</button>
+        <button class="cat-pill" onclick="pilihKat(this,'gratis')" type="button">🎁 Gratis</button>
       </div>
     </div>
-
     <div class="card">
-      <div class="sec-lbl">Judul Listing <span style="color:#E53E3E">*</span></div>
-      <input type="text" placeholder="cth: Stroller Babyelle B900 kondisi mulus" style="width:100%;border:1px solid #ddd;border-radius:8px;padding:10px 12px;font-size:13px;outline:none;color:#1a1a1a">
+      <div class="slbl">Judul Listing <span style="color:#E53E3E">*</span></div>
+      <input type="text" class="field" placeholder="cth: Stroller Babyelle B900 kondisi mulus">
     </div>
-
     <div class="card">
-      <div class="sec-lbl">Kondisi Barang <span style="color:#E53E3E">*</span></div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <label style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:10px;border:1.5px solid #0F766E;background:#E1F5EE;cursor:pointer">
-          <input type="radio" name="kondisi" value="baru" checked style="margin-top:2px;accent-color:#0F766E">
-          <div>
-            <div style="font-size:13px;font-weight:700;color:#085041">Seperti Baru</div>
-            <div style="font-size:11px;color:#0F6E56">Dipakai sangat jarang, tidak ada kerusakan</div>
-          </div>
-        </label>
-        <label style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:10px;border:1.5px solid #e0e0e0;background:#fff;cursor:pointer">
-          <input type="radio" name="kondisi" value="baik" style="margin-top:2px;accent-color:#0F766E">
-          <div>
-            <div style="font-size:13px;font-weight:700;color:#1a1a1a">Baik</div>
-            <div style="font-size:11px;color:#888">Ada tanda pemakaian normal, semua fungsi bekerja</div>
-          </div>
-        </label>
-        <label style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:10px;border:1.5px solid #e0e0e0;background:#fff;cursor:pointer">
-          <input type="radio" name="kondisi" value="cukup" style="margin-top:2px;accent-color:#0F766E">
-          <div>
-            <div style="font-size:13px;font-weight:700;color:#1a1a1a">Cukup Baik</div>
-            <div style="font-size:11px;color:#888">Ada minor defect, wajib dijelaskan di deskripsi</div>
-          </div>
-        </label>
+      <div class="slbl">Kondisi Barang <span style="color:#E53E3E">*</span></div>
+      <label class="kondisi-label on" id="kl-baru"><input type="radio" name="kondisi" value="baru" checked style="margin-top:2px;accent-color:#0F766E"><div><div style="font-size:13px;font-weight:700;color:#085041">Seperti Baru</div><div style="font-size:11px;color:#0F6E56">Dipakai sangat jarang, tidak ada kerusakan</div></div></label>
+      <label class="kondisi-label" id="kl-baik"><input type="radio" name="kondisi" value="baik" style="margin-top:2px;accent-color:#0F766E"><div><div style="font-size:13px;font-weight:700;color:#1a1a1a">Baik</div><div style="font-size:11px;color:#888">Ada tanda pemakaian normal, semua fungsi bekerja</div></div></label>
+      <label class="kondisi-label" id="kl-cukup"><input type="radio" name="kondisi" value="cukup" style="margin-top:2px;accent-color:#0F766E"><div><div style="font-size:13px;font-weight:700;color:#1a1a1a">Cukup Baik</div><div style="font-size:11px;color:#888">Ada minor defect, wajib dijelaskan di deskripsi</div></div></label>
+      <div class="pg-hint" id="pg-hint"><div style="font-size:12px;font-weight:700;color:#6EE7B7;margin-bottom:4px"><i class="ti ti-chart-bar" style="font-size:13px" aria-hidden="true"></i> Price Guide ReGuna</div><div style="font-size:12px;color:rgba(255,255,255,.85)" id="pg-range-text">Pilih kategori untuk lihat kisaran harga</div><div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:3px">Berdasarkan kondisi yang kamu pilih</div></div>
+    </div>
+    <div class="card">
+      <div class="slbl">Harga <span style="color:#E53E3E">*</span></div>
+      <div style="display:flex;align-items:center;border:1px solid #ddd;border-radius:8px;overflow:hidden">
+        <span style="padding:10px 12px;background:#f5f5f5;color:#888;font-size:13px;font-weight:700;border-right:1px solid #ddd">Rp</span>
+        <input type="number" placeholder="0" style="flex:1;border:none;padding:10px 12px;font-size:13px;outline:none;color:#1a1a1a">
+      </div>
+      <div style="font-size:11px;color:#888;margin-top:6px">Limit Tier 1: maks Rp 500.000 per item</div>
+    </div>
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+        <div class="slbl" style="margin-bottom:0">Deskripsi <span style="color:#E53E3E">*</span></div>
+        <span style="font-size:11px;color:#aaa" id="char-count">0 / min 50</span>
+      </div>
+      <textarea class="field" placeholder="Ceritakan kondisi barang secara jujur: berapa lama dipakai, kelengkapan, catatan khusus..." style="min-height:90px;resize:none" oninput="hitungChar(this)"></textarea>
+    </div>
+    <div class="card">
+      <div class="slbl">Lokasi</div>
+      <input type="text" class="field" placeholder="cth: Tangerang Selatan">
+    </div>
+    <div class="card">
+      <div class="slbl">Metode Penyerahan</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <label style="display:flex;align-items:center;gap:10px;cursor:pointer"><input type="checkbox" checked style="width:16px;height:16px;accent-color:#0F766E"><div><div style="font-size:13px;font-weight:600;color:#1a1a1a">COD (Ketemu Langsung)</div><div style="font-size:11px;color:#888">Atur titik temu lewat chat</div></div></label>
+        <label style="display:flex;align-items:center;gap:10px;cursor:pointer"><input type="checkbox" style="width:16px;height:16px;accent-color:#0F766E"><div><div style="font-size:13px;font-weight:600;color:#1a1a1a">Gosend / Grab</div><div style="font-size:11px;color:#888">Buyer bayar ongkir</div></div></label>
+        <label style="display:flex;align-items:center;gap:10px;cursor:pointer"><input type="checkbox" style="width:16px;height:16px;accent-color:#0F766E"><div><div style="font-size:13px;font-weight:600;color:#1a1a1a">Kurir (JNE / J&amp;T / SiCepat)</div><div style="font-size:11px;color:#888">Buyer bayar ongkir</div></div></label>
       </div>
     </div>
+    <div style="height:90px"></div>
+  </div>
+  <div style="padding:12px 16px 24px;background:#fff;border-top:1px solid #eee;flex-shrink:0">
+    <button class="btn-g" onclick="go('s-home')" type="button" style="font-size:15px;padding:14px"><i class="ti ti-send" aria-hidden="true"></i> Posting Listing</button>
+    <div style="font-size:11px;color:#aaa;text-align:center;margin-top:8px">Listing pertama akan dimoderasi dalam 1×24 jam</div>
+  </div>
+</div>
 
-    <div class="card" id="pg-hint" style="display:none">
-      <div style="background:#1E3A5F;border-radius:10px;padding:12px 14px">
-        <div style="font-size:12px;font-weight:700;color:#6EE7B7;margin-bottom:4px"><i class="ti ti-chart-bar" style="font-size:13px" aria-hidden="true"></i> Price Guide ReGuna</div>
-        <div style="font-size:12px;color:rgba(255,255,255,.8)" id="pg-range-text">Pilih kategori untuk melihat kisaran harga</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:4px">Harga wajar berdasarkan kondisi yang kamu pilih</div>
+<!-- ═══════════════════════════════
+     PROFIL SELLER
+═══════════════════════════════ -->
+<div id="s-profil" class="screen">
+  <div class="profil-hdr">
+    <div class="profil-hdr-bar">
+      <span class="hdr-title">Profil Saya</span>
+      <i class="ti ti-settings hdr-icon" aria-hidden="true"></i>
+    </div>
+    <div class="profil-avatar-row">
+      <div class="profil-avatar">HB</div>
+      <div>
+        <div style="color:#fff;font-size:17px;font-weight:800">Haris B.</div>
+        <div style="display:flex;align-items:center;gap:6px;margin-top:4px"><span class="badge bn">Tier 1</span><span style="color:rgba(255,255,255,.7);font-size:11px">Member sejak Mei 2025</span></div>
       </div>
     </div>
-
+  </div>
+  <div class="body">
+    <div class="stats-grid">
+      <div class="stat-cell"><div class="stat-num">0</div><div class="stat-lbl">Transaksi</div></div>
+      <div class="stat-cell"><div class="stat-num">—</div><div class="stat-lbl">Rating</div></div>
+      <div class="stat-cell"><div class="stat-num" style="color:#0F766E">1</div><div class="stat-lbl">Listing Aktif</div></div>
+    </div>
     <div class="card">
-      <div class="sec-lbl">Harga <span style="color:#E53E3E">*</span></div>
-      <div style="display:flex;align-items:center;border:1px solid #ddd;border-radius:8px;overflow:h
+      <div style="display:flex;justify-content:space-between;align-i
