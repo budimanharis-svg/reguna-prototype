@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ReGuna — Nilai Baru untuk Setiap Barang</title>
+<meta name="description" content="Platform sirkulasi barang rumah tangga layak pakai untuk keluarga Indonesia">
+<meta name="theme-color" content="#0F766E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="ReGuna">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:#f0f0f0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;overflow:hidden}
+
+/* ── DESKTOP PHONE FRAME ── */
+.app-shell{
+  display:flex;align-items:center;justify-content:center;
+  min-height:100vh;background:#e8e8e8;
+  padding:20px;
+}
+.phone-frame{
+  width:375px;height:812px;
+  background:#fff;border-radius:44px;
+  overflow:hidden;position:relative;
+  box-shadow:0 30px 80px rgba(0,0,0,.18),0 0 0 10px #1a1a1a,0 0 0 11px #333;
+}
+
+/* On real mobile, fill screen */
+@media(max-width:430px){
+  .app-shell{padding:0;background:#fff;min-height:100dvh;align-items:flex-start}
+  .phone-frame{width:100%;height:100dvh;border-radius:0;box-shadow:none}
+}
+
+/* ── SCREEN SYSTEM ── */
+.screen{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  background:#f5f5f5;
+  transition:transform .28s cubic-bezier(.4,0,.2,1),opacity .28s ease;
+  will-change:transform;
+}
+.screen.hidden{transform:translateX(100%);opacity:0;pointer-events:none}
+.screen.slide-left{transform:translateX(-30%);opacity:0;pointer-events:none}
+
+/* ── STATUS BAR ── */
+.status-bar{
+  height:44px;background:#0F766E;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;flex-shrink:0;
+}
+.status-time{color:#fff;font-size:15px;font-weight:600}
+.status-icons{display:flex;align-items:center;gap:6px;color:#fff;font-size:14px}
+
+/* ── NAV HEADER ── */
+.nav-header{
+  background:#0F766E;padding:10px 16px 14px;flex-shrink:0;
+}
+.nav-row{display:flex;align-items:center;gap:10px}
+.nav-back{color:#fff;font-size:24px;cursor:pointer;padding:4px;border:none;background:none}
+.nav-title{color:#fff;font-size:16px;font-weight:600;flex:1}
+.nav-right{color:rgba(255,255,255,.85);font-size:22px;cursor:pointer}
+
+/* ── SCROLLABLE BODY ── */
+.screen-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.screen-body::-webkit-scrollbar{display:none}
+
+/* ── BOTTOM NAV ── */
+.bottom-nav{
+  height:68px;background:#fff;
+  border-top:.5px solid #e5e5e5;
+  display:flex;align-items:center;justify-content:space-around;
+  flex-shrink:0;padding-bottom:8px;
+}
+.nav-item{
+  display:flex;flex-direction:column;align-items:center;
+  gap:3px;flex:1;cursor:pointer;border:none;background:none;
+  color:#999;font-size:10px;padding:6px 0;
+}
+.nav-item.active{color:#0F766E}
+.nav-item i{font-size:22px}
+.nav-sell{
+  width:52px;height:52px;border-radius:26px;
+  background:#0F766E;color:#fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-size:10px;gap:2px;cursor:pointer;border:none;margin-top:-10px;
+  box-shadow:0 4px 12px rgba(15,118,110,.4);
+}
+.nav-sell i{font-size:20px}
+
+/* ── CARDS ── */
+.card{background:#fff;border-radius:12px;overflow:hidden}
+.section-block{background:#fff;margin-bottom:8px;padding:14px 16px}
+.section-label{font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:.7px;margin-bottom:10px}
+
+/* ── BADGES ── */
+.badge{display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:20px;font-size:11px;font-weight:600}
+.badge-teal{background:#E1F5EE;color:#0F6E56}
+.badge-blue{background:#E6F1FB;color:#185FA5}
+.badge-amber{background:#FAEEDA;color:#854F0B}
+.badge-tier{background:#1E3A5F;color:#fff;font-size:10px;padding:2px 7px}
+
+/* ── COLORS ── */
+:root{
+  --teal:#0F766E;--teal-light:#E1F5EE;--teal-mid:#9FE1CB;
+  --navy:#1E3A5F;--orange:#D4622A;
+  --text:#1a1a1a;--text-2:#555;--text-3:#888;
+  --border:#e8e8e8;--bg:#f5f5f5;
+}
+
+/* ══════════════════════════════════════
+   SCREEN 1 — HOME / EXPLORE
+══════════════════════════════════════ */
+#s-home .home-header{
+  background:var(--teal);padding:10px 16px 16px;
+}
+#s-home .logo-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+#s-home .logo{color:#fff;font-size:22px;font-weight:700;letter-spacing:-.5px}
+#s-home .logo span{color:#9FE1CB}
+#s-home .tagline{color:rgba(255,255,255,.75);font-size:11px;margin-top:1px}
+#s-home .header-icons{display:flex;gap:14px;color:#fff;font-size:22px}
+#s-home .search-bar{
+  display:flex;align-items:center;gap:8px;
+  background:#fff;border-radius:10px;padding:9px 12px;
+  color:var(--text-3);font-size:13px;cursor:pointer;
+}
+#s-home .search-bar i{font-size:18px;color:var(--teal)}
+
+#s-home .price-guide-banner{
+  background:linear-gradient(135deg,#1E3A5F 0%,#0F766E 100%);
+  margin:10px 12px 0;border-radius:12px;padding:12px 14px;
+  display:flex;align-items:center;justify-content:space-between;cursor:pointer;
+}
+#s-home .pg-text h4{color:#fff;font-size:13px;font-weight:600}
+#s-home .pg-text p{color:rgba(255,255,255,.75);font-size:11px;margin-top:2px}
+#s-home .pg-icon{color:rgba(255,255,255,.8);font-size:32px}
+
+#s-home .cat-row{
+  display:flex;gap:8px;padding:12px 12px 4px;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;
+}
+#s-home .cat-row::-webkit-scrollbar{display:none}
+.cat-pill{
+  padding:7px 14px;border-radius:20px;
+  font-size:12px;font-weight:600;white-space:nowrap;
+  border:1.5px solid var(--border);background:#fff;
+  color:var(--text-2);cursor:pointer;flex-shrink:0;
+}
+.cat-pill.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+
+.listing-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:10px;padding:10px 12px 16px;
+}
+.listing-card{
+  background:#fff;border-radius:12px;overflow:hidden;
+  border:.5px solid var(--border);cursor:pointer;
+}
+.listing-card:active{opacity:.85}
+.listing-img{
+  width:100%;aspect-ratio:1;background:#f0f0f0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:36px;position:relative;
+}
+.listing-cond{position:absolute;top:6px;left:6px}
+.listing-info{padding:8px}
+.listing-name{font-size:12px;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:2px}
+.listing-sub{font-size:11px;color:var(--text-3);margin-bottom:4px}
+.listing-price{font-size:13px;font-weight:700;color:var(--teal)}
+.listing-price.free{color:#D4622A}
+.listing-seller{display:flex;align-items:center;gap:4px;margin-top:4px;font-size:10px;color:var(--text-3)}
+
+/* ══════════════════════════════════════
+   SCREEN 2 — DETAIL LISTING
+══════════════════════════════════════ */
+#s-detail .gallery{position:relative;background:#f0f0f0}
+#s-detail .main-img{
+  width:100%;height:240px;display:flex;align-items:center;justify-content:center;font-size:72px;
+}
+#s-detail .gallery-dots{
+  position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
+  display:flex;gap:5px;
+}
+#s-detail .dot{width:6px;height:6px;border-radius:3px;background:rgba(255,255,255,.5)}
+#s-detail .dot.active{width:16px;background:#fff}
+#s-detail .thumb-row{
+  display:flex;gap:6px;padding:10px 12px;background:#fff;
+}
+#s-detail .thumb{
+  width:54px;height:54px;border-radius:8px;background:#f0f0f0;
+  display:flex;align-items:center;justify-content:center;font-size:22px;
+  border:1.5px solid transparent;cursor:pointer;flex-shrink:0;
+}
+#s-detail .thumb.active{border-color:var(--teal)}
+#s-detail .cond-overlay{
+  position:absolute;top:10px;left:10px;
+}
+
+#s-detail .price-row{
+  padding:14px 16px 10px;background:#fff;
+  border-bottom:.5px solid var(--border);
+}
+#s-detail .price-main{font-size:24px;font-weight:700;color:var(--text)}
+#s-detail .price-guide-bar{
+  margin-top:10px;
+  background:var(--teal-light);border-radius:8px;padding:10px 12px;
+}
+#s-detail .bar-label{font-size:11px;color:#0F6E56;font-weight:600;margin-bottom:6px;display:flex;justify-content:space-between}
+#s-detail .bar-track{height:6px;background:var(--teal-mid);border-radius:3px;position:relative}
+#s-detail .bar-fill{height:6px;background:var(--teal);border-radius:3px;width:30%}
+#s-detail .bar-marker{
+  position:absolute;top:-5px;left:30%;
+  width:16px;height:16px;border-radius:50%;
+  background:var(--teal);border:2.5px solid #fff;
+  box-shadow:0 1px 4px rgba(0,0,0,.2);
+  transform:translateX(-50%);
+}
+
+#s-detail .seller-card{
+  display:flex;align-items:center;gap:10px;
+  padding:14px 16px;background:#fff;margin-top:8px;cursor:pointer;
+}
+#s-detail .seller-avatar{
+  width:40px;height:40px;border-radius:20px;
+  background:var(--teal-light);display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:15px;color:var(--teal);flex-shrink:0;
+}
+#s-detail .seller-name{font-size:13px;font-weight:600;color:var(--text)}
+#s-detail .seller-meta{font-size:11px;color:var(--text-3);margin-top:2px;display:flex;align-items:center;gap:6px}
+
+#s-detail .detail-table{padding:14px 16px;background:#fff;margin-top:8px}
+.dt-row{display:flex;padding:7px 0;border-bottom:.5px solid var(--border)}
+.dt-row:last-child{border-bottom:none}
+.dt-label{font-size:13px;color:var(--text-3);width:110px;flex-shrink:0}
+.dt-val{font-size:13px;color:var(--text);font-weight:500}
+
+#s-detail .desc-block{padding:14px 16px;background:#fff;margin-top:8px}
+#s-detail .desc-text{font-size:13px;color:var(--text-2);line-height:1.6}
+
+#s-detail .safety-note{
+  margin:0 0 0;padding:10px 14px;
+  background:#FAEEDA;border-left:3px solid #D97706;
+  display:flex;gap:8px;align-items:flex-start;
+  font-size:12px;color:#854F0B;line-height:1.4;
+}
+
+#s-detail .trust-row{
+  display:flex;gap:8px;padding:12px 16px;background:#fff;margin-top:8px;
+}
+.trust-badge{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;
+  padding:10px 4px;background:#f8f8f8;border-radius:10px;
+}
+.trust-badge i{font-size:20px;color:var(--teal)}
+.trust-badge span{font-size:10px;color:var(--text-3);text-align:center;line-height:1.3}
+
+#s-detail .detail-cta{
+  padding:12px 16px 20px;background:#fff;border-top:.5px solid var(--border);
+  display:flex;gap:10px;flex-shrink:0;
+}
+.btn-chat{
+  flex:1;padding:13px;border-radius:10px;
+  border:1.5px solid var(--teal);background:#fff;
+  color:var(--teal);font-size:14px;font-weight:600;cursor:pointer;
+}
+.btn-primary{
+  flex:2;padding:13px;border-radius:10px;
+  background:var(--teal);color:#fff;
+  font-size:14px;font-weight:600;border:none;cursor:pointer;
+}
+.btn-primary:active,.btn-chat:active{opacity:.85}
+
+/* ══════════════════════════════════════
+   SCREEN 3 — CHAT
+══════════════════════════════════════ */
+#s-chat .chat-header{background:var(--teal);padding:10px 16px 12px;flex-shrink:0}
+#s-chat .ch-row{display:flex;align-items:center;gap:10px}
+#s-chat .ch-avatar{
+  width:36px;height:36px;border-radius:18px;
+  background:#9FE1CB;display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:13px;color:var(--teal);flex-shrink:0;
+}
+#s-chat .ch-name{color:#fff;font-size:14px;font-weight:600}
+#s-chat .ch-status{color:rgba(255,255,255,.75);font-size:11px;display:flex;align-items:center;gap:4px}
+#s-chat .online-dot{width:7px;height:7px;border-radius:50%;background:#4ade80}
+
+#s-chat .product-strip{
+  background:#005f58;padding:9px 14px;
+  display:flex;align-items:center;gap:10px;flex-shrink:0;
+  border-bottom:.5px solid rgba(255,255,255,.1);cursor:pointer;
+}
+#s-chat .ps-thumb{
+  width:36px;height:36px;border-radius:6px;background:#E1F5EE;
+  display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;
+}
+#s-chat .ps-name{color:#fff;font-size:12px;font-weight:600}
+#s-chat .ps-price{color:rgba(255,255,255,.75);font-size:11px}
+
+#s-chat .security-notice{
+  background:#FAEEDA;padding:8px 14px;
+  font-size:11px;color:#854F0B;
+  display:flex;align-items:center;gap:6px;flex-shrink:0;
+}
+
+#s-chat .chat-body{
+  flex:1;overflow-y:auto;padding:12px 14px;
+  display:flex;flex-direction:column;gap:10px;
+  -webkit-overflow-scrolling:touch;
+}
+#s-chat .chat-body::-webkit-scrollbar{display:none}
+
+.chat-date{text-align:center;font-size:11px;color:var(--text-3);margin:4px 0}
+.bubble-row{display:flex;gap:8px;align-items:flex-end}
+.bubble-row.me{flex-direction:row-reverse}
+.bubble{
+  max-width:72%;padding:9px 12px;border-radius:16px;
+  font-size:13px;line-height:1.45;
+}
+.bubble.them{background:#f0f0f0;color:var(--text);border-bottom-left-radius:4px}
+.bubble.me{background:var(--teal);color:#fff;border-bottom-right-radius:4px}
+.bubble-time{font-size:10px;color:var(--text-3);margin-bottom:4px;align-self:flex-end}
+.bubble-row.me .bubble-time{text-align:right}
+
+.photo-bubble{
+  width:140px;height:105px;border-radius:12px;
+  background:#ddd;overflow:hidden;display:flex;align-items:center;justify-content:center;
+  font-size:32px;
+}
+
+.escrow-nudge{
+  background:#fff;border:1.5px solid var(--teal);border-radius:14px;
+  padding:14px;margin:4px 0;
+}
+.en-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.en-icon{font-size:24px;color:var(--teal)}
+.en-title{font-size:13px;font-weight:700;color:var(--text)}
+.en-sub{font-size:12px;color:var(--text-2);margin-bottom:10px;line-height:1.4}
+.en-price{font-size:18px;font-weight:700;color:var(--teal);margin-bottom:10px}
+.btn-escrow{
+  width:100%;padding:11px;border-radius:10px;
+  background:var(--teal);color:#fff;
+  font-size:13px;font-weight:600;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+
+.typing-indicator{
+  display:flex;align-items:center;gap:4px;padding:10px 12px;
+  background:#f0f0f0;border-radius:16px;border-bottom-left-radius:4px;
+  width:fit-content;
+}
+.typing-dot{
+  width:7px;height:7px;border-radius:50%;background:#aaa;
+  animation:pulse 1.2s ease-in-out infinite;
+}
+.typing-dot:nth-child(2){animation-delay:.2s}
+.typing-dot:nth-child(3){animation-delay:.4s}
+@keyframes pulse{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
+
+#s-chat .chat-input-bar{
+  padding:10px 14px 20px;background:#fff;
+  border-top:.5px solid var(--border);
+  display:flex;align-items:center;gap:8px;flex-shrink:0;
+}
+.chat-input{
+  flex:1;padding:9px 14px;border-radius:24px;
+  border:.5px solid #ddd;background:#f5f5f5;
+  font-size:13px;color:var(--text);outline:none;
+}
+.icon-btn{
+  width:36px;height:36px;border-radius:18px;
+  background:none;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text-3);font-size:22px;
+}
+.icon-btn.send{background:var(--teal);color:#fff}
+
+/* ══════════════════════════════════════
+   SCREEN 4 — CHECKOUT
+══════════════════════════════════════ */
+#s-checkout .screen-body{background:#f5f5f5}
+
+.product-row{display:flex;gap:10px;align-items:flex-start}
+.product-thumb{
+  width:54px;height:54px;border-radius:8px;background:var(--teal-light);
+  display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;
+}
+.product-name{font-size:13px;font-weight:600;color:var(--text);line-height:1.3}
+.product-sub{font-size:12px;color:var(--text-3);margin-top:2px}
+.product-price-main{font-size:14px;font-weight:700;color:var(--teal);margin-top:4px}
+.price-cross{text-decoration:line-through;color:#aaa;font-size:12px;font-weight:400;margin-right:4px}
+
+.meeting-card{
+  display:flex;gap:10px;background:#f8f8f8;
+  border-radius:10px;padding:12px;border:.5px solid var(--border);
+}
+.meeting-icon{font-size:22px;color:var(--teal);flex-shrink:0}
+.meeting-label{font-size:11px;color:var(--text-3);margin-bottom:2px}
+.meeting-val{font-size:13px;font-weight:600;color:var(--text);line-height:1.4}
+.meeting-note{font-size:11px;color:#D97706;margin-top:5px;display:flex;align-items:center;gap:4px}
+
+.pay-method-list{display:flex;flex-direction:column;gap:8px}
+.method-opt{
+  display:flex;align-items:center;gap:10px;padding:11px 12px;
+  border-radius:10px;border:1.5px solid var(--border);
+  cursor:pointer;background:#fff;
+}
+.method-opt.selected{border-color:var(--teal);background:var(--teal-light)}
+.method-icon{
+  width:38px;height:26px;border-radius:5px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;flex-shrink:0;color:#fff;
+}
+.gopay{background:#00AED6}.ovo{background:#4C3494}.qris{background:#E31837}.va{background:#003087}
+.method-name{font-size:13px;font-weight:600;color:var(--text);flex:1}
+.method-sub{font-size:11px;color:var(--text-3)}
+.radio{
+  width:18px;height:18px;border-radius:50%;
+  border:1.5px solid #ccc;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.radio.on{border-color:var(--teal)}
+.radio-dot{width:9px;height:9px;border-radius:50%;background:var(--teal)}
+
+.summary-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:.5px solid var(--border)}
+.summary-row:last-child{border-bottom:none}
+.sr-label{font-size:13px;color:var(--text-3)}
+.sr-val{font-size:13px;font-weight:600;color:var(--text)}
+.summary-total{display:flex;justify-content:space-between;padding:10px 0 0;border-top:1.5px solid var(--border);margin-top:4px}
+.st-label{font-size:14px;font-weight:600;color:var(--text)}
+.st-val{font-size:16px;font-weight:700;color:var(--text)}
+
+.escrow-info{
+  background:var(--teal-light);border:.5px solid var(--teal-mid);
+  border-radius:12px;padding:13px;
+}
+.ei-title{font-size:13px;font-weight:700;color:#085041;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.ei-desc{font-size:12px;color:#0F6E56;line-height:1.5;margin-bottom:10px}
+.ei-steps{display:flex;flex-direction:column;gap:7px}
+.ei-step{display:flex;gap:8px;font-size:12px;color:#0F6E56;align-items:flex-start}
+.step-num{
+  width:18px;height:18px;border-radius:50%;background:var(--teal);
+  color:#fff;font-size:10px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;
+}
+
+.trust-badges{display:flex;gap:8px;margin-top:12px}
+.tb-item{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:8px 4px;background:rgba(255,255,255,.6);border-radius:8px;
+}
+.tb-item i{font-size:18px;color:var(--teal)}
+.tb-item span{font-size:10px;color:#0F6E56;text-align:center;line-height:1.3}
+
+.checkout-cta{
+  padding:12px 16px 24px;background:#fff;
+  border-top:.5px solid var(--border);flex-shrink:0;
+}
+.cta-total-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.cta-total-label{font-size:12px;color:var(--text-3)}
+.cta-total-amount{font-size:18px;font-weight:700;color:var(--text)}
+.btn-pay{
+  width:100%;padding:14px;border-radius:12px;
+  background:var(--teal);color:#fff;
+  font-size:14px;font-weight:700;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-pay:active{opacity:.9}
+.pay-disclaimer{font-size:11px;color:var(--text-3);text-align:center;margin-top:8px;line-height:1.4}
+
+/* ══════════════════════════════════════
+   SCREEN 5 — PAYMENT SUCCESS
+══════════════════════════════════════ */
+#s-success{background:#fff}
+#s-success .success-header{
+  background:var(--teal);height:56px;
+  display:flex;align-items:center;padding:0 16px;flex-shrink:0;
+}
+#s-success .success-header span{color:#fff;font-size:16px;font-weight:600}
+
+#s-success .success-hero{
+  background:var(--teal-light);padding:30px 24px;
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  border-bottom:.5px solid var(--teal-mid);
+}
+.success-icon{
+  width:72px;height:72px;border-radius:36px;background:var(--teal);
+  display:flex;align-items:center;justify-content:center;
+  font-size:36px;color:#fff;margin-bottom:16px;
+}
+.success-title{font-size:20px;font-weight:700;color:var(--text);margin-bottom:6px}
+.success-sub{font-size:13px;color:var(--text-2);line-height:1.5}
+.success-order{
+  margin-top:14px;padding:8px 16px;background:#fff;
+  border-radius:8px;border:.5px solid var(--teal-mid);
+  font-size:12px;color:var(--text-3);
+}
+.success-order span{font-weight:700;color:var(--teal);font-size:13px}
+
+.tracking-timeline{padding:20px 16px}
+.tl-title{font-size:14px;font-weight:700;color:var(--text);margin-bottom:16px}
+.tl-item{display:flex;gap:12px;margin-bottom:0}
+.tl-left{display:flex;flex-direction:column;align-items:center;width:32px}
+.tl-dot{
+  width:28px;height:28px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;flex-shrink:0;
+}
+.tl-dot.done{background:var(--teal);color:#fff}
+.tl-dot.active{background:var(--teal-light);color:var(--teal);border:2px solid var(--teal)}
+.tl-dot.pending{background:#f0f0f0;color:#ccc;border:2px solid #e0e0e0}
+.tl-line{width:2px;flex:1;background:#e0e0e0;margin:4px 0;min-height:28px}
+.tl-line.done{background:var(--teal)}
+.tl-content{flex:1;padding-bottom:24px}
+.tl-step{font-size:13px;font-weight:600;color:var(--text)}
+.tl-step.pending{color:#bbb}
+.tl-desc{font-size:12px;color:var(--text-3);margin-top:2px;line-height:1.4}
+.tl-time{font-size:11px;color:var(--text-3);margin-top:3px}
+
+.success-actions{
+  padding:0 16px 32px;display:flex;flex-direction:column;gap:10px;
+}
+.btn-wa{
+  width:100%;padding:13px;border-radius:12px;
+  background:#25D366;color:#fff;
+  font-size:14px;font-weight:600;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-outline{
+  width:100%;padding:13px;border-radius:12px;
+  border:1.5px solid var(--teal);background:#fff;
+  color:var(--teal);font-size:14px;font-weight:600;cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<div class="app-shell">
+<div class="phone-frame">
+
+<!-- ══════════════════════════════
+     SCREEN 1: HOME / EXPLORE
+══════════════════════════════ -->
+<div class="screen" id="s-home">
+  <div id="s-home" class="home-header" style="flex-shrink:0">
+    <div class="logo-row">
+      <div>
+        <div class="logo">Re<span>Guna</span></div>
+        <div class="tagline">Nilai baru untuk setiap barang</div>
+      </div>
+      <div class="header-icons">
+        <i class="ti ti-heart" aria-hidden="true"></i>
+        <i class="ti ti-bell" aria-hidden="true"></i>
+      </div>
+    </div>
+    <div class="search-bar">
+      <i class="ti ti-search" aria-hidden="true"></i>
+      <span>Cari barang layak pakai...</span>
+    </div>
+  </div>
+
+  <div class="screen-body">
+    <div class="price-guide-banner" onclick="showScreen('s-detail')">
+      <div class="pg-text">
+        <h4>Price Guide ReGuna</h4>
+        <p>Cek kisaran harga wajar sebelum beli atau jual</p>
+      </div>
+      <i class="ti ti-chart-bar pg-icon" aria-hidden="true"></i>
+    </div>
+
+    <div class="cat-row" id="catRow">
+      <div class="cat-pill active" onclick="filterCat(this,'semua')">Semua</div>
+      <div class="cat-pill" onclick="filterCat(this,'anak')">Anak &amp; Bayi</div>
+      <div class="cat-pill" onclick="filterCat(this,'olahraga')">Olahraga</div>
+      <div class="cat-pill" onclick="filterCat(this,'furnitur')">Furnitur</div>
+      <div class="cat-pill" onclick="filterCat(this,'elektronik')">Elektronik</div>
+      <div class="cat-pill" onclick="filterCat(this,'gratis')">🎁 Gratis</div>
+    </div>
+
+    <div class="listing-grid">
+      <!-- Card 1 -->
+      <div class="listing-card" onclick="showScreen('s-detail')">
+        <div class="listing-img">
+          🛒
+          <span class="listing-cond badge badge-teal">Seperti Baru</span>
+        </div>
+        <div class="listing-info">
+          <div class="listing-name">Stroller Babyelle B900</div>
+          <div class="listing-sub">Anak &amp; Bayi</div>
+          <div class="listing-price">Rp 850.000</div>
+          <div class="listing-seller"><i class="ti ti-star" style="color:#F59E0B;font-size:11px" aria-hidden="true"></i> 4.9 · Sari W.</div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="listing-card">
+        <div class="listing-img">
+          🏋️
+          <span class="listing-cond badge badge-blue">Baik</span>
+        </div>
+        <div class="listing-info">
+          <div class="listing-name">Treadmill Lifefit T100</div>
+          <div class="listing-sub">Olahraga</div>
+          <div class="listing-price">Rp 2.500.000</div>
+          <div class="listing-seller"><i class="ti ti-star" style="color:#F59E0B;font-size:11px" aria-hidden="true"></i> 4.7 · Budi R.</div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="listing-card">
+        <div class="listing-img">
+          🚲
+          <span class="listing-cond badge badge-teal">Seperti Baru</span>
+        </div>
+        <div class="listing-info">
+          <div class="listing-name">Sepeda Anak Wimcycle 16"</div>
+          <div class="listing-sub">Anak &amp; Bayi</div>
+          <div class="listing-price">Rp 350.000</div>
+          <div class="listing-seller"><i class="ti ti-star" style="color:#F59E0B;font-size:11px" aria-hidden="true"></i> 5.0 · Dewi A.</div>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="listing-card">
+        <div class="listing-img">
+          🛋️
+          <span class="listing-cond badge badge-amber">Cukup Baik</span>
+        </div>
+        <div class="listing-info">
+          <div class="listing-name">Sofa 2-Seater Fabric</div>
+          <div class="listing-sub">Furnitur</div>
+          <div class="listing-price">Rp 1.200.000</div>
+          <div class="listing-seller"><i class="ti ti-star" style="color:#F59E0B;font-size:11px" aria-hidden="true"></i> 4.6 · Rudi P.</div>
+        </div>
+      </div>
+      <!-- Card 5 -->
+      <div class="listing-card">
+        <div class="listing-img">
+          🧸
+          <span class="listing-cond badge badge-teal">Seperti Baru</span>
+        </div>
+        <div class="listing-info">
+          <div class="listing-name">LEGO Duplo Classic Box</div>
+          <div class="listing-sub">Anak &amp; Bayi</div>
+          <div class="listing-price">Rp 280.000</div>
+          <div class="listing-seller"><i class="ti ti-star" style="color:#F59E0B;font-size:11px" aria-hidden="true"></i> 4.8 · Rina S.</div>
+        </div>
+      </div>
+      <!-- Card 6 Gratis -->
+      <div class="listing-card">
+        <div class="listing-img">
+          🏃
+          <span class="listing-cond badge" style="background:#FEF3C7;color:#B45309">Gratis</span>
+        </div>
+        <div class="listing-info">
+          <div class="listing-name">Treadmill Manual Tak Terpakai</div>
+          <div class="listing-sub">Olahraga · Ambil Sendiri</div>
+          <div class="listing-price free">Rp 2.000 (admin)</div>
+          <div class="listing-seller"><i class="ti ti-star" style="color:#F59E0B;font-size:11px" aria-hidden="true"></i> 4.5 · Haris B.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-nav">
+    <button class="nav-item active">
+      <i class="ti ti-home" aria-hidden="true"></i>
+      <span>Jelajahi</span>
+    </button>
+    <button class="nav-item">
+      <i class="ti ti-heart" aria-hidden="true"></i>
+      <span>Simpan</span>
+    </button>
+    <button class="nav-sell">
+      <i class="ti ti-plus" aria-hidden="true"></i>
+      <span style="font-size:9px;font-weight:700">Jual</span>
+    </button>
+    <button class="nav-item">
+      <i class="ti ti-message" aria-hidden="true"></i>
+      <span>Chat</span>
+    </button>
+    <button class="nav-item">
+      <i class="ti ti-user" aria-hidden="true"></i>
+      <span>Profil</span>
+    </button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     SCREEN 2: DETAIL LISTING
+══════════════════════════════ -->
+<div class="screen hidden" id="s-detail">
+  <div class="status-bar">
+    <span class="status-time">09:41</span>
+    <div class="status-icons">
+      <i class="ti ti-wifi" aria-hidden="true"></i>
+      <i class="ti ti-battery-2" aria-hidden="true"></i>
+    </div>
+  </div>
+  <div class="nav-header">
+    <div class="nav-row">
+      <button class="nav-back" onclick="goBack('s-home')" aria-label="Kembali"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
+      <span class="nav-title">Detail Barang</span>
+      <i class="ti ti-share nav-right" aria-hidden="true"></i>
+      <i class="ti ti-heart nav-right" aria-hidden="true"></i>
+    </div>
+  </div>
+
+  <div class="screen-body">
+    <div class="gallery" style="position:relative">
+      <div class="main-img">🛒</div>
+      <div class="cond-overlay">
+        <span class="badge badge-teal"><i class="ti ti-circle-check" style="font-size:11px" aria-hidden="true"></i> Seperti Baru</span>
+      </div>
+      <div class="gallery-dots">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+    <div class="thumb-row" style="background:#fff">
+      <div class="thumb active">🛒</div>
+      <div class="thumb">📦</div>
+      <div class="thumb">🔍</div>
+      <div class="thumb">📋</div>
+    </div>
+
+    <div class="price-row">
+      <div style="display:flex;align-items:baseline;gap:8px">
+        <span class="price-main">Rp 850.000</span>
+        <span class="badge badge-teal" style="font-size:11px">Harga fleksibel</span>
+      </div>
+      <div style="font-size:12px;color:var(--text-3);margin-top:2px">Stroller Babyelle B900 · Seri 2022</div>
+      <div class="price-guide-bar">
+        <div class="bar-label">
+          <span><i class="ti ti-chart-bar" style="font-size:12px" aria-hidden="true"></i> Price Guide ReGuna</span>
+          <span>Rp 700K – Rp 1,2jt</span>
+        </div>
+        <div class="bar-track">
+          <div class="bar-fill"></div>
+          <div class="bar-marker"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:4px;font-size:10px;color:#0F6E56">
+          <span>Rp 700K (Cukup Baik)</span>
+          <span>Rp 1,2jt (Seperti Baru)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="seller-card" onclick="showScreen('s-chat')">
+      <div class="seller-avatar">SW</div>
+      <div style="flex:1">
+        <div style="display:flex;align-items:center;gap:6px">
+          <span class="seller-name">Sari W.</span>
+          <span class="badge badge-tier">Tier 2</span>
+        </div>
+        <div class="seller-meta">
+          <i class="ti ti-star" style="color:#F59E0B;font-size:12px" aria-hidden="true"></i> 4.9 · 23 transaksi
+          <span>·</span> <i class="ti ti-clock" style="font-size:12px" aria-hidden="true"></i> &lt;1 jam
+        </div>
+      </div>
+      <i class="ti ti-chevron-right" style="color:#ccc;font-size:18px" aria-hidden="true"></i>
+    </div>
+
+    <div class="detail-table">
+      <div class="section-label">Detail Barang</div>
+      <div class="dt-row"><span class="dt-label">Kondisi</span><span class="dt-val">Seperti Baru</span></div>
+      <div class="dt-row"><span class="dt-label">Merek</span><span class="dt-val">Babyelle</span></div>
+      <div class="dt-row"><span class="dt-label">Model</span><span class="dt-val">B900 Seri 2022</span></div>
+      <div class="dt-row"><span class="dt-label">Dipakai</span><span class="dt-val">8 bulan</span></div>
+      <div class="dt-row"><span class="dt-label">Lokasi</span><span class="dt-val">Tangerang Selatan</span></div>
+      <div class="dt-row"><span class="dt-label">Pengiriman</span><span class="dt-val">COD / Gosend</span></div>
+    </div>
+
+    <div class="desc-block" style="margin-top:8px">
+      <div class="section-label">Deskripsi</div>
+      <div class="desc-text">Stroller Babyelle B900 seri 2022 kondisi sangat mulus. Dipakai hanya 8 bulan, anak sudah bisa jalan sendiri. Semua fungsi normal: sandaran bisa rebah, kanopi lengkap, sabuk pengaman mulus, roda empat masih mulus. Sudah dicuci bersih. Kelengkapan: buku manual, tas bawaan, rain cover.</div>
+    </div>
+
+    <div class="safety-note">
+      <i class="ti ti-alert-triangle" style="font-size:18px;color:#D97706;flex-shrink:0" aria-hidden="true"></i>
+      <span><strong>Catatan keamanan bayi:</strong> Cek tanggal produksi sebelum membeli. Stroller ini diproduksi 2022, masih dalam batas aman penggunaan.</span>
+    </div>
+
+    <div class="trust-row">
+      <div class="trust-badge"><i class="ti ti-shield-lock" aria-hidden="true"></i><span>Pembayaran<br>Escrow</span></div>
+      <div class="trust-badge"><i class="ti ti-clock" aria-hidden="true"></i><span>Dispute<br>72 jam</span></div>
+      <div class="trust-badge"><i class="ti ti-camera" aria-hidden="true"></i><span>Foto<br>asli seller</span></div>
+    </div>
+
+    <div style="height:80px"></div>
+  </div>
+
+  <div class="detail-cta">
+    <button class="btn-chat" onclick="showScreen('s-chat')">
+      <i class="ti ti-message" aria-hidden="true"></i> Chat
+    </button>
+    <button class="btn-primary" onclick="showScreen('s-checkout')">Beli Sekarang</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     SCREEN 3: CHAT
+══════════════════════════════ -->
+<div class="screen hidden" id="s-chat">
+  <div class="status-bar">
+    <span class="status-time">09:41</span>
+    <div class="status-icons">
+      <i class="ti ti-wifi" aria-hidden="true"></i>
+      <i class="ti ti-battery-2" aria-hidden="true"></i>
+    </div>
+  </div>
+
+  <div class="chat-header">
+    <div class="ch-row">
+      <button class="nav-back" onclick="goBack('s-detail')" style="color:#fff;background:none;border:none;cursor:pointer;font-size:22px"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
+      <div class="ch-avatar">SW</div>
+      <div style="flex:1">
+        <div class="ch-name">Sari W. <span class="badge badge-tier" style="font-size:9px;vertical-align:1px">Tier 2</span></div>
+        <div class="ch-status"><span class="online-dot"></span> Online sekarang</div>
+      </div>
+      <i class="ti ti-dots-vertical nav-right" style="color:rgba(255,255,255,.8);font-size:20px" aria-hidden="true"></i>
+    </div>
+  </div>
+
+  <div class="product-strip" onclick="showScreen('s-detail')">
+    <div class="ps-thumb">🛒</div>
+    <div>
+      <div class="ps-name">Stroller Babyelle B900</div>
+      <div class="ps-price">Rp 850.000 · Seperti Baru</div>
+    </div>
+    <i class="ti ti-chevron-right" style="color:rgba(255,255,255,.5);font-size:16px" aria-hidden="true"></i>
+  </div>
+
+  <div class="security-notice">
+    <i class="ti ti-lock" style="font-size:14px" aria-hidden="true"></i>
+    Nomor HP disembunyikan. Transaksi di ReGuna = dana kamu dilindungi escrow.
+  </div>
+
+  <div class="chat-body">
+    <div class="chat-date">Hari ini · 09.15 WIB</div>
+
+    <div class="bubble-row">
+      <div>
+        <div class="bubble them">Halo kak! Masih tersedia strollernya? 😊</div>
+        <div class="bubble-time">09.15</div>
+      </div>
+    </div>
+
+    <div class="bubble-row me">
+      <div>
+        <div class="bubble me">Masih kak! Kondisi mulus banget, cuma 8 bulan dipakai</div>
+        <div class="bubble-time" style="text-align:right">09.16</div>
+      </div>
+    </div>
+
+    <div class="bubble-row">
+      <div>
+        <div class="bubble them">Boleh minta foto bagian roda kak? Mau pastiin kondisinya</div>
+        <div class="bubble-time">09.18</div>
+      </div>
+    </div>
+
+    <div class="bubble-row me">
+      <div>
+        <div class="photo-bubble">🔍</div>
+        <div class="bubble-time" style="text-align:right">09.20</div>
+      </div>
+    </div>
+
+    <div class="bubble-row me">
+      <div>
+        <div class="bubble me">Ini foto rodanya kak, masih bagus semua</div>
+        <div class="bubble-time" style="text-align:right">09.20</div>
+      </div>
+    </div>
+
+    <div class="bubble-row">
+      <div>
+        <div class="bubble them">Wah mulus ya! Boleh nego kak? 800rb gimana? 🙏</div>
+        <div class="bubble-time">09.22</div>
+      </div>
+    </div>
+
+    <div class="bubble-row me">
+      <div>
+        <div class="bubble me">Oke kak, 800rb deal! Lokasi Tangsel ya, COD bisa di mall BSD</div>
+        <div class="bubble-time" style="text-align:right">09.25</div>
+      </div>
+    </div>
+
+    <div class="bubble-row">
+      <div>
+        <div class="bubble them">Siap kak! Sabtu jam 14.00 bisa? Di Aeon BSD pintu utama</div>
+        <div class="bubble-time">09.26</div>
+      </div>
+    </div>
+
+    <div class="escrow-nudge">
+      <div class="en-header">
+        <i class="ti ti-shield-check en-icon" aria-hidden="true"></i>
+        <span class="en-title">Deal tercapai di Rp 800.000! 🎉</span>
+      </div>
+      <div class="en-sub">Bayar lewat escrow ReGuna agar dana kamu aman. Dana baru cair ke seller setelah kamu konfirmasi terima barang.</div>
+      <div class="en-price">Rp 800.000</div>
+      <button class="btn-escrow" onclick="showScreen('s-checkout')">
+        <i class="ti ti-lock" aria-hidden="true"></i> Bayar Rp 800.000 via Escrow
+      </button>
+    </div>
+  </div>
+
+  <div class="chat-input-bar">
+    <button class="icon-btn" aria-label="Lampiran"><i class="ti ti-paperclip" aria-hidden="true"></i></button>
+    <input class="chat-input" type="text" placeholder="Ketik pesan...">
+    <button class="icon-btn" aria-label="Kamera"><i class="ti ti-camera" aria-hidden="true"></i></button>
+    <button class="icon-btn send" aria-label="Kirim"><i class="ti ti-send" aria-hidden="true"></i></button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     SCREEN 4: CHECKOUT
+══════════════════════════════ -->
+<div class="screen hidden" id="s-checkout">
+  <div class="status-bar">
+    <span class="status-time">09:41</span>
+    <div class="status-icons">
+      <i class="ti ti-wifi" aria-hidden="true"></i>
+      <i class="ti ti-battery-2" aria-hidden="true"></i>
+    </div>
+  </div>
+  <div class="nav-header">
+    <div class="nav-row">
+      <button class="nav-back" onclick="goBack('s-chat')" aria-label="Kembali"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
+      <span class="nav-title">Konfirmasi Pesanan</span>
+      <span style="color:rgba(255,255,255,.7);font-size:12px">Langkah 1/2</span>
+    </div>
+  </div>
+
+  <div class="screen-body">
+    <div class="section-block">
+      <div class="section-label">Detail Barang</div>
+      <div class="product-row">
+        <div class="product-thumb">🛒</div>
+        <div style="flex:1">
+          <div class="product-name">Stroller Babyelle B900</div>
+          <div class="product-sub">Penjual: Sari W. · <span class="badge badge-teal" style="font-size:10px"><i class="ti ti-circle-check" style="font-size:10px" aria-hidden="true"></i> Seperti Baru</span></div>
+          <div class="product-price-main">
+            <span class="price-cross">Rp 850.000</span>Rp 800.000
+          </div>
+          <div style="font-size:11px;color:var(--text-3);margin-top:2px">Harga negosiasi disepakati via chat</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label">Titik Temu COD</div>
+      <div class="meeting-card">
+        <i class="ti ti-map-pin meeting-icon" aria-hidden="true"></i>
+        <div style="flex:1">
+          <div class="meeting-label">Lokasi</div>
+          <div class="meeting-val">Aeon Mall BSD City, Pintu Utama</div>
+          <div class="meeting-label" style="margin-top:6px">Waktu</div>
+          <div class="meeting-val">Sabtu, 17 Mei · 14.00 WIB</div>
+          <div class="meeting-note">
+            <i class="ti ti-alert-triangle" style="font-size:13px" aria-hidden="true"></i>
+            Bayar via escrow sebelum bertemu seller
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label">Metode Pembayaran</div>
+      <div class="pay-method-list">
+        <div class="method-opt selected" onclick="selectPay(this,'gopay')">
+          <div class="method-icon gopay">GP</div>
+          <div style="flex:1">
+            <div class="method-name">GoPay</div>
+            <div class="method-sub">Saldo tersedia · Rp 1.250.000</div>
+          </div>
+          <div class="radio on" id="r-gopay"><div class="radio-dot"></div></div>
+        </div>
+        <div class="method-opt" onclick="selectPay(this,'ovo')">
+          <div class="method-icon ovo">OVO</div>
+          <div style="flex:1">
+            <div class="method-name">OVO</div>
+            <div class="method-sub">Sambungkan akun OVO</div>
+          </div>
+          <div class="radio" id="r-ovo"></div>
+        </div>
+        <div class="method-opt" onclick="selectPay(this,'qris')">
+          <div class="method-icon qris">QR</div>
+          <div style="flex:1">
+            <div class="method-name">QRIS</div>
+            <div class="method-sub">Scan dari app manapun</div>
+          </div>
+          <div class="radio" id="r-qris"></div>
+        </div>
+        <div class="method-opt" onclick="selectPay(this,'va')">
+          <div class="method-icon va">VA</div>
+          <div style="flex:1">
+            <div class="method-name">Transfer Bank (VA)</div>
+            <div class="method-sub">BCA · BRI · Mandiri · BNI</div>
+          </div>
+          <div class="radio" id="r-va"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label">Ringkasan Pembayaran</div>
+      <div class="summary-row"><span class="sr-label">Harga barang</span><span class="sr-val">Rp 800.000</span></div>
+      <div class="summary-row"><span class="sr-label">Biaya layanan ReGuna</span><span class="sr-val">Rp 3.000</span></div>
+      <div class="summary-row"><span class="sr-label">Biaya transaksi GoPay</span><span class="sr-val">Rp 0</span></div>
+      <div class="summary-total">
+        <span class="st-label">Total dibayar</span>
+        <span class="st-val">Rp 803.000</span>
+      </div>
+    </div>
+
+    <div class="section-block">
+      <div class="section-label">Cara Kerja Escrow</div>
+      <div class="escrow-info">
+        <div class="ei-title"><i class="ti ti-shield-lock" style="font-size:18px" aria-hidden="true"></i> Dana kamu aman sampai barang diterima</div>
+        <div class="ei-desc">ReGuna menahan dana dan baru mencairkan ke seller setelah kamu konfirmasi penerimaan barang.</div>
+        <div class="ei-steps">
+          <div class="ei-step"><span class="step-num">1</span><span>Kamu bayar — dana masuk rekening escrow ReGuna</span></div>
+          <div class="ei-step"><span class="step-num">2</span><span>Bertemu seller, cek kondisi barang di lokasi</span></div>
+          <div class="ei-step"><span class="step-num">3</span><span>Barang oke? Konfirmasi di app — dana cair ke seller</span></div>
+          <div class="ei-step"><span class="step-num">4</span><span>Ada masalah? Dispute dalam 72 jam — tim ReGuna mediasi</span></div>
+        </div>
+        <div class="trust-badges">
+          <div class="tb-item"><i class="ti ti-clock" aria-hidden="true"></i><span>Dispute 72 jam</span></div>
+          <div class="tb-item"><i class="ti ti-headset" aria-hidden="true"></i><span>Mediasi ReGuna</span></div>
+          <div class="tb-item"><i class="ti ti-shield-check" aria-hidden="true"></i><span>Dana dijamin</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="height:8px"></div>
+  </div>
+
+  <div class="checkout-cta">
+    <div class="cta-total-row">
+      <span class="cta-total-label">Total pembayaran</span>
+      <span class="cta-total-amount">Rp 803.000</span>
+    </div>
+    <button class="btn-pay" onclick="showScreen('s-success')">
+      <i class="ti ti-lock" aria-hidden="true"></i> Bayar via Escrow
+    </button>
+    <div class="pay-disclaimer">Dengan membayar, kamu menyetujui Syarat &amp; Ketentuan escrow ReGuna</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     SCREEN 5: PAYMENT SUCCESS
+══════════════════════════════ -->
+<div class="screen hidden" id="s-success">
+  <div class="status-bar">
+    <span class="status-time">09:41</span>
+    <div class="status-icons">
+      <i class="ti ti-wifi" aria-hidden="true"></i>
+      <i class="ti ti-battery-2" aria-hidden="true"></i>
+    </div>
+  </div>
+  <div class="success-header">
+    <span>Status Pesanan</span>
+  </div>
+
+  <div class="screen-body">
+    <div class="success-hero">
+      <div class="success-icon"><i class="ti ti-shield-check" aria-hidden="true"></i></div>
+      <div class="success-title">Pembayaran Berhasil!</div>
+      <div class="success-sub">Dana Rp 803.000 sudah masuk escrow ReGuna.<br>Aman hingga kamu konfirmasi terima barang.</div>
+      <div class="success-order">ID Pesanan: <span>#RG-2025-00841</span></div>
+    </div>
+
+    <div class="tracking-timeline">
+      <div class="tl-title">Status Pesanan</div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dot done"><i class="ti ti-check" aria-hidden="true"></i></div>
+          <div class="tl-line done"></div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-step">Pembayaran diterima</div>
+          <div class="tl-desc">Dana Rp 803.000 masuk ke escrow ReGuna</div>
+          <div class="tl-time">Hari ini · 09.41 WIB</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dot active"><i class="ti ti-clock" aria-hidden="true"></i></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-step">Menunggu pertemuan COD</div>
+          <div class="tl-desc">Aeon BSD · Sabtu 17 Mei · 14.00 WIB</div>
+          <div class="tl-time">Dijadwalkan</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dot pending"><i class="ti ti-package" aria-hidden="true"></i></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-content">
+          <div class="tl-step pending">Konfirmasi penerimaan</div>
+          <div class="tl-desc" style="color:#ccc">Setelah cek barang, kamu konfirmasi di sini</div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dot pending"><i class="ti ti-circle-check" aria-hidden="true"></i></div>
+        </div>
+        <div class="tl-content" style="padding-bottom:0">
+          <div class="tl-step pending">Dana cair ke seller</div>
+          <div class="tl-desc" style="color:#ccc">Rp 800.000 dikirim ke Sari W.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="success-actions">
+      <button class="btn-wa">
+        <i class="ti ti-brand-whatsapp" aria-hidden="true"></i> Bagikan ke WhatsApp
+      </button>
+      <button class="btn-outline" onclick="showScreen('s-home')">Jelajahi Barang Lain</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- end phone-frame -->
+</div><!-- end app-shell -->
+
+<script>
+var history = [];
+
+function showScreen(id) {
+  var current = document.querySelector('.screen:not(.hidden):not(.slide-left)');
+  if (current && current.id !== id) {
+    history.push(current.id);
+    current.classList.add('slide-left');
+    setTimeout(function(){ current.classList.add('hidden'); }, 280);
+  }
+  var next = document.getElementById(id);
+  next.classList.remove('hidden','slide-left');
+}
+
+function goBack(id) {
+  var current = document.querySelector('.screen:not(.hidden):not(.slide-left)');
+  if (current) {
+    current.classList.add('hidden');
+  }
+  var prev = document.getElementById(id);
+  prev.classList.remove('hidden','slide-left');
+}
+
+function filterCat(el, cat) {
+  document.querySelectorAll('.cat-pill').forEach(function(p){ p.classList.remove('active'); });
+  el.classList.add('active');
+}
+
+function selectPay(el, id) {
+  document.querySelectorAll('.method-opt').forEach(function(o){ o.classList.remove('selected'); });
+  document.querySelectorAll('.radio').forEach(function(r){ r.classList.remove('on'); r.innerHTML=''; });
+  el.classList.add('selected');
+  var r = document.getElementById('r-'+id);
+  if(r){ r.classList.add('on'); r.innerHTML='<div class="radio-dot"></div>'; }
+}
+</script>
+</body>
+</html>
