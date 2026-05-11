@@ -541,7 +541,7 @@ html,body{height:100%;background:#f0f0f0;font-family:-apple-system,BlinkMacSyste
      SCREEN 1: HOME / EXPLORE
 ══════════════════════════════ -->
 <div class="screen" id="s-home">
-  <div id="s-home" class="home-header" style="flex-shrink:0">
+  <div class="home-header" style="flex-shrink:0">
     <div class="logo-row">
       <div>
         <div class="logo">Re<span>Guna</span></div>
@@ -1133,40 +1133,49 @@ html,body{height:100%;background:#f0f0f0;font-family:-apple-system,BlinkMacSyste
 </div><!-- end app-shell -->
 
 <script>
-var history = [];
+(function() {
 
-function showScreen(id) {
-  var current = document.querySelector('.screen:not(.hidden):not(.slide-left)');
-  if (current && current.id !== id) {
-    history.push(current.id);
-    current.classList.add('slide-left');
-    setTimeout(function(){ current.classList.add('hidden'); }, 280);
+  function showScreen(id) {
+    var screens = document.querySelectorAll('.screen');
+    screens.forEach(function(s) {
+      if (s.id === id) {
+        s.classList.remove('hidden', 'slide-left');
+      } else {
+        if (!s.classList.contains('hidden')) {
+          s.classList.add('slide-left');
+          setTimeout(function(){ s.classList.add('hidden'); }, 250);
+        }
+      }
+    });
   }
-  var next = document.getElementById(id);
-  next.classList.remove('hidden','slide-left');
-}
 
-function goBack(id) {
-  var current = document.querySelector('.screen:not(.hidden):not(.slide-left)');
-  if (current) {
-    current.classList.add('hidden');
+  function goBack(id) {
+    document.querySelectorAll('.screen').forEach(function(s) {
+      if (s.id === id) {
+        s.classList.remove('hidden', 'slide-left');
+      } else {
+        s.classList.add('hidden');
+        s.classList.remove('slide-left');
+      }
+    });
   }
-  var prev = document.getElementById(id);
-  prev.classList.remove('hidden','slide-left');
-}
 
-function filterCat(el, cat) {
-  document.querySelectorAll('.cat-pill').forEach(function(p){ p.classList.remove('active'); });
-  el.classList.add('active');
-}
+  function filterCat(el, cat) {
+    document.querySelectorAll('.cat-pill').forEach(function(p) {
+      p.classList.remove('active');
+    });
+    el.classList.add('active');
+  }
 
-function selectPay(el, id) {
-  document.querySelectorAll('.method-opt').forEach(function(o){ o.classList.remove('selected'); });
-  document.querySelectorAll('.radio').forEach(function(r){ r.classList.remove('on'); r.innerHTML=''; });
-  el.classList.add('selected');
-  var r = document.getElementById('r-'+id);
-  if(r){ r.classList.add('on'); r.innerHTML='<div class="radio-dot"></div>'; }
-}
-</script>
-</body>
-</html>
+  function selectPay(el, payId) {
+    document.querySelectorAll('.method-opt').forEach(function(o) {
+      o.classList.remove('selected');
+    });
+    document.querySelectorAll('.radio').forEach(function(r) {
+      r.classList.remove('on');
+      r.innerHTML = '';
+    });
+    el.classList.add('selected');
+    var r = document.getElementById('r-' + payId);
+    if (r) {
+    
