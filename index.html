@@ -10,13 +10,13 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-button{font-family:inherit;cursor:pointer;border:none;background:none;padding:0;text-align:left}
+button{font-family:inherit;cursor:pointer;border:none;background:none;padding:0;text-align:left;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#e0e0e0}
 .phone{width:375px;height:812px;margin:24px auto;background:#f5f5f5;border-radius:40px;overflow:hidden;box-shadow:0 0 0 10px #1c1c1e,0 24px 60px rgba(0,0,0,.3);position:relative}
-@media(max-width:430px){body{background:#f5f5f5}.phone{width:100%;height:100vh;border-radius:0;box-shadow:none;margin:0}}
+@media(max-width:430px){html,body{height:100%;overflow:hidden}body{background:#f5f5f5}.phone{position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;border-radius:0;box-shadow:none;margin:0}}
 .screen{display:none;flex-direction:column;height:100%;overflow:hidden}
 .screen.active{display:flex}
-.body{flex:1;overflow-y:scroll}
+.body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
 
 /* HEADER */
 .hdr{background:#0F766E;flex-shrink:0}
@@ -49,7 +49,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .slbl{font-size:11px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.6px;margin-bottom:10px}
 
 /* ══ HOME ══ */
-.home-hdr{background:#0F766E;padding:12px 16px 16px}
+.home-hdr{background:#0F766E;padding:12px 16px 16px;flex-shrink:0}
 .logo{color:#fff;font-size:22px;font-weight:800;letter-spacing:-.5px}
 .logo span{color:#6EE7B7}
 .tagline{color:rgba(255,255,255,.7);font-size:11px}
@@ -242,42 +242,42 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 
   <div class="body">
-    <button class="pg-banner" onclick="go('s-detail')" type="button">
+    <button class="pg-banner" onclick="navTo('s-detail')" type="button">
       <div><h4>Price Guide ReGuna</h4><p>Cek kisaran harga wajar sebelum beli atau jual</p></div>
       <i class="ti ti-chart-bar" aria-hidden="true"></i>
     </button>
 
     <div class="cat-row">
-      <button class="cat-pill on" onclick="pilih(this,'semua')" type="button">Semua</button>
-      <button class="cat-pill" onclick="pilih(this,'anak')" type="button">Anak &amp; Bayi</button>
-      <button class="cat-pill" onclick="pilih(this,'olahraga')" type="button">Olahraga</button>
-      <button class="cat-pill" onclick="pilih(this,'furnitur')" type="button">Furnitur</button>
-      <button class="cat-pill" onclick="pilih(this,'elektronik')" type="button">Elektronik</button>
-      <button class="cat-pill" onclick="pilih(this,'gratis')" type="button">🎁 Gratis</button>
+      <button class="cat-pill on" onclick="filCat(this,'semua')" type="button">Semua</button>
+      <button class="cat-pill" onclick="filCat(this,'anak')" type="button">Anak &amp; Bayi</button>
+      <button class="cat-pill" onclick="filCat(this,'olahraga')" type="button">Olahraga</button>
+      <button class="cat-pill" onclick="filCat(this,'furnitur')" type="button">Furnitur</button>
+      <button class="cat-pill" onclick="filCat(this,'elektronik')" type="button">Elektronik</button>
+      <button class="cat-pill" onclick="filCat(this,'gratis')" type="button">🎁 Gratis</button>
     </div>
 
     <div class="grid" id="listing-grid">
-      <button class="lcard" onclick="go('s-detail')" type="button" data-cat="anak">
+      <button class="lcard" onclick="navTo('s-detail')" type="button" data-cat="anak">
         <div class="limg">🛒<span class="limg-badge badge bt">Seperti Baru</span></div>
         <div class="linfo"><div class="lname">Stroller Babyelle B900</div><div class="lcat">Anak &amp; Bayi</div><div class="lprice">Rp 850.000</div><div class="lmeta"><i class="ti ti-star" aria-hidden="true"></i> 4.9 · Sari W.</div></div>
       </button>
-      <button class="lcard" onclick="go('s-home')" type="button" data-cat="olahraga">
+      <button class="lcard" onclick="navTo('s-home')" type="button" data-cat="olahraga">
         <div class="limg">🏋️<span class="limg-badge badge bb">Baik</span></div>
         <div class="linfo"><div class="lname">Treadmill Lifefit T100</div><div class="lcat">Olahraga</div><div class="lprice">Rp 2.500.000</div><div class="lmeta"><i class="ti ti-star" aria-hidden="true"></i> 4.7 · Budi R.</div></div>
       </button>
-      <button class="lcard" onclick="go('s-home')" type="button" data-cat="anak">
+      <button class="lcard" onclick="navTo('s-home')" type="button" data-cat="anak">
         <div class="limg">🚲<span class="limg-badge badge bt">Seperti Baru</span></div>
         <div class="linfo"><div class="lname">Sepeda Anak Wimcycle 16"</div><div class="lcat">Anak &amp; Bayi</div><div class="lprice">Rp 350.000</div><div class="lmeta"><i class="ti ti-star" aria-hidden="true"></i> 5.0 · Dewi A.</div></div>
       </button>
-      <button class="lcard" onclick="go('s-home')" type="button" data-cat="furnitur">
+      <button class="lcard" onclick="navTo('s-home')" type="button" data-cat="furnitur">
         <div class="limg">🛋️<span class="limg-badge badge ba">Cukup Baik</span></div>
         <div class="linfo"><div class="lname">Sofa 2-Seater Fabric</div><div class="lcat">Furnitur</div><div class="lprice">Rp 1.200.000</div><div class="lmeta"><i class="ti ti-star" aria-hidden="true"></i> 4.6 · Rudi P.</div></div>
       </button>
-      <button class="lcard" onclick="go('s-home')" type="button" data-cat="anak">
+      <button class="lcard" onclick="navTo('s-home')" type="button" data-cat="anak">
         <div class="limg">🧸<span class="limg-badge badge bt">Seperti Baru</span></div>
         <div class="linfo"><div class="lname">LEGO Duplo Classic Box</div><div class="lcat">Anak &amp; Bayi</div><div class="lprice">Rp 280.000</div><div class="lmeta"><i class="ti ti-star" aria-hidden="true"></i> 4.8 · Rina S.</div></div>
       </button>
-      <button class="lcard" onclick="go('s-home')" type="button" data-cat="gratis">
+      <button class="lcard" onclick="navTo('s-home')" type="button" data-cat="gratis">
         <div class="limg">🏃<span class="limg-badge badge ba">Gratis</span></div>
         <div class="linfo"><div class="lname">Treadmill Manual Tak Terpakai</div><div class="lcat">Olahraga · Ambil Sendiri</div><div class="lprice free">Rp 2.000 (admin)</div><div class="lmeta"><i class="ti ti-star" aria-hidden="true"></i> 4.5 · Haris B.</div></div>
       </button>
@@ -285,11 +285,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
 
   <div class="bnav">
-    <button class="bnav-btn on" onclick="go('s-home')" type="button"><i class="ti ti-home" aria-hidden="true"></i><span>Jelajahi</span></button>
+    <button class="bnav-btn on" onclick="navTo('s-home')" type="button"><i class="ti ti-home" aria-hidden="true"></i><span>Jelajahi</span></button>
     <button class="bnav-btn" type="button"><i class="ti ti-heart" aria-hidden="true"></i><span>Simpan</span></button>
-    <button class="bnav-sell" onclick="go('s-buat-listing')" type="button"><i class="ti ti-plus" aria-hidden="true"></i><span>Jual</span></button>
-    <button class="bnav-btn" onclick="go('s-chat')" type="button"><i class="ti ti-message" aria-hidden="true"></i><span>Chat</span></button>
-    <button class="bnav-btn" onclick="go('s-profil')" type="button"><i class="ti ti-user" aria-hidden="true"></i><span>Profil</span></button>
+    <button class="bnav-sell" onclick="navTo('s-buat-listing')" type="button"><i class="ti ti-plus" aria-hidden="true"></i><span>Jual</span></button>
+    <button class="bnav-btn" onclick="navTo('s-chat')" type="button"><i class="ti ti-message" aria-hidden="true"></i><span>Chat</span></button>
+    <button class="bnav-btn" onclick="navTo('s-profil')" type="button"><i class="ti ti-user" aria-hidden="true"></i><span>Profil</span></button>
   </div>
 </div>
 
@@ -299,7 +299,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div id="s-detail" class="screen">
   <div class="hdr">
     <div class="hdr-bar">
-      <button class="back-btn" onclick="go('s-home')" type="button"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
+      <button class="back-btn" onclick="navTo('s-home')" type="button"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
       <span class="hdr-title">Detail Barang</span>
       <i class="ti ti-share hdr-icon" aria-hidden="true"></i>
       <i class="ti ti-heart hdr-icon" aria-hidden="true"></i>
@@ -326,7 +326,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div class="pgbar-range"><span>Rp 700K (Cukup Baik)</span><span>Rp 1,2jt (Seperti Baru)</span></div>
       </div>
     </div>
-    <button class="seller-btn" onclick="go('s-chat')" type="button">
+    <button class="seller-btn" onclick="navTo('s-chat')" type="button">
       <div class="avatar">SW</div>
       <div style="flex:1">
         <div style="display:flex;align-items:center;gap:6px"><span class="sname">Sari W.</span><span class="badge bn">Tier 2</span></div>
@@ -359,8 +359,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div style="height:80px"></div>
   </div>
   <div class="detail-cta">
-    <button class="btn-o" onclick="go('s-chat')" type="button" style="flex:1"><i class="ti ti-message" aria-hidden="true"></i> Chat</button>
-    <button class="btn-g" onclick="go('s-checkout')" type="button" style="flex:2">Beli Sekarang</button>
+    <button class="btn-o" onclick="navTo('s-chat')" type="button" style="flex:1"><i class="ti ti-message" aria-hidden="true"></i> Chat</button>
+    <button class="btn-g" onclick="navTo('s-checkout')" type="button" style="flex:2">Beli Sekarang</button>
   </div>
 </div>
 
@@ -370,7 +370,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div id="s-chat" class="screen">
   <div class="chat-hdr">
     <div class="chat-hdr-row">
-      <button class="back-btn" onclick="go('s-detail')" type="button"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
+      <button class="back-btn" onclick="navTo('s-detail')" type="button"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
       <div class="avatar" style="width:36px;height:36px;font-size:13px">SW</div>
       <div style="flex:1">
         <div style="color:#fff;font-size:14px;font-weight:700">Sari W. <span class="badge bn" style="font-size:9px;vertical-align:1px">Tier 2</span></div>
@@ -379,7 +379,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <i class="ti ti-dots-vertical" style="color:rgba(255,255,255,.8);font-size:20px" aria-hidden="true"></i>
     </div>
   </div>
-  <button class="prod-strip" onclick="go('s-detail')" type="button">
+  <button class="prod-strip" onclick="navTo('s-detail')" type="button">
     <div class="ps-thumb">🛒</div>
     <div style="flex:1"><div style="color:#fff;font-size:12px;font-weight:700">Stroller Babyelle B900</div><div style="color:rgba(255,255,255,.7);font-size:11px">Rp 850.000 · Seperti Baru</div></div>
     <i class="ti ti-chevron-right" style="color:rgba(255,255,255,.4);font-size:16px" aria-hidden="true"></i>
@@ -399,7 +399,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="ec-head"><i class="ti ti-shield-check" aria-hidden="true"></i><span class="ec-title">Deal di Rp 800.000! 🎉</span></div>
       <div class="ec-sub">Bayar lewat escrow ReGuna agar dana kamu aman sampai barang diterima.</div>
       <div class="ec-price">Rp 800.000</div>
-      <button class="btn-g" onclick="go('s-checkout')" type="button"><i class="ti ti-lock" aria-hidden="true"></i> Bayar Rp 800.000 via Escrow</button>
+      <button class="btn-g" onclick="navTo('s-checkout')" type="button"><i class="ti ti-lock" aria-hidden="true"></i> Bayar Rp 800.000 via Escrow</button>
     </div>
   </div>
   <div class="chat-input-row">
@@ -416,7 +416,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div id="s-checkout" class="screen">
   <div class="hdr">
     <div class="hdr-bar">
-      <button class="back-btn" onclick="go('s-chat')" type="button"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
+      <button class="back-btn" onclick="navTo('s-chat')" type="button"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
       <span class="hdr-title">Konfirmasi Pesanan</span>
       <span style="color:rgba(255,255,255,.65);font-size:12px">Langkah 1/2</span>
     </div>
@@ -465,7 +465,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
   </div>
   <div class="co-cta">
     <div class="co-total-row"><span class="co-lbl">Total pembayaran</span><span class="co-amt">Rp 803.000</span></div>
-    <button class="btn-g" onclick="go('s-success')" type="button"><i class="ti ti-lock" aria-hidden="true"></i> Bayar via Escrow</button>
+    <button class="btn-g" onclick="navTo('s-success')" type="button"><i class="ti ti-lock" aria-hidden="true"></i> Bayar via Escrow</button>
     <div class="disclaimer">Dengan membayar, kamu menyetujui Syarat &amp; Ketentuan escrow ReGuna</div>
   </div>
 </div>
@@ -483,8 +483,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="order-id">ID Pesanan: <span>#RG-2025-00841</span></div>
     </div>
     <div class="suc-btns" style="padding-top:20px">
-      <button class="btn-g" onclick="go('s-tracking')" type="button"><i class="ti ti-package" aria-hidden="true"></i> Lihat Status Pesanan</button>
-      <button class="btn-o" onclick="go('s-home')" type="button">Jelajahi Barang Lain</button>
+      <button class="btn-g" onclick="navTo('s-tracking')" type="button"><i class="ti ti-package" aria-hidden="true"></i> Lihat Status Pesanan</button>
+      <button class="btn-o" onclick="navTo('s-home')" type="button">Jelajahi Barang Lain</button>
     </div>
   </div>
 </div>
@@ -495,7 +495,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div id="s-tracking" class="screen">
   <div class="hdr">
     <div class="hdr-bar">
-      <button class="back-btn" onclick="go('s-home')" type="button"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
+      <button class="back-btn" onclick="navTo('s-home')" type="button"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
       <span class="hdr-title">Pesanan Saya</span>
       <i class="ti ti-bell hdr-icon" aria-hidden="true"></i>
     </div>
@@ -522,7 +522,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <div>
           <div style="font-size:13px;font-weight:700;color:#1a1a1a">Aeon Mall BSD City, Pintu Utama</div>
           <div style="font-size:12px;color:#888;margin-top:2px">Sabtu, 17 Mei · 14.00 WIB</div>
-          <button onclick="go('s-chat')" type="button" style="display:inline-flex;align-items:center;gap:4px;margin-top:8px;font-size:12px;font-weight:700;color:#0F766E"><i class="ti ti-message" style="font-size:14px" aria-hidden="true"></i> Chat dengan Sari W.</button>
+          <button onclick="navTo('s-chat')" type="button" style="display:inline-flex;align-items:center;gap:4px;margin-top:8px;font-size:12px;font-weight:700;color:#0F766E"><i class="ti ti-message" style="font-size:14px" aria-hidden="true"></i> Chat dengan Sari W.</button>
         </div>
       </div>
     </div>
@@ -534,7 +534,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="tl-row"><div class="tl-left"><div class="tl-dot next"><i class="ti ti-circle-check" aria-hidden="true"></i></div></div><div class="tl-content" style="padding-bottom:0"><div class="tl-step dim">Dana cair ke seller</div><div class="tl-desc dim">Rp 800.000 dikirim ke Sari W.</div></div></div>
     </div>
     <div style="padding:0 16px 8px"><div style="background:#FEF3C7;border-radius:10px;padding:12px 14px;font-size:12px;color:#92400E;line-height:1.5"><strong>Cara konfirmasi:</strong> Setelah bertemu seller dan cek barang di lokasi, tekan tombol konfirmasi di bawah. Dana baru cair ke seller setelah kamu konfirmasi.</div></div>
-    <div style="padding:12px 16px 8px"><button class="btn-g" onclick="go('s-home')" type="button" style="font-size:15px;padding:15px"><i class="ti ti-circle-check" aria-hidden="true"></i> Konfirmasi Terima Barang</button></div>
+    <div style="padding:12px 16px 8px"><button class="btn-g" onclick="navTo('s-home')" type="button" style="font-size:15px;padding:15px"><i class="ti ti-circle-check" aria-hidden="true"></i> Konfirmasi Terima Barang</button></div>
     <div style="text-align:center;padding:8px 16px 24px"><button type="button" style="font-size:12px;color:#E53E3E">Ada masalah? Ajukan Dispute (tersedia 72 jam)</button></div>
   </div>
 </div>
@@ -545,7 +545,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 <div id="s-buat-listing" class="screen">
   <div class="hdr">
     <div class="hdr-bar">
-      <button class="back-btn" onclick="go('s-home')" type="button"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
+      <button class="back-btn" onclick="navTo('s-home')" type="button"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
       <span class="hdr-title">Buat Listing</span>
       <span style="color:rgba(255,255,255,.65);font-size:12px">Tier 1</span>
     </div>
@@ -613,7 +613,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <div style="height:90px"></div>
   </div>
   <div style="padding:12px 16px 24px;background:#fff;border-top:1px solid #eee;flex-shrink:0">
-    <button class="btn-g" onclick="go('s-home')" type="button" style="font-size:15px;padding:14px"><i class="ti ti-send" aria-hidden="true"></i> Posting Listing</button>
+    <button class="btn-g" onclick="navTo('s-home')" type="button" style="font-size:15px;padding:14px"><i class="ti ti-send" aria-hidden="true"></i> Posting Listing</button>
     <div style="font-size:11px;color:#aaa;text-align:center;margin-top:8px">Listing pertama akan dimoderasi dalam 1×24 jam</div>
   </div>
 </div>
@@ -642,4 +642,143 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
       <div class="stat-cell"><div class="stat-num" style="color:#0F766E">1</div><div class="stat-lbl">Listing Aktif</div></div>
     </div>
     <div class="card">
-      <div style="display:flex;justify-content:space-between;align-i
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <div class="slbl" style="margin-bottom:0">Listing Saya</div>
+        <button onclick="navTo('s-buat-listing')" type="button" style="font-size:12px;font-weight:700;color:#0F766E">+ Buat Listing</button>
+      </div>
+      <button class="lcard" onclick="navTo('s-detail')" type="button" style="display:flex;flex-direction:row;border-radius:10px;overflow:hidden;background:#f9f9f9">
+        <div style="width:60px;height:60px;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0">🛒</div>
+        <div style="padding:8px 10px;flex:1">
+          <div style="font-size:12px;font-weight:700;color:#1a1a1a">Stroller Babyelle B900</div>
+          <div style="font-size:11px;color:#999;margin-top:2px">Rp 850.000 · Seperti Baru</div>
+          <div style="margin-top:4px"><span class="badge bt" style="font-size:10px">Aktif · 3 dilihat</span></div>
+        </div>
+      </button>
+    </div>
+    <div class="card">
+      <div class="slbl">Akun</div>
+      <div style="display:flex;flex-direction:column">
+        <button class="menu-row" type="button">
+          <i class="ti ti-package menu-icon" aria-hidden="true"></i>
+          <span class="menu-label">Riwayat Pesanan</span>
+          <i class="ti ti-chevron-right" style="color:#ccc;font-size:16px" aria-hidden="true"></i>
+        </button>
+        <button class="menu-row" type="button">
+          <i class="ti ti-wallet menu-icon" aria-hidden="true"></i>
+          <span class="menu-label">Wallet &amp; Escrow</span>
+          <i class="ti ti-chevron-right" style="color:#ccc;font-size:16px" aria-hidden="true"></i>
+        </button>
+        <button class="menu-row" type="button">
+          <i class="ti ti-star menu-icon" aria-hidden="true"></i>
+          <span class="menu-label">Ulasan Saya</span>
+          <i class="ti ti-chevron-right" style="color:#ccc;font-size:16px" aria-hidden="true"></i>
+        </button>
+        <button class="menu-row" type="button">
+          <i class="ti ti-settings menu-icon" aria-hidden="true"></i>
+          <span class="menu-label">Pengaturan Akun</span>
+          <i class="ti ti-chevron-right" style="color:#ccc;font-size:16px" aria-hidden="true"></i>
+        </button>
+        <button class="menu-row" type="button">
+          <i class="ti ti-help-circle menu-icon" aria-hidden="true"></i>
+          <span class="menu-label">Bantuan &amp; FAQ</span>
+          <i class="ti ti-chevron-right" style="color:#ccc;font-size:16px" aria-hidden="true"></i>
+        </button>
+        <button class="menu-row danger" type="button">
+          <i class="ti ti-logout menu-icon" aria-hidden="true"></i>
+          <span class="menu-label">Keluar</span>
+        </button>
+      </div>
+    </div>
+    <div style="height:80px"></div>
+  </div>
+  <div class="bnav">
+    <button class="bnav-btn" onclick="navTo('s-home')" type="button"><i class="ti ti-home" aria-hidden="true"></i><span>Jelajahi</span></button>
+    <button class="bnav-btn" type="button"><i class="ti ti-heart" aria-hidden="true"></i><span>Simpan</span></button>
+    <button class="bnav-sell" onclick="navTo('s-buat-listing')" type="button"><i class="ti ti-plus" aria-hidden="true"></i><span>Jual</span></button>
+    <button class="bnav-btn" onclick="navTo('s-chat')" type="button"><i class="ti ti-message" aria-hidden="true"></i><span>Chat</span></button>
+    <button class="bnav-btn on" type="button"><i class="ti ti-user" aria-hidden="true"></i><span>Profil</span></button>
+  </div>
+</div>
+
+</div><!-- .phone -->
+<script>
+function navTo(id) {
+  var all = document.querySelectorAll('.screen');
+  for (var i = 0; i < all.length; i++) {
+    if (all[i].id === id) {
+      all[i].classList.add('active');
+      var b = all[i].querySelector('.body,.chat-body');
+      if (b) b.scrollTop = 0;
+    } else {
+      all[i].classList.remove('active');
+    }
+  }
+}
+function filCat(el, cat) {
+  var pills = document.querySelectorAll('.cat-row .cat-pill');
+  for (var i = 0; i < pills.length; i++) pills[i].classList.remove('on');
+  el.classList.add('on');
+  var cards = document.querySelectorAll('#listing-grid .lcard');
+  for (var i = 0; i < cards.length; i++) {
+    var c = cards[i].getAttribute('data-cat') || '';
+    cards[i].style.display = (cat === 'semua' || c === cat) ? 'block' : 'none';
+  }
+}
+var selKat = '';
+var pgData = {
+  anak:{baru:'Rp 300K – 1,2jt',baik:'Rp 150K – 800K',cukup:'Rp 50K – 400K'},
+  olahraga:{baru:'Rp 500K – 3jt',baik:'Rp 200K – 1,5jt',cukup:'Rp 100K – 800K'},
+  furnitur:{baru:'Rp 400K – 2jt',baik:'Rp 200K – 1,2jt',cukup:'Rp 100K – 600K'},
+  elektronik:{baru:'Rp 200K – 1,5jt',baik:'Rp 100K – 900K',cukup:'Rp 50K – 500K'},
+  gratis:{baru:'Rp 2.000 (admin)',baik:'Rp 2.000 (admin)',cukup:'Rp 2.000 (admin)'}
+};
+function pilihKat(el, kat) {
+  var btns = document.querySelectorAll('#kat-btns .cat-pill');
+  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('on');
+  el.classList.add('on');
+  selKat = kat;
+  updatePg();
+}
+function updatePg() {
+  var hint = document.getElementById('pg-hint');
+  var txt = document.getElementById('pg-range-text');
+  if (!hint || !txt || !selKat) return;
+  var cond = 'baru';
+  var rs = document.querySelectorAll('input[name="kondisi"]');
+  for (var i = 0; i < rs.length; i++) { if (rs[i].checked) { cond = rs[i].value; break; } }
+  hint.style.display = 'block';
+  txt.textContent = 'Kisaran harga: ' + (pgData[selKat] ? pgData[selKat][cond] : '-');
+}
+document.addEventListener('change', function(e) {
+  if (e.target && e.target.name === 'kondisi') {
+    var lbls = ['kl-baru','kl-baik','kl-cukup'];
+    for (var i = 0; i < lbls.length; i++) {
+      var el = document.getElementById(lbls[i]);
+      if (el) el.classList.remove('on');
+    }
+    var lbl = e.target.closest('label');
+    if (lbl) lbl.classList.add('on');
+    updatePg();
+  }
+});
+function hitungChar(el) {
+  var n = el.value.length;
+  var c = document.getElementById('char-count');
+  if (c) { c.textContent = n + ' / min 50'; c.style.color = n >= 50 ? '#0F766E' : '#aaa'; }
+}
+function pilihPay(id) {
+  var opts = ['gopay','ovo','qris','va'];
+  for (var i = 0; i < opts.length; i++) {
+    var o = document.getElementById('opt-' + opts[i]);
+    var r = document.getElementById('r-' + opts[i]);
+    if (o) o.classList.remove('on');
+    if (r) { r.classList.remove('on'); r.innerHTML = ''; }
+  }
+  var opt = document.getElementById('opt-' + id);
+  var radio = document.getElementById('r-' + id);
+  if (opt) opt.classList.add('on');
+  if (radio) { radio.classList.add('on'); radio.innerHTML = '<div class="radio-dot"></div>'; }
+}
+</script>
+</body>
+</html>
