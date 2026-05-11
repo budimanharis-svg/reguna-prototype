@@ -316,16 +316,16 @@ a { color: inherit; text-decoration: none; }
     </a>
 
     <div class="cat-row">
-      <button class="cat-pill on" onclick="pilih(this)">Semua</button>
-      <button class="cat-pill" onclick="pilih(this)">Anak &amp; Bayi</button>
-      <button class="cat-pill" onclick="pilih(this)">Olahraga</button>
-      <button class="cat-pill" onclick="pilih(this)">Furnitur</button>
-      <button class="cat-pill" onclick="pilih(this)">Elektronik</button>
-      <button class="cat-pill" onclick="pilih(this)">🎁 Gratis</button>
+      <button class="cat-pill on" onclick="pilih(this,'semua')" data-cat="semua">Semua</button>
+      <button class="cat-pill" onclick="pilih(this,'anak')" data-cat="anak">Anak &amp; Bayi</button>
+      <button class="cat-pill" onclick="pilih(this,'olahraga')" data-cat="olahraga">Olahraga</button>
+      <button class="cat-pill" onclick="pilih(this,'furnitur')" data-cat="furnitur">Furnitur</button>
+      <button class="cat-pill" onclick="pilih(this,'elektronik')" data-cat="elektronik">Elektronik</button>
+      <button class="cat-pill" onclick="pilih(this,'gratis')" data-cat="gratis">🎁 Gratis</button>
     </div>
 
-    <div class="listing-grid">
-      <a href="#s-detail" class="listing-card">
+    <div class="listing-grid" id="listing-grid">
+      <a href="#s-detail" class="listing-card" data-cat="anak">
         <div class="listing-img">🛒<span class="img-badge badge b-teal">Seperti Baru</span></div>
         <div class="listing-info">
           <div class="listing-name">Stroller Babyelle B900</div>
@@ -334,7 +334,7 @@ a { color: inherit; text-decoration: none; }
           <div class="listing-meta"><i class="ti ti-star" aria-hidden="true"></i> 4.9 · Sari W.</div>
         </div>
       </a>
-      <a href="#" class="listing-card">
+      <a href="#" class="listing-card" data-cat="olahraga">
         <div class="listing-img">🏋️<span class="img-badge badge b-blue">Baik</span></div>
         <div class="listing-info">
           <div class="listing-name">Treadmill Lifefit T100</div>
@@ -343,7 +343,7 @@ a { color: inherit; text-decoration: none; }
           <div class="listing-meta"><i class="ti ti-star" aria-hidden="true"></i> 4.7 · Budi R.</div>
         </div>
       </a>
-      <a href="#" class="listing-card">
+      <a href="#" class="listing-card" data-cat="anak">
         <div class="listing-img">🚲<span class="img-badge badge b-teal">Seperti Baru</span></div>
         <div class="listing-info">
           <div class="listing-name">Sepeda Anak Wimcycle 16"</div>
@@ -352,7 +352,7 @@ a { color: inherit; text-decoration: none; }
           <div class="listing-meta"><i class="ti ti-star" aria-hidden="true"></i> 5.0 · Dewi A.</div>
         </div>
       </a>
-      <a href="#" class="listing-card">
+      <a href="#" class="listing-card" data-cat="furnitur">
         <div class="listing-img">🛋️<span class="img-badge badge b-amber">Cukup Baik</span></div>
         <div class="listing-info">
           <div class="listing-name">Sofa 2-Seater Fabric</div>
@@ -361,7 +361,7 @@ a { color: inherit; text-decoration: none; }
           <div class="listing-meta"><i class="ti ti-star" aria-hidden="true"></i> 4.6 · Rudi P.</div>
         </div>
       </a>
-      <a href="#" class="listing-card">
+      <a href="#" class="listing-card" data-cat="anak">
         <div class="listing-img">🧸<span class="img-badge badge b-teal">Seperti Baru</span></div>
         <div class="listing-info">
           <div class="listing-name">LEGO Duplo Classic Box</div>
@@ -370,7 +370,7 @@ a { color: inherit; text-decoration: none; }
           <div class="listing-meta"><i class="ti ti-star" aria-hidden="true"></i> 4.8 · Rina S.</div>
         </div>
       </a>
-      <a href="#" class="listing-card">
+      <a href="#" class="listing-card" data-cat="gratis">
         <div class="listing-img">🏃<span class="img-badge badge b-amber">Gratis</span></div>
         <div class="listing-info">
           <div class="listing-name">Treadmill Manual Tak Terpakai</div>
@@ -385,9 +385,9 @@ a { color: inherit; text-decoration: none; }
   <div class="bottom-nav">
     <a href="#s-home" class="nav-a on"><i class="ti ti-home" aria-hidden="true"></i><span>Jelajahi</span></a>
     <a href="#" class="nav-a"><i class="ti ti-heart" aria-hidden="true"></i><span>Simpan</span></a>
-    <a href="#" class="nav-sell"><i class="ti ti-plus" aria-hidden="true"></i><span>Jual</span></a>
-    <a href="#" class="nav-a"><i class="ti ti-message" aria-hidden="true"></i><span>Chat</span></a>
-    <a href="#" class="nav-a"><i class="ti ti-user" aria-hidden="true"></i><span>Profil</span></a>
+    <a href="#s-buat-listing" class="nav-sell"><i class="ti ti-plus" aria-hidden="true"></i><span>Jual</span></a>
+    <a href="#s-chat" class="nav-a"><i class="ti ti-message" aria-hidden="true"></i><span>Chat</span></a>
+    <a href="#s-profil" class="nav-a"><i class="ti ti-user" aria-hidden="true"></i><span>Profil</span></a>
   </div>
 </div>
 
@@ -663,46 +663,192 @@ a { color: inherit; text-decoration: none; }
     </div>
 
     <div class="success-btns">
+      <a href="#s-tracking" class="btn-primary"><i class="ti ti-package" aria-hidden="true"></i> Lihat Status Pesanan</a>
       <button class="btn-wa"><i class="ti ti-brand-whatsapp" aria-hidden="true"></i> Bagikan ke WhatsApp</button>
       <a href="#s-home" class="btn-outline">Jelajahi Barang Lain</a>
     </div>
   </div>
 </div>
 
-</div><!-- .phone -->
+<!-- ══════ ORDER TRACKING ══════ -->
+<div id="s-tracking" class="screen">
+  <div class="hdr">
+    <div class="hdr-bar">
+      <a href="#s-home" class="back-a" aria-label="Kembali"><i class="ti ti-arrow-left" aria-hidden="true"></i></a>
+      <span class="hdr-title">Pesanan Saya</span>
+      <i class="ti ti-bell hdr-icon" aria-hidden="true"></i>
+    </div>
+  </div>
+  <div class="body">
 
-<script>
-function pilih(el) {
-  var btns = document.querySelectorAll('.cat-pill');
-  for (var i = 0; i < btns.length; i++) btns[i].classList.remove('on');
-  el.classList.add('on');
-}
+    <div style="background:#E1F5EE;border-bottom:1px solid #9FE1CB;padding:12px 16px;display:flex;align-items:center;gap:10px;flex-shrink:0">
+      <i class="ti ti-shield-check" style="font-size:24px;color:#0F766E" aria-hidden="true"></i>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:#085041">Dana Rp 803.000 Aman di Escrow</div>
+        <div style="font-size:11px;color:#0F6E56">Akan cair ke seller setelah kamu konfirmasi terima barang</div>
+      </div>
+    </div>
 
-function pilihPay(id) {
-  var opts = document.querySelectorAll('.pay-opt');
-  for (var i = 0; i < opts.length; i++) opts[i].classList.remove('on');
-  var radios = document.querySelectorAll('.radio-c');
-  for (var i = 0; i < radios.length; i++) { radios[i].classList.remove('on'); radios[i].innerHTML = ''; }
-  var opt = document.getElementById('opt-' + id);
-  var radio = document.getElementById('r-' + id);
-  if (opt) opt.classList.add('on');
-  if (radio) { radio.classList.add('on'); radio.innerHTML = '<div class="radio-dot"></div>'; }
-}
+    <div class="card">
+      <div class="sec-lbl">Detail Pesanan</div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <div style="width:48px;height:48px;border-radius:8px;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0">🛒</div>
+        <div style="flex:1">
+          <div style="font-size:13px;font-weight:700;color:#1a1a1a">Stroller Babyelle B900</div>
+          <div style="font-size:11px;color:#999;margin-top:1px">Sari W. · Seperti Baru</div>
+        </div>
+        <div style="font-size:14px;font-weight:800;color:#0F766E">Rp 800.000</div>
+      </div>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid #f0f0f0;display:flex;justify-content:space-between;font-size:12px">
+        <span style="color:#888">ID Pesanan</span><span style="font-weight:700;color:#1a1a1a">#RG-2025-00841</span>
+      </div>
+      <div style="margin-top:6px;display:flex;justify-content:space-between;font-size:12px">
+        <span style="color:#888">Waktu bayar</span><span style="font-weight:700;color:#1a1a1a">Hari ini · 09.41 WIB</span>
+      </div>
+    </div>
 
-window.addEventListener('hashchange', function() {
-  var id = location.hash.replace('#', '');
-  if (!id) id = 's-home';
-  var screens = document.querySelectorAll('.screen');
-  for (var i = 0; i < screens.length; i++) {
-    if (screens[i].id === id) {
-      screens[i].classList.add('active');
-      var b = screens[i].querySelector('.body, .chat-body');
-      if (b) b.scrollTop = 0;
-    } else {
-      screens[i].classList.remove('active');
-    }
-  }
-});
-</script>
-</body>
-</html>
+    <div class="card">
+      <div class="sec-lbl">Titik Temu COD</div>
+      <div style="display:flex;gap:10px;background:#f8f8f8;border-radius:10px;padding:12px;border:1px solid #eee">
+        <i class="ti ti-map-pin" style="font-size:20px;color:#0F766E;flex-shrink:0;margin-top:2px" aria-hidden="true"></i>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#1a1a1a">Aeon Mall BSD City, Pintu Utama</div>
+          <div style="font-size:12px;color:#888;margin-top:2px">Sabtu, 17 Mei 2025 · 14.00 WIB</div>
+          <a href="#s-chat" style="display:inline-flex;align-items:center;gap:4px;margin-top:8px;font-size:12px;font-weight:600;color:#0F766E">
+            <i class="ti ti-message" style="font-size:14px" aria-hidden="true"></i> Chat dengan Sari W.
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="sec-lbl">Status Pengiriman</div>
+      <div class="tl-row">
+        <div class="tl-left"><div class="tl-dot done"><i class="ti ti-check" aria-hidden="true"></i></div><div class="tl-line done"></div></div>
+        <div class="tl-content"><div class="tl-step">Pembayaran diterima</div><div class="tl-desc">Dana Rp 803.000 masuk ke escrow ReGuna</div><div class="tl-time">Hari ini · 09.41 WIB</div></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-left"><div class="tl-dot cur"><i class="ti ti-clock" aria-hidden="true"></i></div><div class="tl-line"></div></div>
+        <div class="tl-content"><div class="tl-step">Menunggu pertemuan COD</div><div class="tl-desc">Aeon BSD · Sabtu 17 Mei · 14.00 WIB</div><div class="tl-time">Dijadwalkan</div></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-left"><div class="tl-dot next"><i class="ti ti-package" aria-hidden="true"></i></div><div class="tl-line"></div></div>
+        <div class="tl-content"><div class="tl-step dim">Konfirmasi penerimaan</div><div class="tl-desc dim">Cek barang di lokasi, lalu konfirmasi di bawah</div></div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-left"><div class="tl-dot next"><i class="ti ti-circle-check" aria-hidden="true"></i></div></div>
+        <div class="tl-content" style="padding-bottom:0"><div class="tl-step dim">Dana cair ke seller</div><div class="tl-desc dim">Rp 800.000 dikirim ke Sari W.</div></div>
+      </div>
+    </div>
+
+    <div style="padding:0 16px 8px">
+      <div style="background:#FEF3C7;border-radius:10px;padding:12px 14px;font-size:12px;color:#92400E;line-height:1.5">
+        <strong>Cara konfirmasi:</strong> Setelah bertemu seller dan cek barang di lokasi, tekan tombol "Konfirmasi Terima Barang" di bawah. Dana baru akan cair ke seller setelah kamu konfirmasi.
+      </div>
+    </div>
+
+    <div style="padding:12px 16px 8px">
+      <a href="#s-home" class="btn-primary" style="width:100%;font-size:15px;padding:15px">
+        <i class="ti ti-circle-check" aria-hidden="true"></i> Konfirmasi Terima Barang
+      </a>
+    </div>
+    <div style="text-align:center;padding:8px 16px 24px">
+      <a href="#" style="font-size:12px;color:#E53E3E;text-decoration:none">Ada masalah? Ajukan Dispute (tersedia 72 jam)</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════ BUAT LISTING ══════ -->
+<div id="s-buat-listing" class="screen">
+  <div class="hdr">
+    <div class="hdr-bar">
+      <a href="#s-home" class="back-a" aria-label="Kembali"><i class="ti ti-arrow-left" aria-hidden="true"></i></a>
+      <span class="hdr-title">Buat Listing</span>
+      <span style="color:rgba(255,255,255,.65);font-size:12px">Tier 1</span>
+    </div>
+  </div>
+  <div class="body">
+
+    <div class="card">
+      <div class="sec-lbl">Foto Barang <span style="color:#E53E3E">*</span></div>
+      <div style="display:flex;gap:8px">
+        <div style="width:90px;height:90px;border-radius:10px;border:2px dashed #0F766E;background:#E1F5EE;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;flex-shrink:0">
+          <i class="ti ti-camera" style="font-size:22px;color:#0F766E" aria-hidden="true"></i>
+          <span style="font-size:10px;color:#0F766E;font-weight:600">Foto Utama</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;flex:1">
+          <div style="display:flex;gap:8px">
+            <div style="flex:1;height:40px;border-radius:8px;border:1.5px dashed #ccc;background:#f8f8f8;display:flex;align-items:center;justify-content:center;cursor:pointer">
+              <i class="ti ti-plus" style="font-size:18px;color:#aaa" aria-hidden="true"></i>
+            </div>
+            <div style="flex:1;height:40px;border-radius:8px;border:1.5px dashed #ccc;background:#f8f8f8;display:flex;align-items:center;justify-content:center;cursor:pointer">
+              <i class="ti ti-plus" style="font-size:18px;color:#aaa" aria-hidden="true"></i>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <div style="flex:1;height:40px;border-radius:8px;border:1.5px dashed #ccc;background:#f8f8f8;display:flex;align-items:center;justify-content:center;cursor:pointer">
+              <i class="ti ti-plus" style="font-size:18px;color:#aaa" aria-hidden="true"></i>
+            </div>
+            <div style="flex:1;height:40px;border-radius:8px;border:1.5px dashed #ccc;background:#f8f8f8;display:flex;align-items:center;justify-content:center;cursor:pointer">
+              <i class="ti ti-plus" style="font-size:18px;color:#aaa" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:11px;color:#aaa;margin-top:8px"><i class="ti ti-info-circle" style="font-size:12px;vertical-align:-1px" aria-hidden="true"></i> Minimal 3 foto · Termasuk foto kondisi aktual</div>
+    </div>
+
+    <div class="card">
+      <div class="sec-lbl">Kategori <span style="color:#E53E3E">*</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px" id="kat-btns">
+        <button class="cat-pill" onclick="pilihKat(this,'anak')">Anak &amp; Bayi</button>
+        <button class="cat-pill" onclick="pilihKat(this,'olahraga')">Olahraga</button>
+        <button class="cat-pill" onclick="pilihKat(this,'furnitur')">Furnitur</button>
+        <button class="cat-pill" onclick="pilihKat(this,'elektronik')">Elektronik</button>
+        <button class="cat-pill" onclick="pilihKat(this,'gratis')">🎁 Gratis</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="sec-lbl">Judul Listing <span style="color:#E53E3E">*</span></div>
+      <input type="text" placeholder="cth: Stroller Babyelle B900 kondisi mulus" style="width:100%;border:1px solid #ddd;border-radius:8px;padding:10px 12px;font-size:13px;outline:none;color:#1a1a1a">
+    </div>
+
+    <div class="card">
+      <div class="sec-lbl">Kondisi Barang <span style="color:#E53E3E">*</span></div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <label style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:10px;border:1.5px solid #0F766E;background:#E1F5EE;cursor:pointer">
+          <input type="radio" name="kondisi" value="baru" checked style="margin-top:2px;accent-color:#0F766E">
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#085041">Seperti Baru</div>
+            <div style="font-size:11px;color:#0F6E56">Dipakai sangat jarang, tidak ada kerusakan</div>
+          </div>
+        </label>
+        <label style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:10px;border:1.5px solid #e0e0e0;background:#fff;cursor:pointer">
+          <input type="radio" name="kondisi" value="baik" style="margin-top:2px;accent-color:#0F766E">
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#1a1a1a">Baik</div>
+            <div style="font-size:11px;color:#888">Ada tanda pemakaian normal, semua fungsi bekerja</div>
+          </div>
+        </label>
+        <label style="display:flex;align-items:flex-start;gap:10px;padding:10px 12px;border-radius:10px;border:1.5px solid #e0e0e0;background:#fff;cursor:pointer">
+          <input type="radio" name="kondisi" value="cukup" style="margin-top:2px;accent-color:#0F766E">
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#1a1a1a">Cukup Baik</div>
+            <div style="font-size:11px;color:#888">Ada minor defect, wajib dijelaskan di deskripsi</div>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="card" id="pg-hint" style="display:none">
+      <div style="background:#1E3A5F;border-radius:10px;padding:12px 14px">
+        <div style="font-size:12px;font-weight:700;color:#6EE7B7;margin-bottom:4px"><i class="ti ti-chart-bar" style="font-size:13px" aria-hidden="true"></i> Price Guide ReGuna</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.8)" id="pg-range-text">Pilih kategori untuk melihat kisaran harga</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:4px">Harga wajar berdasarkan kondisi yang kamu pilih</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="sec-lbl">Harga <span style="color:#E53E3E">*</span></div>
+      <div style="display:flex;align-items:center;border:1px solid #ddd;border-radius:8px;overflow:h
