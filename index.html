@@ -702,7 +702,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 
 </div><!-- .phone -->
 <script>
-function navTo(id) {
+// Tampilkan screen tanpa push history (dipakai oleh popstate)
+function showScreen(id) {
   var all = document.querySelectorAll('.screen');
   for (var i = 0; i < all.length; i++) {
     if (all[i].id === id) {
@@ -714,6 +715,18 @@ function navTo(id) {
     }
   }
 }
+// Navigasi utama — push history agar tombol back HP bisa diintersep
+function navTo(id) {
+  showScreen(id);
+  window.history.pushState({screen: id}, '');
+}
+// Inisialisasi history entry untuk home screen
+window.history.replaceState({screen: 's-home'}, '');
+// Intersep tombol back HP — arahkan ke screen sebelumnya, bukan keluar browser
+window.addEventListener('popstate', function(e) {
+  var screen = (e.state && e.state.screen) ? e.state.screen : 's-home';
+  showScreen(screen);
+});
 function filCat(el, cat) {
   var pills = document.querySelectorAll('.cat-row .cat-pill');
   for (var i = 0; i < pills.length; i++) pills[i].classList.remove('on');
